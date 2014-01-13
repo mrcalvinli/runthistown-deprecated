@@ -58,6 +58,7 @@ Minimal Viable Product
 Site Design
 -----
 ![Design Possibilities](/DesignPossibilities.jpg)
+Image in folder if you can't see.
 
 ####Top-Left Design
 Pros
@@ -91,6 +92,7 @@ Cons
 - Confusion on how to input visiting points due to one input box (learnability issue)
 
 ![Mock-up](/DesignPic.jpg)
+Image in folder if you can't see.
 
 Additional Questions
 ---
