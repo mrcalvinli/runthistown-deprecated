@@ -63,6 +63,8 @@ $(document).ready(function() {
 		$("#orderBtnDropdown").html('Shortest Path <span class="caret" style = "border-top: 4px solid white"></span>');
 	})
 
+	
+
 	// Add autocomplete
 	var input = document.getElementById('input'); 
 	var buttons = document.getElementById('buttonContainer');
@@ -119,7 +121,7 @@ $(document).ready(function() {
 		addLocation(e.latLng);
 	});
 
-	var markerDict = {};
+	markerDict = {};
 	function addLocation(location) {
 		var urlAddress = createUrlAddress(location);
 		$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + urlAddress + '&sensor=false', function(json_data){
@@ -132,9 +134,9 @@ $(document).ready(function() {
 				marker = null;
 			}			
 
-			var pinColor = "ef5b5b";
+			var pinColor = "e6463d";  // red
 			if (Object.keys(markerDict).length == 0) {
-				pinColor = "41d355";
+				pinColor = "2eba3e"; // green
 			}
 
 			var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
@@ -150,7 +152,7 @@ $(document).ready(function() {
 		});	
 	}
 
-	var pathArray = [];
+	pathArray = [];
 	var letterArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 	letterIndex = 0;
 	$("#submit").on("click", function() {
@@ -159,7 +161,8 @@ $(document).ready(function() {
 		if (marker != null) {
 			for (var i = 0; i < Object.keys(markerDict).length; i++) {
 				var keysArray = Object.keys(markerDict);
-				var pinColor = "5B84EF";
+				// var pinColor = "5B84EF"; // blue marker;
+				var pinColor = "2eba3e"; // green marker;
 				var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
 			        new google.maps.Size(21, 34),
 			        new google.maps.Point(0,0),
@@ -173,10 +176,8 @@ $(document).ready(function() {
 			for (var i = 0; i < Object.keys(markerDict).length; i++) {
 				var keysArray = Object.keys(markerDict);
 				var thisMarker = markerDict[keysArray[i]];
-				thisMarker.setMap(map);
+				// thisMarker.setMap(map);
 			}
-
-			console.log(markerDict.toString());
 		} else {
 
 		}
@@ -201,7 +202,6 @@ $(document).ready(function() {
 		    map.panTo(center);
 
 			pathArray.push([lat, lng]);
-			console.log(pathArray);
 
 			$(".destEntryLetter").each(function() {
 				$(this).attr("class", "entryLetter wptsEntryLetter")
@@ -217,8 +217,72 @@ $(document).ready(function() {
 			$("#routeEntry-" + letterArray[letterIndex]).append("<div class = 'entryLetter " + letterClass + "'>" + "<span class = 'entrySpan' id = 'entrySpan-" + letterArray[letterIndex] + "' style = 'margin-top: 6px; display: block'>" + "&bull;" /*letterArray[letterIndex] */ + "</span></div>");
 			entryClass = "orgEntry"
 			$("#routeEntry-" + letterArray[letterIndex]).append("<input class = 'controls routeInput'>");
-
+			$("#routeEntry-" + letterArray[letterIndex]).append("<button type = 'button' class = 'close' style = 'margin-top: 5px; padding-left; 5px'>&times;</button>")
 			
+			// Delete Button
+			$("#routeEntry-" + letterArray[letterIndex] + " .close").on("click", function() {
+				var thisLetter = $(this).parent().attr("id").toString()[11];
+				console.log(thisLetter);
+				markerDict[thisLetter].setMap(null);
+				markerDict[thisLetter] = null;
+				delete markerDict[thisLetter];
+				var index = letterArray.indexOf(thisLetter);
+				pathArray.pop(index);
+
+				// replace old info with info from new letters
+				var thisLetterIndex = letterArray.indexOf(thisLetter);
+				var markerKeys = Object.keys(markerDict);
+				for (var i = 0; i < markerKeys.length; i++) {
+					var currentLetterIndex = letterArray.indexOf(markerKeys[i]);
+					var currentLetter = letterArray[currentLetterIndex];
+					var prevLetter = letterArray[currentLetterIndex - 1];
+					if (currentLetterIndex > thisLetterIndex) {
+						markerDict[prevLetter] = markerDict[currentLetter];
+						delete markerDict[currentLetter];
+					}
+				}
+				// console.log(JSON.stringify(markerDict));
+
+				// remove animation
+				$("#routeEntry-" + thisLetter).animate({"opacity": 0}, 300, function() {
+					$("#routeEntry-" + thisLetter).first().remove();
+				});
+				
+
+				function animateEntriesUp() {
+					var index = letterArray.indexOf(thisLetter) + 1;
+					var i = index;                     //  set your counter to 1
+
+					function myLoop () {           //  create a loop function
+					   setTimeout(function () {    //  call a 3s setTimeout when the loop is called
+					      	var currentLetter = letterArray[i];
+							$("#routeEntry-" + currentLetter).animate(
+								{"margin-top": parseInt($("#routeEntry-" + currentLetter).css("margin-top")) - 45},
+								300
+							);
+
+							console.log(i);        //  your code here
+							i++;                     //  increment the counter
+							if (i < letterIndex) {            //  if the counter < 10, call the loop function
+							 myLoop();             //  ..  again which will trigger another 
+							} else {
+								var newIndex = letterArray.indexOf(thisLetter) + 1;
+								for (var j = newIndex; j < letterIndex; j++) {
+									var currentLetter = letterArray[j];
+									$("#routeEntry-" + currentLetter).attr("id", "routeEntry-" + letterArray[j-1]);
+								}
+								letterIndex--;
+							}                     //  ..  setTimeout()
+					   }, 150)
+					}
+
+					myLoop();  
+				}
+
+				setTimeout(animateEntriesUp(), 150);
+
+
+			});
 			
 			$("#routeEntry-" + letterArray[letterIndex] + " .routeInput").val(address.toString());
 			letterIndex++;
@@ -227,6 +291,8 @@ $(document).ready(function() {
 			
 		});		
 		marker = null;
+
+		
 	});
 
 	$("#pathCreator").on("click", function() {
