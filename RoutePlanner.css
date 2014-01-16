@@ -1,0 +1,174 @@
+.yellow {
+	color: #ffffff;
+	background-color: #F69C1E;
+	*background-color: #F69C1E;
+	background-image: -moz-linear-gradient(top, #FEC12F, #F69C1E);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FEC12F), to(#F69C1E));
+	background-image: -webkit-linear-gradient(top, #FEC12F, #F69C1E);
+	background-image: -o-linear-gradient(top, #FEC12F, #F69C1E);
+	background-image: linear-gradient(to bottom, #FEC12F, #F69C1E);
+	background-repeat: repeat-x;
+	border-color: #F69C1E #F69C1E #000000;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffFEC12F', endColorstr='#ffF69C1E', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	border-top-color: #FEC12F;
+	border-bottom-color: #F69C1E;
+}
+
+.yellow-dark {
+	color: #ffffff;
+  background-color: #F69C1E;
+  *background-color: #F69C1E;
+  background-image: -moz-linear-gradient(top, #F69C1E, #DD6900);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F69C1E), to(#DD6900));
+  background-image: -webkit-linear-gradient(top, #F69C1E, #DD6900);
+  background-image: -o-linear-gradient(top, #F69C1E, #DD6900);
+  background-image: linear-gradient(to bottom, #F69C1E, #DD6900);
+  background-repeat: repeat-x;
+  border-color: #F69C1E #DD6900 #000000;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffF69C1E', endColorstr='#ffDD6900', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+html { height: 100% }
+	body { height: 100%; margin: 0; padding: 0; font-family: Roboto, arial; }
+		.controls {
+			margin-top: 16px;
+			border: 1px solid transparent;
+			border-radius: 5px 5px 5px 5px;
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			height: 32px;
+			outline: none;
+			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+		}
+		.controls .last { border-radius: 0 5px 5px 0; }
+		#buttonContainer { box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); }
+		.btnControls {
+			color: white;
+			margin-left: 0px;
+			margin-right: -3px;
+			min-width: 50px;
+			border-top-color: #FEC12F;
+			border-bottom-color: #F69C1E;
+			border-radius: 0;
+			margin-top: -1px;
+			margin-left: -1px;
+		}
+		#input {
+			width: -moz-calc(100% - 78px - 144px - 91px - 50px);
+			width: -webkit-calc(100% - 78px - 144px - 91px - 50px);
+			width: -o-calc(100% - 78px - 144px - 91px - 50px);
+			width: calc(100% - 78px - 144px - 91px - 50px);
+			max-width: 400px;
+			border-radius: 5px 0 0 5px;
+			background-color: #fff;
+			padding: 0 11px 0 13px;
+			font-family: Roboto;
+			font-size: 15px;
+			font-weight: 300;
+			text-overflow: ellipsis;
+		}
+    #submit { 
+     	box-shadow: none; 
+     	height: 32px; 
+	}
+    #pathCreator { 
+    	box-shadow: none; 
+    	height: 32px; 
+    }
+    .mainElement {
+    	/* Firefox */
+		height: -moz-calc(100% - 40px);
+		/* WebKit */
+		height: -webkit-calc(100% - 40px);
+		/* Opera */
+		height: -o-calc(100% - 40px);
+		/* Standard */
+		height: calc(100% - 40px);
+    }
+		#map { 
+			width: -moz-calc(100% - 381px);
+			width: -webkit-calc(100% - 381px);
+			width: -o-calc(100% - 381px);
+			width: calc(100% - 381px); 
+			display: inline-block; 
+			float: left; 
+			box-shadow: 2px 0px 2px rgba(0, 0, 0, 0.2);
+		}
+		#locList { 
+			color: #333333; 
+			width: 381px; 
+			display: inline-block; 
+			float: left 
+		}
+			.btnContainer {
+				padding: 10px;
+			}
+			#orderBtnDropdown:hover,
+			#orderBtnDropdown:focus,
+			#orderBtnDropdown:active,
+			#orderBtnDropdown.active,
+			#orderBtnDropdown.disabled,
+			#orderBtnDropdown[disabled] {
+			  color: white;
+			  background-color: #F69C1E;
+				*background-color: #F69C1E;
+			}
+			#routeList {
+				padding: 10px;
+				padding-bottom: 0;
+
+				width: -moz-calc(100% - 20px);
+				width: -webkit-calc(100% - 20px);
+				width: -o-calc(100% - 20px);
+				width: calc(100% - 20px);
+
+				height: -moz-calc(100% - 70px - 50px);
+				height: -webkit-calc(100% - 70px - 50px);
+				height: -o-calc(100% - 70px - 50px);
+				height: calc(100% - 70px - 50px);
+			}
+				.routeEntry {
+					height: 45px;
+					width: 361px;
+					position: absolute;
+				}
+				.entryLetter {
+					width: 32px;
+					height: 32px;
+					border-radius: 16px;
+					border: 1px solid black;
+					float: left;
+					text-align: center;
+					font-size: 13pt;
+				}
+				.orgEntryLetter {
+					background-color: #41d355;
+				}
+				.wptsEntryLetter {
+					background-color: #5B84EF
+				}
+				.destEntryLetter {
+					background-color: #ef5b5b;
+				}
+				.routeInput {
+					float: left;
+
+					width: -moz-calc(100% - 34px - 5px);
+					width: -webkit-calc(100% - 34px - 5px);
+					width: -o-calc(100% - 34px - 5px);
+					width: calc(100% - 34px - 5px);
+
+					padding: 0 11px 0 13px;
+					box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+					border: 1px solid #ccc;
+					margin: 0 0 0 5px;
+				}
+				.routeInput:hover,
+				.routeInput:focus {
+					box-shadow: 0 2px 6px rgba(251, 159, 31, 0.6);
+					border: 1px solid rgb(251, 159, 31);
+				}
