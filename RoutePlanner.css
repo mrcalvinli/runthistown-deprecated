@@ -1,3 +1,8 @@
+@font-face { font-family: Sanchez Regular; src: url('fonts/Sanchezregular.otf'); } 
+body {
+	font-family: Sanchez Regular;
+}
+
 .yellow {
 	color: #ffffff;
 	background-color: #F69C1E;
