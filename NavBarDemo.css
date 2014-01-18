@@ -1,16 +1,41 @@
 #nav-color {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #363636;
-  *background-color: #222222;
-  background-image: -moz-linear-gradient(top, #444444, #222222);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#444444), to(#222222));
-  background-image: -webkit-linear-gradient(top, #444444, #222222);
-  background-image: -o-linear-gradient(top, #444444, #222222);
-  background-image: linear-gradient(to bottom, #444444, #222222);
-  background-repeat: repeat-x;
-  border-color: #222222 #222222 #000000;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff444444', endColorstr='#ff222222', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    color: #ffffff;
+    /*text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);*/
+    background-color: #FFB800;
+    *background-color: #222222;
+    background-image: -moz-linear-gradient(top, #FFB800, #FFD551);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FFB800), to(#FFD551));
+    background-image: -webkit-linear-gradient(top, #FFB800, #FFD551);
+    background-image: -o-linear-gradient(top, #FFB800, ##FFD551);
+    background-image: linear-gradient(to bottom, #FFB800, #FFD551);
+    background-repeat: repeat-x;
+    border-color: #FFD551 #FFD551 #FFD551;
+    /*border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);*/
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff444444', endColorstr='#ff222222', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+
+    border-radius: 0px;
+}
+
+#nav-color a {
+    color: white;
+}
+
+#nav-color .btn-default {
+    color: #707070;
+}
+
+.form-control:focus {
+    border-color: #cccccc;
+    outline: 0px;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+}
+
+.navbar {
+    border: 0px;
+}
+
+.navbar-nav.navbar-right:last-child {
+    margin-right: 0px;
 }

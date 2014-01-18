@@ -1,0 +1,16 @@
+#mainContainer {
+	position: relative;
+	top: 30px;
+}
+
+#userInfo {
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+#userInfo > img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
