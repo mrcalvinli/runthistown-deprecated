@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 	<head>
+		<!-- jQuery UI -->
+		<script type="text/javascript" src = "http://code.jquery.com/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src = "http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>	
 		<link rel="stylesheet" type="text/css" href="bootstrap3/css/bootstrap.css">
 		<!-- <link rel="stylesheet" type="text/css" href="bootstrap2/css/bootstrap.css"> -->
 		<!-- <link rel="stylesheet" type="text/css" href="bootstrap2/css/bootstrap-responsive.css"> -->
 		<!-- <link rel="stylesheet" type="text/css" href="bootstrap2/css/docs.css"> -->
 		<link rel="stylesheet" type="text/css" href="LandingPage.css">
+		<link rel="stylesheet" type="text/css" href="Navbar.css">
 
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-		<script type="text/javascript" src = "LandingPage.js"></script>
 		
-
+		
 		<!-- jQuery UI -->
 		<script type="text/javascript" src = "http://code.jquery.com/jquery-1.10.2.js"></script>
-		<script type="text/javascript" src = "http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<script type="text/javascript" src = "http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>	
 
-		<script type="text/javascript" src = "bootstrap3/js/bootstrap.js"></script>
+		<script type="text/javascript" src = "LandingPage.js"></script>
+		<script type="text/javascript" src = "bootstrap3/js/bootstrap.js"></script>	
+
+		<script type="text/javascript" src = "Navbar.js"></script>
 	</head>
 	<body>
+		<!-- Navbar -->
+		<nav class = "navbar navbar-inverse navbar-fixed-top" style = "box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5); height: 60px;" role = "navigation"></nav>
+
 		<div id = "navigator">
 			<br><span id = "homeBullet" class = "navBullet glyphicon glyphicon-home" data-toggle="tooltip" title="Home"></span><br><br><br>
 			<div id = "navBullet1" class = "navBullet" data-toggle="tooltip" title="Section&nbsp;1"></div><br><br><br>
@@ -50,15 +59,8 @@
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
 
-		<div class = "navbar navbar-inverse navbar-fixed-top" style = "box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);">
-			<div class = "navbar-inner">
-				<div class = "container-fluid">
-					<a class = "brand" href="#" style = "padding: 6px 20px 6px; float: left; margin: 0"><img style = "height: 48px" src="images/RunThisTownLogo1.png"></a>
-					<!-- <a class = "brand" href = "#">RunThisTown</a> -->
-				</div>
-			</div>
+		
 
-		</div>
 		<div class = "jumbotron masthead" style = "box-sizing: content-box">
 			<!-- <div class = "jumbotronBg"></div> -->
 			<div class = "container">
@@ -94,4 +96,5 @@
 			</div>
 		</div>
 	</body>
+	
 </html>

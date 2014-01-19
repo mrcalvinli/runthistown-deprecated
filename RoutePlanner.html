@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 	<head>
-		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
-		
-		<link rel="stylesheet" type="text/css" href="bootstrap2/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="bootstrap3/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="RoutePlanner.css">
+		<link rel="stylesheet" type="text/css" href="Navbar.css">
 
-
+		
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUpd0JH2ETsua4nzZ4VHqwf1IrEJaGhiY&sensor=true&libraries=places"></script>
 		<script type="text/javascript" src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
-		<script type="text/javascript" src = "bootstrap2/js/jquery.js"></script>
-		<script src="bootstrap2/js/bootstrap-dropdown.js"></script>
+		
+		
+		<script type="text/javascript" src = "bootstrap3/js/bootstrap.js"></script>
+		<!-- <script src="bootstrap2/js/bootstrap-dropdown.js"></script> -->
+
+		<script type="text/javascript" src = "Navbar.js"></script>
+
+		
 	</head>
 	<body>
-		<div class = "navbar navbar-inverse navbar-fixed-top" style = "box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);">
-			<div class = "navbar-inner">
-				<div class = "container-fluid">
-					<a class = "brand" href="#" style = "padding: 6px 20px 6px"><img style = "height: 48px" src="images/RunThisTownLogo1.png"></a>
-					<!-- <a class = "brand" href = "#">RunThisTown</a> -->
-				</div>
-			</div>
-		</div>
+
+		<nav class = "navbar navbar-inverse navbar-fixed-top" style = "box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5); height: 60px;" role = "navigation"></nav>
+
 		<input id = "input" class = "controls">
 		<span id = "buttonContainer" class = "controls">
 			<button class = "btn controls btnControls yellow" id = "submit" style = "outline: none; "><!-- <i class = "icon-search icon-white"></i> -->Submit</button>
@@ -30,17 +30,17 @@
 		</span>
 		<div id="map" class = "mainElement" style = "margin-top: 60px"></div>
 		<div  class = "mainElement" id = "locList" style = "margin-top: 60px">
-			<h2 style = "text-align: center">Your route</h2>
+			<h2 style = "text-align: center; font-family: Sanchez-Regular">Your route</h2>
 			<div class="btnContainer">
 				<div>
-					<h4 style = "display: inline-block; padding-right: 5px; vertical-align: middle">Waypoint order</h4>
-					<i class = "icon-arrow-right" style = "vertical-align: middle"></i>
+					<h4 style = "display: inline-block; padding-right: 5px; vertical-align: middle; font-family: Sanchez-Regular">Waypoint order</h4>
+					<span class = "glyphicon glyphicon-arrow-right" style = "vertical-align: middle"></span>
 					<div class="btn-group">
-					  <button id = "orderBtnDropdown" class="btn dropdown-toggle yellow" data-toggle="dropdown" style = "outline: none;">
+					  <button id = "orderBtnDropdown" class="btn dropdown-toggle yellow" data-toggle="dropdown" style = "outline: none; font-family: Sanchez Regular">
 					    Custom
 					    <span class="caret" style = "border-top: 4px solid white"></span>
 					  </button>
-					  <ul class="dropdown-menu">
+					  <ul class="dropdown-menu" role = "menu">
 					  	<li><a id = "customOrderBtn" href="#">Custom</a></li>
 					  	<li><a id = "autoOrderBtn" href="#">Auto</a></li>
 					  	<li><a id = "shortestPathOrderBtn" href="#">Shortest Path</a></li>

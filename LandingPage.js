@@ -13,6 +13,11 @@ $(document).ready(function() {
 		$("#infoSection2").height($(window).height() - 60);
 		$("#infoSection3").height($(window).height() - 60);
 		$("#navigator").css("margin-top", (($(window).height() - 60)/2) - $("#navigator").height()/2 + 60 - 20);
+		if ( $(window).width() < 1440 ){
+			$('.jumbotron').css("min-height", '793px');
+		} else {
+			$('.jumbotron').css('min-height', '500px');
+		}
 	});
 
 	// Chevron animation

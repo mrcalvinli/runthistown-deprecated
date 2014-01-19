@@ -1,0 +1,49 @@
+@font-face { font-family: Sanchez Regular; src: url('fonts/Sanchezregular.otf'); }
+.navbar { font-family: Sanchez Regular; }
+.navbar-nav li {
+	margin-top: 10px;
+	font-size: 14pt;
+	font-weight: bolder;
+}
+
+#extraInfo {
+	color: white;
+	margin-top: 15px;
+	margin-right: 20px;
+	opacity: 0.5;
+	cursor: pointer;
+}
+
+#extraInfo:hover {
+	opacity: 1;
+}
+.brand { float: left; margin-left: 20px; }
+.popover-title { font-family: Sanchez Regular; padding: 10px 30px; font-size: 14pt; }
+/*#routeFinderCont {
+	width: -moz-calc(100% - 279px - 15px - 40px - 141px);
+	width: -webkit-calc(100% - 279px - 15px - 40px - 141px);
+	width: -o-calc(100% - 279px - 15px - 40px - 141px);
+	width: calc(100% - 279px - 15px - 40px - 141px);
+}
+#routeFinder {
+	width: -moz-calc(100% - 71px - 3px);
+	width: -webkit-calc(100% - 71px - 3px);
+	width: -o-calc(100% - 71px - 3px);
+	width: calc(100% - 71px - 3px);
+	max-width: 500px;
+}*/
+
+#searchContainer {
+	width: -moz-calc(100% - 279px - 145px);
+	width: -webkit-calc(100% - 279px - 145px);
+	width: -o-calc(100% - 279px - 145px);
+	width: calc(100% - 279px - 145px);
+	max-width: 604px;
+}
+
+#inputContainer {
+	width: -moz-calc(100% - 77px);
+	width: -webkit-calc(100% - 77px);
+	width: -o-calc(100% - 77px);
+	width: calc(100% - 77px);
+}

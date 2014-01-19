@@ -214,7 +214,7 @@ $(document).ready(function() {
 			var marginTopString = marginTop.toString() + "px";
 
 			$("#routeList").append("<div style = 'margin-top: " + marginTopString + "' class = 'routeEntry " + entryClass + "' id = 'routeEntry-" + letterArray[letterIndex] + "'></div>");
-			$("#routeEntry-" + letterArray[letterIndex]).append("<div class = 'entryLetter " + letterClass + "'>" + "<span class = 'entrySpan' id = 'entrySpan-" + letterArray[letterIndex] + "' style = 'margin-top: 6px; display: block'>" + "&bull;" /*letterArray[letterIndex] */ + "</span></div>");
+			$("#routeEntry-" + letterArray[letterIndex]).append("<div class = 'entryLetter " + letterClass + "'>" + "<span class = 'entrySpan' id = 'entrySpan-" + letterArray[letterIndex] + "' style = 'margin-top: 3px; display: block'>" + "&bull;" /*letterArray[letterIndex] */ + "</span></div>");
 			entryClass = "orgEntry"
 			$("#routeEntry-" + letterArray[letterIndex]).append("<input class = 'controls routeInput'>");
 			$("#routeEntry-" + letterArray[letterIndex]).append("<button type = 'button' class = 'close' style = 'margin-top: 5px; padding-left; 5px'>&times;</button>")

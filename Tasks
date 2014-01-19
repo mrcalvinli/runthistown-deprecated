@@ -1,0 +1,20 @@
+Tasks
+
+Tasks for Map page
+	- Add delete to routeEntry
+	- Draggable inputs
+	- Add autocomplete to input fields in your route
+	- Deleting feature (time intensive)
+	- Clear all button
+
+	- Error checking
+
+	Things to fix:
+		- Deleting after a path is created (either disable delete, or update path)
+		- (minor) multiple markers placed down over time instead of just one
+		- street view, and those controls on the side are trippin
+		- when geometry not found, do not add marker
+
+Tasks for backend
+	- give functionality to navbar search bar (look through saved routes)
+	- navbar "Sign Up" changes to User name if user is logged in, with user picture
