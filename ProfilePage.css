@@ -37,7 +37,6 @@ legend {
 .rightSection {
 	
 	display: inline-block;
-	position: absolute;
 	height: 100%;
 }
 .statVal {

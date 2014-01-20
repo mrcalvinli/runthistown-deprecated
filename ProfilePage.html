@@ -24,7 +24,7 @@
 					<div id = "profPicCont">
 						<img src = "images/ProfPic.jpg" style = "width: 100%">
 					</div>
-					<legend><h1 style = "text-align: center; margin-bottom: 15px; font-family: Sanchez Regular">Myname</h1></legend>
+					<legend><h1 id = "name" style = "text-align: center; margin-bottom: 15px; font-family: Sanchez Regular"></h1></legend>
 					<div class = "stat"><p class = "statVal">Stat goes here</p><img id = "totalDistIcon" src = "images/RunningMan.png" style = "width: 16px" data-toggle = "tooltip" title = "Total distance run"></div>
 					<div class = "stat"><p class = "statVal">Stat goes here</p><span id = "totalCalIcon" class = "glyphicon glyphicon-fire" data-toggle = "tooltip" title = "Total Calories Burned"></span></div>
 					<div class = "statContainer">
@@ -70,7 +70,25 @@
 			<div class = "col-md-9 rightSection">
 				<div style = "padding-top: 15px; padding-bottom: 15px; width: 100%; height: 100%">
 					<h1 style = "text-align: center; font-family: Sanchez-Regular">My Routes</h1>
-					<div class = "routeContainer"></div>
+					<div class = "routeContainer well">
+						<legend><h2 style = "text-align: center; font-family: Sanchez-Regular">Routes to run</h2></legend>
+						<div id = "routesToRunContainer">
+							<a href = "RoutePlanner.html" style = "color: transparent"><button type="button" class="btn btn-success btn-lg btn-block" style = "font-size: 18pt;">Run a new route</button></a>
+						</div>
+						<legend><h2 style = "text-align: center; font-family: Sanchez-Regular">Routes that I've run</h2></legend>
+						<div id = "routesRunContainer">
+							<div class = "routeEntry well well-sm">
+								<div style = "position: inline-block; width: 50%">
+									<p>Date: </p>
+									<p>Start: </p>
+									<p>End: </p>
+								</div>
+								<div style = "position: inline-block; width: 50%">
+									<p>Distance Traveled</p>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

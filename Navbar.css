@@ -50,4 +50,5 @@
 	width: -webkit-calc(100% - 77px);
 	width: -o-calc(100% - 77px);
 	width: calc(100% - 77px);
+	display: inline-block;
 }

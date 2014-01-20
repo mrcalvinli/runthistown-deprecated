@@ -1,8 +1,16 @@
 $(document).ready(function() {
+	// Backend Stuff
+	$("#name").html("Myname Mcgee");
+
+	// Styling Javascript
 	$("html").height($(window).height());
+	setTimeout(function() {$(".rightSection").height($(".leftSection").height()) ;}, 200);
+
 	$(window).resize(function() {
 		$("html").height($(window).height());
 	});
+
+	// Functional JavaScript
 
 	$("#totalDistIcon").tooltip({"placement": "right"});
 	$("#totalCalIcon").tooltip({"placement": "right"});
@@ -12,4 +20,6 @@ $(document).ready(function() {
 		$("#newGoalContainer").css("border-top", "1px solid grey");
 		$("#newGoalContainer").animate({"height": buttonHeight, "padding-bottom": "5px"}, 300);
 	});
+
+	// Route entry template
 });
