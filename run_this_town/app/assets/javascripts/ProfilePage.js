@@ -23,7 +23,7 @@ $(document).ready(function() {
 
 	// Route entry template
 
-	$(".routeEntry").on("click", function() {
+	$(".profRouteEntry").on("click", function() {
 		if ( $(this).css("height") == "40px" ) {
 			$(this).css("height", "auto");
 		} else {

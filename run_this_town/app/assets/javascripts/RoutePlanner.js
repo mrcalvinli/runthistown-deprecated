@@ -48,19 +48,19 @@ $(document).ready(function() {
 		customOrder = true;
 		autoOrder = false;
 		shortestPathOrder = false;
-		$("#orderBtnDropdown").html('Custom <span class="caret" style = "border-top: 4px solid white"></span>');
+		$("#orderBtnDropdown").html('Order: Custon <span class="caret" style = "border-top: 4px solid white"></span>');
 	})
 	$("#autoOrderBtn").on("click", function() {
 		customOrder = false;
 		autoOrder = true;
 		shortestPathOrder = false;
-		$("#orderBtnDropdown").html('Auto <span class="caret"style = "border-top: 4px solid white"></span>');
+		$("#orderBtnDropdown").html('Order: Auto <span class="caret" style = "border-top: 4px solid white"></span>');
 	})
 	$("#shortestPathOrderBtn").on("click", function() {
 		customOrder = false;
 		autoOrder = false;
 		shortestPathOrder = true;
-		$("#orderBtnDropdown").html('Shortest Path <span class="caret" style = "border-top: 4px solid white"></span>');
+		$("#orderBtnDropdown").html('Order: Shortest Path <span class="caret" style = "border-top: 4px solid white"></span>');
 	});
 
 
@@ -177,119 +177,125 @@ $(document).ready(function() {
 				var thisMarker = markerDict[keysArray[i]];
 				// thisMarker.setMap(map);
 			}
-		} else {
 
+			$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + urlAddress + '&sensor=false', function(json_data){
+				var latLong = json_data.results[0].geometry.location;
+				var lat = latLong.lat;
+				var lng = latLong.lng;
+				var entryClass = "";
+				var letterClass = "";
+				if (letterArray[letterIndex] == "A") {
+					letterClass = "orgEntryLetter";
+					entryClass = "orgEntry"
+				} else {
+					letterClass = "destEntryLetter";
+					entryClass = "destEntry"
+				}
+
+				var center = new google.maps.LatLng(lat, lng);
+			    map.panTo(center);
+
+				pathArray.push([lat, lng]);
+				if (pathArray.length >= 2) {
+					document.getElementById("clearRoute").disabled = false;
+					document.getElementById("pathCreator").disabled = false;
+				}
+
+				$(".destEntryLetter").each(function() {
+					$(this).attr("class", "entryLetter wptsEntryLetter")
+				});
+				$(".destEntry").each(function() {
+					$(this).attr("class", "routeEntry wptsEntry")
+				})
+
+				var marginTop = letterIndex * 45;
+				var marginTopString = marginTop.toString() + "px";
+
+				$("#routeList").append("<div style = 'margin-top: " + marginTopString + "' class = 'routeEntry " + entryClass + "' id = 'routeEntry-" + letterArray[letterIndex] + "'></div>");
+				$("#routeEntry-" + letterArray[letterIndex]).append("<div class = 'entryLetter " + letterClass + "'>" + "<span class = 'entrySpan' id = 'entrySpan-" + letterArray[letterIndex] + "' style = 'margin-top: 3px; display: block'>" + "&bull;" /*letterArray[letterIndex] */ + "</span></div>");
+				entryClass = "orgEntry"
+				$("#routeEntry-" + letterArray[letterIndex]).append("<input class = 'controls routeInput'>");
+				$("#routeEntry-" + letterArray[letterIndex]).append("<button type = 'button' class = 'close deleteRouteEntry' style = 'margin-top: 5px; padding-left; 5px'>&times;</button>")
+				
+				// Delete Button
+				$("#routeEntry-" + letterArray[letterIndex] + " .close").on("click", function() {
+					var thisLetter = $(this).parent().attr("id").toString()[11];
+					console.log(thisLetter);
+					markerDict[thisLetter].setMap(null);
+					markerDict[thisLetter] = null;
+					delete markerDict[thisLetter];
+					var index = letterArray.indexOf(thisLetter);
+					pathArray.pop(index);
+
+					// replace old info with info from new letters
+					var thisLetterIndex = letterArray.indexOf(thisLetter);
+					var markerKeys = Object.keys(markerDict);
+					for (var i = 0; i < markerKeys.length; i++) {
+						var currentLetterIndex = letterArray.indexOf(markerKeys[i]);
+						var currentLetter = letterArray[currentLetterIndex];
+						var prevLetter = letterArray[currentLetterIndex - 1];
+						if (currentLetterIndex > thisLetterIndex) {
+							markerDict[prevLetter] = markerDict[currentLetter];
+							delete markerDict[currentLetter];
+						}
+					}
+					// console.log(JSON.stringify(markerDict));
+
+					// remove animation
+					$("#routeEntry-" + thisLetter).animate({"opacity": 0}, 300, function() {
+						$("#routeEntry-" + thisLetter).first().remove();
+					});
+					
+
+					function animateEntriesUp() {
+						var index = letterArray.indexOf(thisLetter) + 1;
+						var i = index;                     //  set your counter to 1
+
+						function myLoop () {           //  create a loop function
+						   setTimeout(function () {    //  call a 3s setTimeout when the loop is called
+						      	var currentLetter = letterArray[i];
+								$("#routeEntry-" + currentLetter).animate(
+									{"margin-top": parseInt($("#routeEntry-" + currentLetter).css("margin-top")) - 45},
+									300
+								);
+
+								console.log(i);        //  your code here
+								i++;                     //  increment the counter
+								if (i < letterIndex) {            //  if the counter < 10, call the loop function
+								 myLoop();             //  ..  again which will trigger another 
+								} else {
+									var newIndex = letterArray.indexOf(thisLetter) + 1;
+									for (var j = newIndex; j < letterIndex; j++) {
+										var currentLetter = letterArray[j];
+										$("#routeEntry-" + currentLetter).attr("id", "routeEntry-" + letterArray[j-1]);
+									}
+									letterIndex--;
+								}                     //  ..  setTimeout()
+						   }, 150)
+						}
+
+						myLoop();  
+					}
+
+					setTimeout(animateEntriesUp(), 150);
+
+
+				});
+				
+				$("#routeEntry-" + letterArray[letterIndex] + " .routeInput").val(address.toString());
+				letterIndex++;
+
+				// Remember that when deleting an element, you should also change the id of all the elements in front of it
+				
+			});		
+			marker = null;
+		} else {
+			alert("Invalid Point");
 		}
 		
 
 
-		$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + urlAddress + '&sensor=false', function(json_data){
-			var latLong = json_data.results[0].geometry.location;
-			var lat = latLong.lat;
-			var lng = latLong.lng;
-			var entryClass = "";
-			var letterClass = "";
-			if (letterArray[letterIndex] == "A") {
-				letterClass = "orgEntryLetter";
-				entryClass = "orgEntry"
-			} else {
-				letterClass = "destEntryLetter";
-				entryClass = "destEntry"
-			}
-
-			var center = new google.maps.LatLng(lat, lng);
-		    map.panTo(center);
-
-			pathArray.push([lat, lng]);
-
-			$(".destEntryLetter").each(function() {
-				$(this).attr("class", "entryLetter wptsEntryLetter")
-			});
-			$(".destEntry").each(function() {
-				$(this).attr("class", "routeEntry wptsEntry")
-			})
-
-			var marginTop = letterIndex * 45;
-			var marginTopString = marginTop.toString() + "px";
-
-			$("#routeList").append("<div style = 'margin-top: " + marginTopString + "' class = 'routeEntry " + entryClass + "' id = 'routeEntry-" + letterArray[letterIndex] + "'></div>");
-			$("#routeEntry-" + letterArray[letterIndex]).append("<div class = 'entryLetter " + letterClass + "'>" + "<span class = 'entrySpan' id = 'entrySpan-" + letterArray[letterIndex] + "' style = 'margin-top: 3px; display: block'>" + "&bull;" /*letterArray[letterIndex] */ + "</span></div>");
-			entryClass = "orgEntry"
-			$("#routeEntry-" + letterArray[letterIndex]).append("<input class = 'controls routeInput'>");
-			$("#routeEntry-" + letterArray[letterIndex]).append("<button type = 'button' class = 'close' style = 'margin-top: 5px; padding-left; 5px'>&times;</button>")
-			
-			// Delete Button
-			$("#routeEntry-" + letterArray[letterIndex] + " .close").on("click", function() {
-				var thisLetter = $(this).parent().attr("id").toString()[11];
-				console.log(thisLetter);
-				markerDict[thisLetter].setMap(null);
-				markerDict[thisLetter] = null;
-				delete markerDict[thisLetter];
-				var index = letterArray.indexOf(thisLetter);
-				pathArray.pop(index);
-
-				// replace old info with info from new letters
-				var thisLetterIndex = letterArray.indexOf(thisLetter);
-				var markerKeys = Object.keys(markerDict);
-				for (var i = 0; i < markerKeys.length; i++) {
-					var currentLetterIndex = letterArray.indexOf(markerKeys[i]);
-					var currentLetter = letterArray[currentLetterIndex];
-					var prevLetter = letterArray[currentLetterIndex - 1];
-					if (currentLetterIndex > thisLetterIndex) {
-						markerDict[prevLetter] = markerDict[currentLetter];
-						delete markerDict[currentLetter];
-					}
-				}
-				// console.log(JSON.stringify(markerDict));
-
-				// remove animation
-				$("#routeEntry-" + thisLetter).animate({"opacity": 0}, 300, function() {
-					$("#routeEntry-" + thisLetter).first().remove();
-				});
-				
-
-				function animateEntriesUp() {
-					var index = letterArray.indexOf(thisLetter) + 1;
-					var i = index;                     //  set your counter to 1
-
-					function myLoop () {           //  create a loop function
-					   setTimeout(function () {    //  call a 3s setTimeout when the loop is called
-					      	var currentLetter = letterArray[i];
-							$("#routeEntry-" + currentLetter).animate(
-								{"margin-top": parseInt($("#routeEntry-" + currentLetter).css("margin-top")) - 45},
-								300
-							);
-
-							console.log(i);        //  your code here
-							i++;                     //  increment the counter
-							if (i < letterIndex) {            //  if the counter < 10, call the loop function
-							 myLoop();             //  ..  again which will trigger another 
-							} else {
-								var newIndex = letterArray.indexOf(thisLetter) + 1;
-								for (var j = newIndex; j < letterIndex; j++) {
-									var currentLetter = letterArray[j];
-									$("#routeEntry-" + currentLetter).attr("id", "routeEntry-" + letterArray[j-1]);
-								}
-								letterIndex--;
-							}                     //  ..  setTimeout()
-					   }, 150)
-					}
-
-					myLoop();  
-				}
-
-				setTimeout(animateEntriesUp(), 150);
-
-
-			});
-			
-			$("#routeEntry-" + letterArray[letterIndex] + " .routeInput").val(address.toString());
-			letterIndex++;
-
-			// Remember that when deleting an element, you should also change the id of all the elements in front of it
-			
-		});		
-		marker = null;
+		
 
 		
 	});
@@ -378,6 +384,8 @@ $(document).ready(function() {
 										$("#routeEntry-" + letterToChange).attr("id", "#routeEntry-" + thisLetter);
 
 									}
+									document.getElementById("createRouteBtn").disabled = false;
+									$(".deleteRouteEntry").css("display", "none");
 								} else {
 									alert('failed to get directions');
 								}
@@ -400,6 +408,8 @@ $(document).ready(function() {
 									for (var i = 1; i < letterIndex - 1; i++) {
 										$("#routeEntry-" + letterArray[i] + " .entrySpan").html(letterArray[i]);
 									}
+								document.getElementById("createRouteBtn").disabled = false;
+								$(".deleteRouteEntry").css("display", "none");
 								} else {
 									alert('failed to get directions');
 								}
@@ -409,6 +419,29 @@ $(document).ready(function() {
 				});
 			})(i);
 		});
+	});
+
+	$("#clearRoute").on("click", function() {
+		$("#routeList").html("");
+		// Set markers to null and remove them
+		pathArray = [];
+
+		var markerKeys = Object.keys(markerDict);
+		for (var i in markerKeys) {
+			var key = markerKeys[i];
+			markerDict[key].setMap(null);
+			markerDict[key] = null;
+		}
+		markerDict = {};
+		
+		document.getElementById("clearRoute").disabled = true;
+		document.getElementById("pathCreator").disabled = true;
+		document.getElementById("createRouteBtn").disabled = true;
+
+		$(".deleteRouteEntry").css("display", "block");
+
+		directionsDisplay.setMap(null);
+		letterIndex = 0;
 	});
 
 	$("#confirmBtn").on("click", function() {

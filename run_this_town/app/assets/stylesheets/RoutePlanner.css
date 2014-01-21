@@ -142,15 +142,12 @@ html { height: 100% }
 				padding: 10px;
 				padding-bottom: 0;
 
-				width: -moz-calc(100% - 20px);
-				width: -webkit-calc(100% - 20px);
-				width: -o-calc(100% - 20px);
-				width: calc(100% - 20px);
+				width: 100%;
 
-				height: -moz-calc(100% - 70px - 50px - 20px);
-				height: -webkit-calc(100% - 70px - 50px - 20px);
-				height: -o-calc(100% - 70px - 50px - 20px);
-				height: calc(100% - 70px - 50px - 20px);
+				height: -moz-calc(100% - 70px - 50px - 20px - 36px);
+				height: -webkit-calc(100% - 70px - 50px - 20px - 36px);
+				height: -o-calc(100% - 70px - 50px - 20px - 36px);
+				height: calc(100% - 70px - 50px - 20px - 36px);
 			}
 				.routeEntry {
 					height: 45px;
@@ -165,6 +162,7 @@ html { height: 100% }
 					float: left;
 					text-align: center;
 					font-size: 13pt;
+					font-family: Roboto, Sanchez, serif;
 				}
 				.orgEntryLetter {
 					background-color: #2BA63A;
@@ -226,6 +224,8 @@ html { height: 100% }
 					filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 				}
 				.routeInput {
+					font-family: Roboto;
+
 					float: left;
 
 					width: -moz-calc(100% - 34px - 5px - 12px - 5px);
