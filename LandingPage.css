@@ -1,4 +1,4 @@
-@font-face { font-family: Sanchez Regular; src: url('fonts/Sanchezregular.otf'); } 
+/*@font-face { font-family: Sanchez Regular; src: url('fonts/Sanchezregular.otf'); } */
 .tooltip { min-width: none; font-size: 13pt; }
 .tooltip-inner {background-color: rgba(0, 0, 0, 0.5); }
 
@@ -23,7 +23,7 @@
 html, body {
 	height: 100%;
 	background-color: black;
-	font-family: Sanchez Regular;
+	font-family: 'Sanchez', serif;
 }
 
 #navigator {
@@ -58,7 +58,7 @@ html, body {
 	margin-top: calc(25% - 227px);
 }
 #loginModal {
-	font-family: Sanchez Regular;
+	font-family: 'Sanchez', serif;
 }
 
 .modal { font-size: 14pt; }
@@ -94,7 +94,7 @@ html, body {
 	padding: 18px 48px;
 	font-size: 40px;
 	font-weight: 200;
-	font-family: Sanchez Regular;
+	font-family: 'Sanchez', serif;
 	color: #fff;
 	border: 0;
 	-webkit-border-radius: 6px;
@@ -227,7 +227,7 @@ html, body {
 	-o-background-size: cover;
 	background-size: cover;
 	color: white;
-	font-family: Sanchez Regular;
+	font-family: 'Sanchez', serif;
 	font-weight: bolder;
 }
 #infoSection2 {
@@ -238,7 +238,7 @@ html, body {
 	-o-background-size: cover;
 	background-size: cover;
 	color: white;
-	font-family: Sanchez Regular;
+	font-family: 'Sanchez', serif;
 	font-weight: bolder;
 }
 #infoSection3 {
