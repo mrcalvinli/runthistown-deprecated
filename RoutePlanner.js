@@ -61,9 +61,8 @@ $(document).ready(function() {
 		autoOrder = false;
 		shortestPathOrder = true;
 		$("#orderBtnDropdown").html('Shortest Path <span class="caret" style = "border-top: 4px solid white"></span>');
-	})
+	});
 
-	
 
 	// Add autocomplete
 	var input = document.getElementById('input'); 
@@ -408,39 +407,13 @@ $(document).ready(function() {
 						}
 					}
 				});
-
-				/*var orgString = "";
-				var destString = "";
-				var wptsString = "";
-
-				var orgArray = org.toString().split(" ");
-				var destArray = dest.toString().split(" ");
-				var wptsArray = [];
-				for (var i = 0; i < wpts.length; i++) {
-					var subWptsArray = wpts[i].split(" ");
-					for (var j = 0; j < subWptsArray.length; j++) {
-						wptsArray.push(subWptsArray[j]);
-					}
-					if (i != wpts.length - 1) {
-						wptsArray.push("|");
-					}
-				}
-
-				for (var i = 0; i < orgArray.length; i++) {
-					orgString += orgArray[i];
-				}
-				for (var i = 0; i < destArray.length; i++) {
-					destString += destArray[i];
-				}
-				for (var i = 0; i < wptsArray.length; i++) {
-					wptsString += wptsArray[i];
-				}
-				$.getJSON('http://maps.googleapis.com/maps/api/directions/json?origin=' + orgString + '&destination=' + destString + '&waypoints=' + wptsString + '&sensor=false', function(data) {
-					console.log(JSON.stringify(data));
-					var wptsOrder = data["routes"][0]["waypoint_order"];
-					console.log("wptsOrder: " + wptsOrder.toString());
-				});*/
 			})(i);
 		});
+	});
+
+	$("#confirmBtn").on("click", function() {
+		// insert backend stuff here
+		// send route data to server
+		// go to profile page and highlight their new route
 	});
 });

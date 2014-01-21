@@ -3,31 +3,57 @@
 		<title>Nav Bar Demo</title>
 		<link rel="stylesheet" type="text/css" href="bootstrap3/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="NavBarDemo.css">
+
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script type="text/javascript" src = "bootstrap3/js/bootstrap.js"></script>
+		<script type="text/javascript" src = "NavBarDemo.js"></script>
 	</head>
 	<body>
-		<nav class = "navbar navbar-default" id = "nav-color">
-			<div class="navbar-header">
-				<a class = "navbar-brand">RunThisTown</a>
+		<div class="modal fade" id = "creditsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style = "font-family: Sanchez Regular">
+		  <div class="modal-dialog modal-dialog-center">
+		    <div class="modal-content" style = "background-color: beige">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h3 class="modal-title" style = "font-family: Sanchez Regular">Credits</h3>
+		      </div>
+		      <div class="modal-body">
+		        <p>Thanks to all these awesome sources for helping make this website possible!</p><br>
+		        <ul>
+		        	<li><p><a href = "http://glyphicons.com">Glyphicons</a></p></li>
+		        	<li><p><a href = "http://getbootstrap.com">Bootstrap</a></p></li>
+		        	<li><p>Sarah Liu for her amazing photography!</p></li>
+		        </ul>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<nav class = "navbar navbar-inverse navbar-fixed-top" style = "box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5); height: 60px;" role = "navigation">
+			<div class = "navbar-header">
+				<button class = "navbar-toggle" type = "button" data-toggle="collapse" data-target = "#bsnavbar-collapse">
+					<span class = "sr-only">Toggle navigation</span>
+					<span class = "icon-bar"></span>
+					<span class = "icon-bar"></span>
+					<span class = "icon-bar"></span>
+				</button>
+				<a class = "navbar-brand" href="LandingPage.html" style = "padding: 6px 20px 6px; at: lef; margin: 0"><img style = "height: 48px" src="images/RunThisTownLogo1.png"></a>'
 			</div>
-			<!-- Left Side of Nav Bar -->
-			<ul class = "nav navbar-nav">
-				<li><a href = "#">Home</a></li>
-				<li><a href="#">About</a></li>
-			</ul>
-
-			<!-- Search Bar (May take out) -->
-			<form class="navbar-form navbar-left" role="search">
-      			<div class="form-group">
-        			<input type="text" class="form-control" placeholder="Find Route">
-      			</div>
-      			<button type="submit" class="btn btn-default">Search</button>
-    		</form>
-
-			<!-- Right Side of Navbar -->
-			<ul class = "nav navbar-nav navbar-right">
-				<li><a href="#">Login</a></li>
-				<li><a href="#">Sign Up</a></li>
-			</ul>
+			<div class="collapse navbar-collapse" id="bs-navbar-collapse">
+				<form id = "searchContainer" class="navbar-form navbar-left" role="search">
+					<div id = "inputContainer" class="form-group" style = "margin-top: 10px;">
+	        			<input type="text" id = "routeFinder" class="form-control" placeholder="Find Route" >
+	      			</div>
+	      			<button type="submit" class="btn btn-warning" style = "margin-top: 10px; margin-left:3px; position: fixed">Search</button>
+	    		</form>'
+				<ul class = "nav navbar-nav navbar-right" style = "margin-right: 0; right: 0; top: 0; position: fixed">
+					<li><a href="#" data-toggle="modal" data-target="#loginModal">Sign Up</a></li>
+					<li><span id = "extraInfo" class = "glyphicon glyphicon-cog" data-toggle="popover"></span></li>
+				</ul>
+			</div>
 		</nav>
 	</body>
 </html>

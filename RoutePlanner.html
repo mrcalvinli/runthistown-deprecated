@@ -20,6 +20,24 @@
 		
 	</head>
 	<body>
+		<!-- Confirmation Modal -->
+		<div class="modal fade" id = "confirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style = "font-family: Sanchez Regular">
+		  <div class="modal-dialog modal-dialog-center">
+		    <div class="modal-content" style = "background-color: beige">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h3 class="modal-title" style = "font-family: Sanchez Regular">Confirm</h3>
+		      </div>
+		      <div class="modal-body">
+		        <p>Are you sure you want to submit this route?</p><br>
+		      </div>
+		      <div class="modal-footer">
+		      	<button id = "confirmBtn" type="button" class="btn btn-success">Yes</button>
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 
 		<nav class = "navbar navbar-inverse navbar-fixed-top" style = "box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5); height: 60px;" role = "navigation"></nav>
 
@@ -46,6 +64,7 @@
 					  	<li><a id = "shortestPathOrderBtn" href="#">Shortest Path</a></li>
 					  </ul>
 					</div>
+					<div id = "createRouteBtn" class = "btn btn-success" data-toggle="modal" data-target="#confirmationModal">Submit</div>
 				</div>
 			</div>
 			<div id = "routeList"></div>
