@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- Navbar -->
+<nav class = "navbar navbar-inverse navbar-fixed-top" style = "box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5); height: 60px;" role = "navigation"></nav>
+
+<div id = "navigator">
+	<br><span id = "homeBullet" class = "navBullet glyphicon glyphicon-home" data-toggle="tooltip" title="Home"></span><br><br><br>
+	<div id = "navBullet1" class = "navBullet" data-toggle="tooltip" title="Section&nbsp;1"></div><br><br><br>
+	<div id = "navBullet2" class = "navBullet" data-toggle="tooltip" title="Section&nbsp;2"></div><br><br><br>
+	<div id = "navBullet3" class = "navBullet" data-toggle="tooltip" title="Section&nbsp;3"></div><br><br>
+</div> 
+
+<div class="modal fade" id = "loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style = "font-family: Sanchez Regular">
+  <div class="modal-dialog modal-dialog-center">
+    <div class="modal-content" style = "background-color: beige">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" style = "font-family: Sanchez Regular">Sign up here!</h4>
+      </div>
+      <div class="modal-body" style = "text-align: center">
+        <p>Input your information below</p><br>
+
+        <div style = 'display: inline-block; text-align: left'>
+	        <div>Username<input id = "usernameInput" class = 'userInput'></input></div><br>
+	        <div>Password<input id = "passwordInput" class = 'userInput' type = "password"></input></div><br>
+	        <div>Confirm Password<input id = "confirmInput" class = 'userInput' type = "password"></input></div><br>
+	        <div>Age<input id = "ageInput" class = 'userInput'></input></div>
+	    </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-warning">Create Account</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+<div class = "jumbotron masthead" style = "box-sizing: content-box">
+	<!-- <div class = "jumbotronBg"></div> -->
+	<div class = "container">
+		<h1 style = "font-family: Sanchez Regular">Let's Run This Town</h1>
+		<p>Get fit together, see more of your city</p>
+		<button id = "getStarted" class = "yellow btn btn-large" data-toggle="modal" data-target="#loginModal">Get Started</button>
+		<div id = 'learnMoreDiv'>
+			<div><p>Learn more below</p></div>
+			<!-- <i class = "icon-chevron-down icon-white"></i> -->
+			<span id = "learnMoreChevron" class = "glyphicon glyphicon-chevron-down"></span>
+		</div>
+	</div>
+</div>
+<div id = "infoSection1" class = "infoSection">
+	<div style = 'padding: 20px; height: inherit'>
+		<span id = "toHomeChevron" class = "navChevron glyphicon glyphicon-chevron-up"></span>
+		<h1 style = "color: white; font-family: Sanchez Regular; font-size: 66pt; font-weight: bolder; margin-top: 0">Plan your routes</h1>
+		<div class = "bottomNav"><span id = "toSection2DownChevron" class = "navChevron glyphicon glyphicon-chevron-down"></span></div>
+	</div>
+</div>
+<div id = "infoSection2" class = "infoSection">
+	<div style = 'padding: 20px; height: inherit'>
+		<span id = "toSection1UpChevron" class = "navChevron glyphicon glyphicon-chevron-up"></span>
+		<h1 style = "color: white; font-family: Sanchez Regular; font-size: 66pt; font-weight: bolder; margin-top: 0">Meet new people</h1>
+		<div class = "bottomNav"><span id = "toSection3DownChevron" class = "navChevron glyphicon glyphicon-chevron-down"></span></div>
+	</div>
+</div>
+<div id = "infoSection3" class = "infoSection">
+	<div style = 'padding: 20px; height: inherit'>
+		<span id = "toSection2UpChevron" class = "navChevron glyphicon glyphicon-chevron-up"></span>
+		<h1 style = "color: white; font-family: Sanchez Regular; font-size: 66pt; font-weight: bolder; margin-top: 0">Keep track of your progress</h1>
+		<!-- <div class = "bottomNav"><span id = "to" class = "bottomNav navChevron glyphicon glyphicon-chevron-down"></span></div> -->
+	</div>
+</div>
+</body>
+	
