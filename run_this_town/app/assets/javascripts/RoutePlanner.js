@@ -72,7 +72,7 @@ $(document).ready(function() {
 	var autocomplete = new google.maps.places.Autocomplete(input);
 	autocomplete.bindTo('bounds', map);
 	var infowindow = new google.maps.InfoWindow();
-	var marker = new google.maps.Marker({
+	marker = new google.maps.Marker({
 		map:map
 	});
 
@@ -386,6 +386,8 @@ $(document).ready(function() {
 									}
 									document.getElementById("createRouteBtn").disabled = false;
 									$(".deleteRouteEntry").css("display", "none");
+									marker.setMap(null);
+									marker = null;
 								} else {
 									alert('failed to get directions');
 								}
