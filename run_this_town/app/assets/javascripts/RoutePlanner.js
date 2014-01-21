@@ -17,6 +17,12 @@ $(document).ready(function() {
 			zoom: 15
 		};
 		map = new google.maps.Map(document.getElementById("map"), mapOptions);
+		if (navigator.geolocation) {
+		     navigator.geolocation.getCurrentPosition(function (position) {
+		         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+		         map.setCenter(initialLocation);
+		     });
+		 }
 
 	}
 
