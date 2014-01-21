@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 	// Styling Javascript
 	$("html").height($(window).height());
-	setTimeout(function() {$(".rightSection").height($(".leftSection").height()) ;}, 200);
+	// setTimeout(function() {$(".rightSection").height($(".leftSection").height()) ;}, 1000);
 
 	$(window).resize(function() {
 		$("html").height($(window).height());

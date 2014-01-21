@@ -23,7 +23,7 @@ legend {
 	border-color: grey;
 }
 
-.container {
+#profileContainer {
 	background-color: #ccc;
 	margin-top: 120px;
 	min-height: 700px;
