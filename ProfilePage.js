@@ -22,4 +22,12 @@ $(document).ready(function() {
 	});
 
 	// Route entry template
+
+	$(".routeEntry").on("click", function() {
+		if ( $(this).css("height") == "40px" ) {
+			$(this).css("height", "auto");
+		} else {
+			$(this).css("height", "40px");
+		}
+	});
 });
