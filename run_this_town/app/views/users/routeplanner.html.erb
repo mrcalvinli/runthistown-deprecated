@@ -1,0 +1,49 @@
+<!-- Confirmation Modal -->
+	<div class="modal fade" id = "confirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style = "font-family: Sanchez Regular">
+	  <div class="modal-dialog modal-dialog-center">
+	    <div class="modal-content" style = "background-color: beige">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h3 class="modal-title" style = "font-family: Sanchez Regular">Confirm</h3>
+	      </div>
+	      <div class="modal-body">
+	        <p>Are you sure you want to submit this route?</p><br>
+	      </div>
+	      <div class="modal-footer">
+	      	<button id = "confirmBtn" type="button" class="btn btn-success">Yes</button>
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<input id = "input" class = "controls">
+	<span id = "buttonContainer" class = "controls">
+		<button class = "btn controls btnControls yellow" id = "submit" style = "outline: none; "><!-- <i class = "icon-search icon-white"></i> -->Add Point</button>
+		<button class = "btn controls btnControls yellow last" id = "pathCreator" style = "outline: none; ">Create Path</button>
+	</span>
+	<div id="map" class = "mainElement" style = "margin-top: 60px"></div>
+	<div  class = "mainElement" id = "locList" style = "margin-top: 60px">
+		<h2 style = "text-align: center; font-family: Sanchez-Regular">Your route</h2>
+		<div class="btnContainer">
+			<div>
+				<h4 style = "display: inline-block; padding-right: 5px; vertical-align: middle; font-family: Sanchez-Regular">Waypoint order</h4>
+				<span class = "glyphicon glyphicon-arrow-right" style = "vertical-align: middle"></span>
+				<div class="btn-group">
+				  <button id = "orderBtnDropdown" class="btn dropdown-toggle yellow" data-toggle="dropdown" style = "outline: none; font-family: Sanchez Regular">
+				    Custom
+				    <span class="caret" style = "border-top: 4px solid white"></span>
+				  </button>
+				  <ul class="dropdown-menu" role = "menu">
+				  	<li><a id = "customOrderBtn" href="#">Custom</a></li>
+				  	<li><a id = "autoOrderBtn" href="#">Auto</a></li>
+				  	<li><a id = "shortestPathOrderBtn" href="#">Shortest Path</a></li>
+				  </ul>
+				</div>
+				<div id = "createRouteBtn" class = "btn btn-success" data-toggle="modal" data-target="#confirmationModal">Submit</div>
+			</div>
+		</div>
+		<div id = "routeList"></div>
+	</div>
+</body>
+<script src="RoutePlanner.js"></script>
