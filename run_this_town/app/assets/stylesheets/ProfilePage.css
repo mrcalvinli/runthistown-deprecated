@@ -15,8 +15,7 @@ html {
 }
 body {
 	font-family: Sanchez Regular;
-	background: transparent;
-	
+	background: transparent;	
 }
 
 legend {
@@ -29,6 +28,11 @@ legend {
 	min-height: 700px;
 	position: relative;
 	border-radius: 10px;
+	height: -moz-calc(100% - 120px);
+	height: -webkit-calc(100% - 120px);
+	height: -o-calc(100% - 120px);
+	height: calc(100% - 120px);
+	max-height: 839px;
 }
 .leftSection {
 	
