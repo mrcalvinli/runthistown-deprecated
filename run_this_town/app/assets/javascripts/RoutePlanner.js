@@ -516,18 +516,23 @@ $(document).ready(function() {
 		// go to profile page and highlight their new route
 
 		//DO CHECKING FOR REPEATED SENDS AND PREVENT BAD BAD INFO SENDING
-		console.log("bleahhh");
+		console.log(routeInfoArray);
 		$.ajax({
 			beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
 			url: '/routeplanner_post',
 			type: 'POST',
 			data: {
 				"user_id": 1,
-				"name": "Dis Route Doh"
+				"name": "Dis Route Doh",
 				"locations": routeInfoArray
 			},
-			success: function(){
-				console.log("it twerked!");
+			dataType: "json",
+			success: function(data, textStatus){
+				if (data.redirect) {
+					window.location.href = data.redirect;
+				} else {
+					console.log("redirect failed");
+				}
 			},
 			error: function(){
 				console.log("it no twerked...");
