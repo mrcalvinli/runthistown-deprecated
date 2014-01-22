@@ -1,4 +1,26 @@
 <!DOCTYPE html>
+<script type="text/javascript">
+	// Styling javascript
+	var mainHeight = $(window).height() - 60;
+	$(".jumbotron").css("height", mainHeight - 100);
+	$("#infoSection1").height(mainHeight);
+	$("#infoSection2").height(mainHeight);
+	$("#infoSection3").height(mainHeight);
+	$("#navigator").css("margin-top", (mainHeight/2) - $("#navigator").height()/2 + 60 - 20);
+
+	$(window).resize(function() {
+		$(".jumbotron").css("height", $(window).height() - 60 - 100);
+		$("#infoSection1").height($(window).height() - 60);
+		$("#infoSection2").height($(window).height() - 60);
+		$("#infoSection3").height($(window).height() - 60);
+		$("#navigator").css("margin-top", (($(window).height() - 60)/2) - $("#navigator").height()/2 + 60 - 20);
+		if ( $(window).width() < 1440 ){
+			$('.jumbotron').css("min-height", '793px');
+		} else {
+			$('.jumbotron').css('min-height', '500px');
+		}
+	});
+</script>
 <div id = "navigator">
 	<br><span id = "homeBullet" class = "navBullet glyphicon glyphicon-home" data-toggle="tooltip" title="Home"></span><br><br><br>
 	<div id = "navBullet1" class = "navBullet" data-toggle="tooltip" title="Section&nbsp;1"></div><br><br><br>
