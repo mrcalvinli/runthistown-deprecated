@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	/**** Styling JavaScript ***/
 	$("#map").css("height", ($(window).height() - $(".navbar").height));
+	console.log("mapHeight: " + $("#map").height());
 	$("#locList").css("height", ($(window).height() - $(".navbar").height));
 
 	$("#map").height($(window).height() - $(".navbar").height);
@@ -392,17 +393,18 @@ $(document).ready(function() {
 									// create routeInfoArray
 									var routeInfoEntry = [$("#routeEntry-A input").val(), pathArray[0][0], pathArray[0][1]];
 									routeInfoArray.push(routeInfoEntry);
-									for (var i in wptsOrder) {
-										var currentLetter = letterArray[wptsOrder[i]];
+									for (var i = 0; i < wptsOrder.length; i++) {
+										var currentLetter = letterArray[wptsOrder[i]] + 1;
 										var address = $("#routeEntry-" + currentLetter + " input").val();
-										var thisLat = response["Vb"]["waypoints"][i]["location"]["d"];
-										var thisLng = response["Vb"]["waypoints"][i]["location"]["e"];
+										var thisLat = response["Vb"]["waypoints"][wptsOrder[i]]["location"]["d"];
+										var thisLng = response["Vb"]["waypoints"][wptsOrder[i]]["location"]["e"];
 										var routeInfoEntry = [address, thisLat, thisLng];
 										routeInfoArray.push(routeInfoEntry);
 									}
 									var lastLetter = letterArray[letterIndex - 1];
 									var routeInfoEntry = [$("#routeEntry-" + lastLetter +" input").val(), pathArray[pathArray.length - 1][0], pathArray[pathArray.length - 1][1]];
-									console.log("routeInfoArray: " + routeInfoArray);
+									routeInfoArray.push(routeInfoEntry);
+									console.log(routeInfoArray);
 									// insert animation here
 									for (var j = 0; j < wptsOrder.length; j++) {
 										// [1, 2, 0]
@@ -455,6 +457,20 @@ $(document).ready(function() {
 									}
 									distance = Math.round(distanceInMeters * 0.000621371 * 100) / 100;
 									$("#routeLength").html(distance.toString() + " mi");
+
+									// create routeInfoArray
+									for (var i in pathArray) {
+										var currentLetter = letterArray[i];
+										var address = $("#routeEntry-" + currentLetter + " input").val();
+										var thisLat = pathArray[i][0]
+										var thisLng = pathArray[i][1];
+										var routeInfoEntry = [address, thisLat, thisLng];
+										routeInfoArray.push(routeInfoEntry);
+									}
+									var lastLetter = letterArray[letterIndex - 1];
+									var routeInfoEntry = [$("#routeEntry-" + lastLetter +" input").val(), pathArray[pathArray.length - 1][0], pathArray[pathArray.length - 1][1]];
+									console.log(routeInfoArray);
+
 									for (var i = 1; i < letterIndex - 1; i++) {
 										$("#routeEntry-" + letterArray[i] + " .entrySpan").html(letterArray[i]);
 									}

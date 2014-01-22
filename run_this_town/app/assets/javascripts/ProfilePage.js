@@ -9,7 +9,7 @@ $(document).ready(function() {
 			$(".rightSection").height($(".leftSection").height()); 
 		}
 		
-		$("html").css("height", "auto");
+		// $("html").css("height", "auto");
 	}
 
 	/*$(window).resize(function() {

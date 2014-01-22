@@ -26,7 +26,26 @@
 	      </div>
 	      <div class="modal-body">
 	        <p>The Route Planner helps you find out what route you want to take when you go on your run, based on the parts of the city that you want to pass by.</p>
-	        <p>There are 3 different order modes:</p>
+	        <ol>
+	        	<li>
+	        		<p>First thing you should do is decide how you'd like us to order the points for you, by clicking the <%= image_tag "RoutePlannerOrderBtn.JPG" %> button.</p>
+	        		<p>There are 3 different order modes:</p>
+			        <ul>
+			        	<li><b>Custom - </b> use this mode if you know exactly what order you want to visit different parts of the city.  Whatever order you create the points will be the order of your route.</li>
+			        	<li><b>Auto - </b> Coming soon...</li>
+			        	<li><b>Shortest Path - </b>After you input your points and click the <%= image_tag "RoutePlannerShowPathBtn.JPG" %> button, we will reorder your points (other than start and end) such that you</li>
+			        </ul>
+	        	</li>
+	        	<li>
+	        		<p>After choosing the order type, you can start inputting the points</p>
+		        	<p>Points are added to you route by either typing them into the input box that says "Enter a location" on the map, and then clicking the <%= image_tag "RoutePlannerAddPointBtn.JPG" %> button, or clicking directly on the map where you want your point, and then clicking the <%= image_tag "RoutePlannerAddPointBtn.JPG" %> button.</p>
+	        	</li>
+		        <p><b>Note: </b>You can always change a mistake in the "Your Route" section, either by deleting a point by clicking the x to the right of the point, or the clear button to start over. You can also change your mind about the order at any point until you click the <%= image_tag "RoutePlannerShowPathBtn.JPG" %> button. In addition, all of the entries in the "Your route" section are input boxes, meaning you can edit them.  However, this is not recommended, as the addresses could be less accurate.</p>
+		        <li>
+		        	<p>After you've created a route, and want to see what the path looks like, click the <%= image_tag "RoutePlannerShowPathBtn.JPG" %> button.  If you're happy with the route, you can click the <%= image_tag "RoutePlannerSubmitRouteBtn.JPG" %> button.  Otherwise, you can press the <%= image_tag "RoutePlannerClearRouteBtn.JPG" %> button to start over.</p>
+		        </li>
+	        </ol>
+		        
 	      </div>
 	      <div class="modal-footer">
 
@@ -37,7 +56,7 @@
 
 	<input id = "input" class = "controls">
 	<span id = "buttonContainer" class = "controls">
-		<button class = "btn btn-warning controls btnControls" id = "submit" style = "outline: none; border-radius: 0"><!-- <i class = "icon-search icon-white"></i> -->Add Point</button>
+		<button class = "btn btn-warning controls btnControls" id = "addPointBtn" style = "outline: none; border-radius: 0"><!-- <i class = "icon-search icon-white"></i> -->Add Point</button>
 		<button class = "btn btn-warning controls btnControls last" id = "pathCreator" style = "outline: none; " disabled>Show Path</button>
 	</span>
 	<div id="map" class = "mainElement" style = "margin-top: 60px"></div>
@@ -64,6 +83,7 @@
 			</div>
 		</div>
 		<div id = "routeList"></div>
+		<div id = "routeLengthContainer" style = "font-size: 14pt; padding: 10px; ">Route Length: <span id = "routeLength" style = "float: right">0 mi</span></div>
 		<div class = "btnContainer">
 			<button id = "createRouteBtn" class = "btn btn-success btn-block" data-toggle="modal" data-target="#confirmationModal" disabled>Submit Route</button>
 		</div>
