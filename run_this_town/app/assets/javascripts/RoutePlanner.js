@@ -78,13 +78,20 @@ $(document).ready(function() {
 	var autocomplete = new google.maps.places.Autocomplete(input);
 	autocomplete.bindTo('bounds', map);
 	var infowindow = new google.maps.InfoWindow();
+	
 	marker = new google.maps.Marker({
 		map:map
 	});
 
 	google.maps.event.addListener(autocomplete, 'place_changed', function() {
 	    infowindow.close();
-	    marker.setVisible(false);
+	    if (marker != null) {
+	    	marker.setVisible(false);
+	    }
+	    marker = new google.maps.Marker({
+			map:map
+		});
+	    
 	    var place = autocomplete.getPlace();
 	    if (!place.geometry) {
 	      return;
@@ -97,12 +104,15 @@ $(document).ready(function() {
 	      map.setCenter(place.geometry.location);
 	      map.setZoom(17);  // Why 17? Because it looks good.
 	    }
+	    var pinColor = "e6463d";  // red
+		if (Object.keys(markerDict).length == 0) {
+			pinColor = "2eba3e"; // green
+		}
 	    marker.setIcon(/** @type {google.maps.Icon} */({
-	      url: place.icon,
-	      size: new google.maps.Size(71, 71),
+	      url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+	      size: new google.maps.Size(21, 34),
 	      origin: new google.maps.Point(0, 0),
-	      anchor: new google.maps.Point(17, 34),
-	      scaledSize: new google.maps.Size(35, 35)
+	      anchor: new google.maps.Point(10, 34)
 	    }));
 	    marker.setPosition(place.geometry.location);
 	    marker.setVisible(true);
@@ -120,7 +130,6 @@ $(document).ready(function() {
 	    infowindow.open(map, marker);
   	});
 
-	var marker = null;
 	var existingMarker = null;
 	google.maps.event.addListener(map, 'click', function(e) {
 		addLocation(e.latLng);
@@ -160,7 +169,7 @@ $(document).ready(function() {
 	pathArray = [];
 	var letterArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 	letterIndex = 0;
-	$("#submit").on("click", function() {
+	$("#addPointBtn").on("click", function() {
 		var address = $("#input").val();
 		var urlAddress = createUrlAddress(address);
 		if (marker != null) {
@@ -306,6 +315,7 @@ $(document).ready(function() {
 		
 	});
 
+	distance = 0;
 	$("#pathCreator").on("click", function() {
 		// get rid of markers on map (replaced by )
 
@@ -367,8 +377,16 @@ $(document).ready(function() {
 								if (status == google.maps.DirectionsStatus.OK) {
 									console.log("success");
 									directionsDisplay.setDirections(response);
-									var wptsOrder = response["routes"][0]["waypoint_order"];
 
+									var wptsOrder = response["routes"][0]["waypoint_order"];
+									var legsArray = response["routes"][0]["legs"];
+									var distanceInMeters = 0;
+									for (var i in legsArray){
+										var legDistance = parseFloat(legsArray[i]["distance"]["value"]);
+										distanceInMeters += legDistance;
+									}
+									distance = Math.round(distanceInMeters * 0.000621371 * 100) / 100;
+									$("#routeLength").html(distance.toString() + " mi");
 									// insert animation here
 
 									for (var j = 0; j < wptsOrder.length; j++) {
@@ -413,6 +431,15 @@ $(document).ready(function() {
 								if (status == google.maps.DirectionsStatus.OK) {
 									console.log("success");
 									directionsDisplay.setDirections(response);
+
+									var legsArray = response["routes"][0]["legs"];
+									var distanceInMeters = 0;
+									for (var i in legsArray){
+										var legDistance = parseFloat(legsArray[i]["distance"]["value"]);
+										distanceInMeters += legDistance;
+									}
+									distance = Math.round(distanceInMeters * 0.000621371 * 100) / 100;
+									$("#routeLength").html(distance.toString() + " mi");
 									for (var i = 1; i < letterIndex - 1; i++) {
 										$("#routeEntry-" + letterArray[i] + " .entrySpan").html(letterArray[i]);
 									}

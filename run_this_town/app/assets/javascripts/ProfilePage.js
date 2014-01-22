@@ -3,12 +3,18 @@ $(document).ready(function() {
 	$("#name").html("Myname Mcgee");
 
 	// Styling Javascript
-	$("html").height($(window).height());
-	window.onload = function() {$(".rightSection").height($(".leftSection").height()) ;}
+	/*$("html").height($(window).height());*/
+	window.onload = function() {
+		if ($(".rightSection").height() < $(".leftSection").height()) {
+			$(".rightSection").height($(".leftSection").height()); 
+		}
+		
+		$("html").css("height", "auto");
+	}
 
-	$(window).resize(function() {
+	/*$(window).resize(function() {
 		$("html").height($(window).height());
-	});
+	});*/
 
 	// Functional JavaScript
 

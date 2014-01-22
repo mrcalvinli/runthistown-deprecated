@@ -87,7 +87,7 @@ html { height: 100% }
 			font-weight: 300;
 			text-overflow: ellipsis;
 		}
-    #submit { 
+    #addPointBtn { 
      	box-shadow: none; 
      	height: 32px; 
 	}
@@ -135,19 +135,20 @@ html { height: 100% }
 			  background-color: #F69C1E;
 			  *background-color: #F69C1E;
 			}
-			#submit:active {
+			#addPointBtn:active {
 				background-color: #F69C1E;
 			}
 			#routeList {
+				overflow: auto;
 				padding: 10px;
 				padding-bottom: 0;
 
 				width: 100%;
 
-				height: -moz-calc(100% - 70px - 50px - 20px - 36px);
-				height: -webkit-calc(100% - 70px - 50px - 20px - 36px);
-				height: -o-calc(100% - 70px - 50px - 20px - 36px);
-				height: calc(100% - 70px - 50px - 20px - 36px);
+				height: -moz-calc(100% - 70px - 50px - 20px - 36px - 47px);
+				height: -webkit-calc(100% - 70px - 50px - 20px - 36px - 47px);
+				height: -o-calc(100% - 70px - 50px - 20px - 36px - 47px);
+				height: calc(100% - 70px - 50px - 20px - 36px - 47px);
 			}
 				.routeEntry {
 					height: 45px;
