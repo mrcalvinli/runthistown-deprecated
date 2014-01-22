@@ -66,8 +66,8 @@ legend {
 	opacity: 1;
 	cursor: pointer;
 }
-.routeEntry { position: relative; max-height: 140px; overflow: hidden; height: 40px; cursor: pointer; }
-.routeEntry:hover { background-color: white; }
+.profRouteEntry { position: relative; max-height: 140px; overflow: hidden; height: 40px; cursor: pointer; }
+.profRouteEntry:hover { background-color: white; }
 .wptsList { 
 	height: -moz-calc(100% - 60px);
 	height: -webkit-calc(100% - 60px);
