@@ -2,9 +2,10 @@
 <html>
 	<head>
 		<title>RunThisTown</title>
+		<!--used in order to pass user authentication in AJAX  calls-->
+
+
 		<%= favicon_link_tag "RunThisTownIcon.ico" %>
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUpd0JH2ETsua4nzZ4VHqwf1IrEJaGhiY&sensor=true&libraries=places"></script>
-		<script type="text/javascript" src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
 		<script type="text/javascript" src = "http://code.jquery.com/jquery-1.10.2.js"></script>
 		<script type="text/javascript" src = "http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>	
 
@@ -12,6 +13,16 @@
 		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 		<%= csrf_meta_tags %>
 		<link href='http://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'>
+
+		<script>
+		    // $(document).ajaxSend(function(e, xhr, options) {
+		    //     var token = $("meta[name='csrf-token']").attr("content");
+		    //     xhr.setRequestHeader("X-CSRF-Token", token);
+		    // });
+        </script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUpd0JH2ETsua4nzZ4VHqwf1IrEJaGhiY&sensor=true&libraries=places"></script>
+		<script type="text/javascript" src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
+
 	</head>
 	<body>
 		<%= render 'partials/navbar' %>
