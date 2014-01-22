@@ -4,8 +4,9 @@ RunThisTown::Application.routes.draw do
     resources :users
 
     root :to => "landing#home"
-    match '/homepage',      to: 'users#homepage',           via: 'get'
-    match '/routeplanner',  to: 'users#routeplanner',       via: 'get'
+    match '/homepage',          to: 'users#homepage',           via: 'get'
+    match '/routeplanner',      to: 'route_planner#new',        via: 'get'
+    match '/routeplanner_post', to: 'route_planner#create',     via: [:post]
 
     # The priority is based upon order of creation: first created -> highest priority.
     # See how all your routes lay out with "rake routes".

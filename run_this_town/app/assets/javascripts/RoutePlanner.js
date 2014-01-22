@@ -452,9 +452,25 @@ $(document).ready(function() {
 		letterIndex = 0;
 	});
 
-	$("#confirmBtn").on("click", function() {
+	$("#confirmRouteBtn").on("click", function() {
 		// insert backend stuff here
 		// send route data to server
 		// go to profile page and highlight their new route
+		console.log("bleahhh");
+		$.ajax({
+			beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+			url: '/routeplanner_post',
+			type: 'POST',
+			data: {
+				"user_id": 1,
+				"name": "Dis Route Doh"
+			},
+			success: function(){
+				console.log("it twerked!");
+			},
+			error: function(){
+				console.log("it no twerked...");
+			}
+		});
 	});
 });
