@@ -1,0 +1,25 @@
+<div style = "font-family: Sanchez Regular, serif">
+  <%= form_for(:user, :url => session_path(:user)) do |f| %>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email, :autofocus => true, :autofocus => true %></div>
+
+  <div><%= f.label :first_name %><br />
+  <%= f.text_field :first_name, :autofocus => true %></div>
+
+  <div><%= f.label :last_name %><br />
+  <%= f.text_field :last_name, :autofocus => true %></div>
+
+  <div><%= f.label :age %><br />
+  <%= f.text_field :age, :autofocus => true%></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.submit "Sign up" %></div>
+<% end %>
+
+</div>
