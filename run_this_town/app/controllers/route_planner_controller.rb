@@ -3,11 +3,18 @@ class RoutePlannerController < ApplicationController
 	end
 
 	def create
+		#Build new Route
 		@route = RunRoute.new
+
+		#Save info into route
 		locDic = params
-		p locDic
 		@route.user_id = locDic["user_id"]
 		@route.name = locDic["name"]
-		@route.save
+		locDic["locations"].each do |locInfo|
+			puts locInfo
+			@route.add_new_loc(locInfo[0], locInfo[1], locInfo[2])
+		end
+		#@route.save
+		redirect_to root_path
 	end
 end
