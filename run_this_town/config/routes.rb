@@ -1,4 +1,5 @@
 RunThisTown::Application.routes.draw do
+  get "route_planner/new"
     resources :users
 
     root 'landing#home'
