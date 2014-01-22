@@ -6,4 +6,9 @@ class UsersController < ApplicationController
 
 	def routeplanner
 	end
+
+	def show
+	    sign_out :user
+	    redirect_to root_path
+	end
 end
