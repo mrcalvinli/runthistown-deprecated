@@ -1,13 +1,13 @@
 $(document).ready(function() {
 
 	var extraInfohtml = '<ul class="dropdown-menu" role="menu" style = "display: block; position: relative; border: none; box-shadow: none; margin-top: -8px;">'
-		+ '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Help</a></li>'
+		+ '<li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" data-toggle="modal" data-target=".helpModal">Help</a></li>'
 		+ '<li role="presentation" class="divider"></li>'
-	    + '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">My Profile</a></li>'
-	    + '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Account Settings</a></li>'
-	    + '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Log Out</a></li>'
+	    + '<li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" >My Profile</a></li>'
+	    + '<li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" >Account Settings</a></li>'
+	    + '<li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" >Log Out</a></li>'
 	    + '<li role="presentation" class="divider"></li>'
-	    + '<li role="presentation"><a id = "creditsBtn" role="menuitem" tabindex="-1" href="#" data-toggle="modal" data-target="#creditsModal">Credits</a></li>'
+	    + '<li role="presentation"><a id = "creditsBtn" role="menuitem" tabindex="-1" style = "cursor: pointer;"  data-toggle="modal" data-target="#creditsModal">Credits</a></li>'
 	+ '</ul>';
 	$("#extraInfo").popover({'placement': 'bottom', 'html': true, 'content': extraInfohtml});
 	$("#extraInfo").on("click", function() {
