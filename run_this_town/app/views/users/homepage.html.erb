@@ -1,5 +1,11 @@
 <!-- Help Modal -->
-
+<script type="text/javascript">
+	window.onload = function() {
+		if ($(".rightSection").height() < $(".leftSection").height()) {
+			$(".rightSection").height($(".leftSection").height()); 
+		}
+	}
+</script>
 <div id = "profileContainer" class = "container">
 	<div class = "col-md-3 leftSection" >
 		<div style = "padding-top: 15px; padding-bottom: 15px; width: 100%; height: 100%">

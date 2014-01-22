@@ -1,4 +1,14 @@
 <!-- Confirmation Modal -->
+	<script type="text/javascript">
+		/**** Styling JavaScript ***/
+		$("#map").css("height", ($(window).height() - $(".navbar").height));
+		console.log("mapHeight: " + $("#map").height());
+		$("#locList").css("height", ($(window).height() - $(".navbar").height));
+
+		$("#map").height($(window).height() - $(".navbar").height);
+		$("#locList").height($(window).height() - $(".navbar").height);
+	</script>
+	
 	<div class="modal fade" id = "confirmationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style = "font-family: Sanchez, serif">
 	  <div class="modal-dialog modal-dialog-center">
 	    <div class="modal-content" style = "background-color: beige">

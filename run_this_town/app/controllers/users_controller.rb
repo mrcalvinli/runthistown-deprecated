@@ -24,4 +24,7 @@ class UsersController < ApplicationController
 	 def devise_mapping
 	   @devise_mapping ||= Devise.mappings[:user]
 	 end
+	 
+	 def edit
+	 end
 end
