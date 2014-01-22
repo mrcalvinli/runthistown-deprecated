@@ -13,20 +13,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" style = "font-family: Sanchez Regular, serif">Sign up here!</h4>
       </div>
-      <div class="modal-body" style = "text-align: center">
-        <p>Input your information below</p><br>
-
-        <div style = 'display: inline-block; text-align: left'>
-	        <div>Username<input id = "usernameInput" class = 'userInput'></input></div><br>
-	        <div>Password<input id = "passwordInput" class = 'userInput' type = "password"></input></div><br>
-	        <div>Confirm Password<input id = "confirmInput" class = 'userInput' type = "password"></input></div><br>
-	        <div>Age<input id = "ageInput" class = 'userInput'></input></div>
-	    </div>
-      </div>
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-        <button type="button" class="btn btn-warning">Create Account</button>
-      </div>
+      <%= render 'partials/registration' %>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
