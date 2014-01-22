@@ -315,6 +315,7 @@ $(document).ready(function() {
 		
 	});
 
+	routeInfoArray = [];
 	distance = 0;
 	$("#pathCreator").on("click", function() {
 		// get rid of markers on map (replaced by )
@@ -387,8 +388,22 @@ $(document).ready(function() {
 									}
 									distance = Math.round(distanceInMeters * 0.000621371 * 100) / 100;
 									$("#routeLength").html(distance.toString() + " mi");
+									
+									// create routeInfoArray
+									var routeInfoEntry = [$("#routeEntry-A input").val(), pathArray[0][0], pathArray[0][1]];
+									routeInfoArray.push(routeInfoEntry);
+									for (var i in wptsOrder) {
+										var currentLetter = letterArray[wptsOrder[i]];
+										var address = $("#routeEntry-" + currentLetter + " input").val();
+										var thisLat = response["Vb"]["waypoints"][i]["location"]["d"];
+										var thisLng = response["Vb"]["waypoints"][i]["location"]["e"];
+										var routeInfoEntry = [address, thisLat, thisLng];
+										routeInfoArray.push(routeInfoEntry);
+									}
+									var lastLetter = letterArray[letterIndex - 1];
+									var routeInfoEntry = [$("#routeEntry-" + lastLetter +" input").val(), pathArray[pathArray.length - 1][0], pathArray[pathArray.length - 1][1]];
+									console.log("routeInfoArray: " + routeInfoArray);
 									// insert animation here
-
 									for (var j = 0; j < wptsOrder.length; j++) {
 										// [1, 2, 0]
 										var thisLetterIndex = j + 1;
