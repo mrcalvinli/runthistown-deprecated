@@ -164,6 +164,7 @@ $(document).ready(function() {
 				map: map,
 				icon: pinImage,
 			});
+			$("#addPointBtn").click();
 		});	
 	}
 
@@ -306,7 +307,7 @@ $(document).ready(function() {
 			});		
 			marker = null;
 		} else {
-			alert("Invalid Point");
+			// alert("Invalid Point");
 		}
 		
 

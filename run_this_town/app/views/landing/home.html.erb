@@ -1,4 +1,26 @@
 <!DOCTYPE html>
+<script type="text/javascript">
+	// Styling javascript
+	var mainHeight = $(window).height() - 60;
+	$(".jumbotron").css("height", mainHeight - 100);
+	$("#infoSection1").height(mainHeight);
+	$("#infoSection2").height(mainHeight);
+	$("#infoSection3").height(mainHeight);
+	$("#navigator").css("margin-top", (mainHeight/2) - $("#navigator").height()/2 + 60 - 20);
+
+	$(window).resize(function() {
+		$(".jumbotron").css("height", $(window).height() - 60 - 100);
+		$("#infoSection1").height($(window).height() - 60);
+		$("#infoSection2").height($(window).height() - 60);
+		$("#infoSection3").height($(window).height() - 60);
+		$("#navigator").css("margin-top", (($(window).height() - 60)/2) - $("#navigator").height()/2 + 60 - 20);
+		if ( $(window).width() < 1440 ){
+			$('.jumbotron').css("min-height", '793px');
+		} else {
+			$('.jumbotron').css('min-height', '500px');
+		}
+	});
+</script>
 <div id = "navigator">
 	<br><span id = "homeBullet" class = "navBullet glyphicon glyphicon-home" data-toggle="tooltip" title="Home"></span><br><br><br>
 	<div id = "navBullet1" class = "navBullet" data-toggle="tooltip" title="Section&nbsp;1"></div><br><br><br>
@@ -6,7 +28,7 @@
 	<div id = "navBullet3" class = "navBullet" data-toggle="tooltip" title="Section&nbsp;3"></div><br><br>
 </div> 
 
-<div class="modal fade" id = "loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style = "font-family: Sanchez Regular, serif; ">
+<div class="modal fade" id = "signUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style = "font-family: Sanchez Regular, serif; ">
   <div class="modal-dialog modal-dialog-center" style = "width: 700px;">
     <div class="modal-content" style = "background-color: beige">
       <div class="modal-header">
@@ -18,14 +40,24 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-
+<div class="modal fade" id = "loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style = "font-family: Sanchez Regular, serif; ">
+  <div class="modal-dialog modal-dialog-center" style = "width: 700px;">
+    <div class="modal-content" style = "background-color: beige">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" style = "font-family: Sanchez Regular, serif">Log In</h4>
+      </div>
+      <%= render 'partials/login' %>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <div class = "jumbotron masthead" style = "box-sizing: content-box">
 	<!-- <div class = "jumbotronBg"></div> -->
 	<div class = "container">
 		<h1 style = "font-family: Sanchez Regular, serif">Let's Run This Town</h1>
 		<p>Get fit together, see more of your city</p>
-		<button id = "getStarted" class = "yellow btn btn-large" data-toggle="modal" data-target="#loginModal">Get Started</button>
+		<button id = "getStarted" class = "yellow btn btn-large" data-toggle="modal" data-target="#signUpModal">Get Started</button>
 		<div id = 'learnMoreDiv'>
 			<div><p>Learn more below</p></div>
 			<!-- <i class = "icon-chevron-down icon-white"></i> -->
