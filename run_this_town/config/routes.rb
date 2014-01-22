@@ -1,7 +1,9 @@
 RunThisTown::Application.routes.draw do
+
+    devise_for :users
     resources :users
 
-    root 'landing#home'
+    root :to => "landing#home"
     match '/homepage',      to: 'users#homepage',           via: 'get'
     match '/routeplanner',  to: 'users#routeplanner',       via: 'get'
 
