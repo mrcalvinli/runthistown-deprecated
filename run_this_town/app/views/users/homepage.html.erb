@@ -12,7 +12,7 @@
 			<div id = "profPicCont">
 				<%= image_tag "ProfPic.jpg", :style => "width: 100%"%>
 			</div>
-			<legend><h1 id = "name" style = "text-align: center; margin-bottom: 15px; font-family: Sanchez Regular"></h1></legend>
+			<legend><h1 id = "name" style = "text-align: center; margin-bottom: 15px; font-family: Sanchez Regular"><%= current_user.first_name + " " + current_user.last_name%></h1></legend>
 			<div class = "stat"><p class = "statVal">Stat goes here</p> <%= image_tag "RunningMan.png", :id => "totalDistIcon", :style  => "width: 16px", :title => "Total distance run" %></div>
 			<div class = "stat"><p class = "statVal">Stat goes here</p><span id = "totalCalIcon" class = "glyphicon glyphicon-fire" data-toggle = "tooltip" title = "Total Calories Burned"></span></div>
 			<div class = "statContainer">

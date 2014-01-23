@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	// Backend Stuff
-	$("#name").html("Myname Mcgee");
+	// $("#name").html("Myname Mcgee");
 
 	// Styling Javascript
 	/*$("html").height($(window).height());*/
