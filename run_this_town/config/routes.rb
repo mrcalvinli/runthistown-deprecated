@@ -1,13 +1,15 @@
 RunThisTown::Application.routes.draw do
 
     devise_for :users
-    resources :users
+    resources :users do
+        post :route_id, :on => :member
+    end
 
     root :to => "landing#home"
     match '/homepage',          to: 'users#homepage',           via: 'get'
     match '/routeplanner',      to: 'route_planner#new',        via: 'get'
     match '/routeplanner_post', to: 'route_planner#create',     via: [:post]
-    match '/homepage_post',      to: 'users#update_route',        via: [:post]
+    match '/homepage_post',     to: 'users#update_route',       via: [:post]
 
     # The priority is based upon order of creation: first created -> highest priority.
     # See how all your routes lay out with "rake routes".
