@@ -93,7 +93,7 @@ function pageLoad() {
 			removeClick($(this));
 		});
 
-		// backend stuff goes here, use startAddress, endAddress, and wptAddresses
+		// backend stuff goes here, use startAddress, endAddress, and wptAddresses //
 	}*/
 
 	function deleteClick(current) {
