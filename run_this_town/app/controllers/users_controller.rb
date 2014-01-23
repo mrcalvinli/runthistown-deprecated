@@ -4,7 +4,8 @@ class UsersController < ApplicationController
 	def homepage
 	end
 
-	def routeplanner
+	def update_route
+		
 	end
 
 	def show

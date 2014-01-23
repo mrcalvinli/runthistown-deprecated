@@ -117,6 +117,24 @@ function pageLoad() {
 		});*/
 
 		// backend stuff goes here, use startAddress, endAddress, and wptAddresses
+		$.ajax({
+			beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+			url: '/homepage_post',
+			type: 'POST',
+			data: {
+				"start": startAddress,
+				"end": endAddress,
+				"wptAddress": wptAddresses
+			},
+			dataType: "json",
+			success: function(data, textStatus){
+				console.log("deletion twerked")
+			},
+			error: function(){
+				console.log("did not delete...");
+			}
+		});
+
 	}
 
 /*	function removeClick(current) {
