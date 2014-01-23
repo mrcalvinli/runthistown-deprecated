@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	// Backend Stuff
-	$("#name").html("Myname Mcgee");
+	// $("#name").html("Myname Mcgee");
 
 	// Styling Javascript
 	/*$("html").height($(window).height());*/
@@ -36,4 +36,39 @@ $(document).ready(function() {
 			$(this).css("height", "40px");
 		}
 	});
+
+	if ($("#routesRunContainer").html() == "") {
+		$("#routesRunContainer").append($("<div style = 'height: 100%; text-align: center; '>You have no routes yet.  Click the button above to get started!</div>"));
+	}
+	
+
+	// Backend Stuff
+	// New Stat template
+		// $(".statContainer").append('<div class = "stat"><p class = "statVal">Stat goes here</p><span class = "glyphicon glyphicon-search"></span></div>');
+	// New Route Template
+		/*$(".routesRunContainer").append(
+			'<div class = "profRouteEntry well well-sm">
+						<div style = "display: inline-block; width: 49%; ">
+							<p>Date: </p>
+							<p>Distance Traveled: </p>
+							<p>Start: </p>
+							<p>End: </p>
+						</div>
+						<div style = "display: inline-block; width: 49%; height: 100%; position: absolute; top: 0; ">
+							<legend><h4 style = "text-align: center; font-family: Sanchez Regular">Waypoints Visited:</h4></legend>
+							<div class = "wptsList">
+								<ol>
+									<li>Place</li>
+									<li>Place</li>
+									<li>Place</li>
+									<li>Place</li>
+									<li>Place</li>
+									<li>Place</li>
+									<li>Place</li>
+									<li>Place</li>
+								</ol>
+							</div>
+						</div>
+					</div>'
+		)*/
 });
