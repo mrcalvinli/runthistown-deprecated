@@ -1,28 +1,5 @@
 <!DOCTYPE html>
 
-<script type="text/javascript">
-	// Styling javascript
-	var mainHeight = $(window).height() - 60;
-	$(".jumbotron").css("height", mainHeight - 100);
-	$("#infoSection1").height(mainHeight);
-	$("#infoSection2").height(mainHeight);
-	$("#infoSection3").height(mainHeight);
-	$("#navigator").css("margin-top", (mainHeight/2) - $("#navigator").height()/2 + 60 - 20);
-
-	$(window).resize(function() {
-		$(".jumbotron").css("height", $(window).height() - 60 - 100);
-		$("#infoSection1").height($(window).height() - 60);
-		$("#infoSection2").height($(window).height() - 60);
-		$("#infoSection3").height($(window).height() - 60);
-		$("#navigator").css("margin-top", (($(window).height() - 60)/2) - $("#navigator").height()/2 + 60 - 20);
-		if ( $(window).width() < 1440 ){
-			$('.jumbotron').css("min-height", '793px');
-		} else {
-			$('.jumbotron').css('min-height', '500px');
-		}
-	});
-</script>
-
 <div id = "navigator">
 	<br><span id = "homeBullet" class = "navBullet glyphicon glyphicon-home" data-toggle="tooltip" title="Home"></span><br><br><br>
 	<div id = "navBullet1" class = "navBullet" data-toggle="tooltip" title="Section&nbsp;1"></div><br><br><br>
@@ -62,12 +39,12 @@
 		<span id = "toHomeChevron" class = "navChevron glyphicon glyphicon-chevron-up"></span>
 		<h1 style = "color: white; font-family: Sanchez, serif; font-size: 66pt; font-weight: bolder; margin-top: 0">Plan your routes</h1>
 
-		<!-- <div class = "col-xs-6"><%= image_tag "BostonMap.JPG", :style => "width: 100%; ", :id => "homePageBostonMap", :class => "img-thumbnail" %></div> -->
-<!-- 		<div class = "col-xs-6" style = "font-size: 20pt; font-weight: normal">
+		<div class = "col-xs-6"><%= image_tag "BostonMap.JPG", :style => "width: 100%; ", :id => "homePageBostonMap", :class => "img-thumbnail" %></div>
+		<div class = "col-xs-6" style = "font-size: 20pt; font-weight: normal">
 			<p>Plan out the your route in a matter of clicks!</p>
 			<p>Simply click on the map at the place you want to visit, or input an address to add the point to your waypoint list</p>
 			<p>You can choose the points in any order you like, or ask us to order the points so your run is as short as possible.  In addition, you can give us an intended distance for you run, and we will show you a route that passes all your waypoints and has a distance as close as possible to your desired distance</p>
-		</div> -->
+		</div>
 
 		<div class = "bottomNav"><span id = "toSection2DownChevron" class = "navChevron glyphicon glyphicon-chevron-down"></span></div>
 	</div>

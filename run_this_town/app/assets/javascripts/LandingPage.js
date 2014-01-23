@@ -1,6 +1,6 @@
-$(document).ready(function() {
-//function pageLoad() {
+function pageLoad() {
 	// Styling javascript
+
 	var mainHeight = $(window).height() - 60;
 	$(".jumbotron").css("height", mainHeight - 100);
 	$("#infoSection1").height(mainHeight);
@@ -99,8 +99,8 @@ $(document).ready(function() {
 		scrollTo = $("#infoSection2");
 		container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")
 	})
-});
+}
 
-//$(document).on('page:load', pageLoad);
+$(document).on('page:load', pageLoad);
 
-//$(document).ready(pageLoad);
+$(document).ready(pageLoad);
