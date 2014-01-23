@@ -1,3 +1,20 @@
+<script type="text/javascript">
+  $("#searchContainer").width($(window).width() 
+            - parseInt($(".navbar-brand").css("width"))
+            - parseInt($(".navbar .navbar-right").css("width")));
+
+  $("inputContainer").width($(window).width()
+              - parseInt($(".navbar .navbar-right").css("width")) - 3);
+  $(window).resize(function() {
+    $("#searchContainer").width($(window).width() 
+            - parseInt($(".navbar-brand").css("width"))
+            - parseInt($(".navbar .navbar-right").css("width")));
+
+    $("inputContainer").width($(window).width()
+              - parseInt($(".navbar .navbar-right").css("width")) - 3);
+  });
+</script>
+
 <div class="modal fade" id = "creditsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style = "font-family: 'Sanchez', serif">
   <div class="modal-dialog modal-dialog-center">
     <div class="modal-content" style = "background-color: beige">
@@ -52,11 +69,39 @@
 		</form>'
 		<ul class = "nav navbar-nav navbar-right" style = "margin-right: 0; right: 0; top: 0; position: fixed">
       <% if user_signed_in? then %>
-        <li><%= link_to current_user.first_name, root_path %></li>
-        <li><span id = "extraInfo" class = "glyphicon glyphicon-cog" data-toggle="popover"></span></li>
+
+        <li><a style = "cursor: pointer"><%= current_user.first_name  %></a></li>
+        <li>
+          <div class = "dropdown">
+            <span id = "extraInfo" class = "glyphicon glyphicon-cog" data-toggle="dropdown"></span>
+            <ul class="dropdown-menu pull-right" role="menu" style = "margin-right: 10px;">
+              <li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" data-toggle="modal" data-target=".helpModal">Help</a></li>
+              <li role="presentation" class="divider"></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" >My Profile</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" >Account Settings</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" >Log Out</a></li>
+              <li role="presentation" class="divider"></li>
+              <li role="presentation"><a id = "creditsBtn" role="menuitem" tabindex="-1" style = "cursor: pointer;"  data-toggle="modal" data-target="#creditsModal">Credits</a></li>
+            </ul>
+          </div>
+        </li>
+
       <% else %>
         <li><a data-toggle="modal" data-target="#loginModal" style = "cursor: pointer">Log In</a></li>
-        <li><span id = "extraInfo" class = "glyphicon glyphicon-cog" data-toggle="popover"></span></li>
+        <li>
+          <div class = "dropdown">
+            <span id = "extraInfo" class = "glyphicon glyphicon-cog" data-toggle="dropdown"></span>
+            <ul class="dropdown-menu pull-right" role="menu" style = "margin-right: 10px;">
+              <li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" data-toggle="modal" data-target=".helpModal">Help</a></li>
+              <li role="presentation" class="divider"></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" >My Profile</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" >Account Settings</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" >Log Out</a></li>
+              <li role="presentation" class="divider"></li>
+              <li role="presentation"><a id = "creditsBtn" role="menuitem" tabindex="-1" style = "cursor: pointer;"  data-toggle="modal" data-target="#creditsModal">Credits</a></li>
+            </ul>
+          </div>
+        </li>
     <% end %>
 		</ul>
 	</div>
