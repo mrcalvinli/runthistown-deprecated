@@ -1,6 +1,8 @@
 class RunRoute < ActiveRecord::Base
 	serialize :locations,Array
 
+	belongs_to :user
+
 	#The data structure that represents a location in the array of locations in route
 	#Location Info = {name, {latitude, longitude}}
 	LocCoord = Struct.new(:latitude, :longitude)

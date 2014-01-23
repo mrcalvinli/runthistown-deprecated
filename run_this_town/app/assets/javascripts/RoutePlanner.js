@@ -517,6 +517,7 @@ $(document).ready(function() {
 		// go to profile page and highlight their new route
 
 		//DO CHECKING FOR REPEATED SENDS AND PREVENT BAD BAD INFO SENDING
+		console.log("here boyyy");
 		console.log(routeInfoArray);
 		$.ajax({
 			beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
