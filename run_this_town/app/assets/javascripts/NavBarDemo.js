@@ -9,7 +9,7 @@ $(document).ready(function() {
 	    + '<li role="presentation" class="divider"></li>'
 	    + '<li role="presentation"><a id = "creditsBtn" role="menuitem" tabindex="-1" style = "cursor: pointer;"  data-toggle="modal" data-target="#creditsModal">Credits</a></li>'
 	+ '</ul>';
-	$("#extraInfo").popover({'placement': 'bottom', 'html': true, 'content': extraInfohtml});
+	/*$("#extraInfo").popover({'placement': 'bottom', 'html': true, 'content': extraInfohtml});
 	$("#extraInfo").on("click", function() {
 		console.log("swag");
 		var popoverRight = $(".popover").offset().left + $(".popover").width();
@@ -18,5 +18,19 @@ $(document).ready(function() {
 			$(".popover").css("left",  parseInt($(".popover").css("left")) - difference - 10 );
 			$(".arrow").css("left", parseInt($(".arrow").css("left")) + difference + 10);
 		}
+	});*/
+	$("#searchContainer").width($(window).width() 
+						- parseInt($(".navbar-brand").css("width"))
+						- parseInt($(".navbar .navbar-right").css("width")));
+
+	$("#inputContainer").width($("#searchContainer").width()
+							- parseInt($(".navbar .navbar-right").css("width")) - 3);
+	$(window).resize(function() {
+		$("#searchContainer").width($(window).width() 
+						- parseInt($(".navbar-brand").css("width"))
+						- parseInt($(".navbar .navbar-right").css("width")));
+
+		$("#inputContainer").width($("#searchContainer").width()
+							- parseInt($(".navbar .navbar-right").css("width")) - 3);
 	});
 });
