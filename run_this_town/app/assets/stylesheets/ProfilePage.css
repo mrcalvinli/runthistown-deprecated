@@ -46,10 +46,7 @@ legend {
 	padding: 5px;
 }
 .routeContainer {
-	height: -moz-calc(100% - 39px - 20px - 10px);
-	height: -webkit-calc(100% - 39px - 20px - 10px);
-	height: -o-calc(100% - 39px - 20px - 10px);
-	height: calc(100% - 39px - 20px - 10px);
+	height: auto;
 	overflow: auto;
 	margin-bottom: 0;
 }

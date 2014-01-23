@@ -4,13 +4,6 @@ function pageLoad() {
 
 	// Styling Javascript
 	/*$("html").height($(window).height());*/
-	window.onload = function() {
-		if ($(".rightSection").height() < $(".leftSection").height()) {
-			$(".rightSection").height($(".leftSection").height()); 
-		}
-		
-		// $("html").css("height", "auto");
-	}
 
 	/*$(window).resize(function() {
 		$("html").height($(window).height());
