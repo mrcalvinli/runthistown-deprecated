@@ -1,4 +1,5 @@
-function pageLoad() {
+$(document).ready(function() {
+
 	var extraInfohtml = '<ul class="dropdown-menu" role="menu" style = "display: block; position: relative; border: none; box-shadow: none; margin-top: -8px;">'
 		+ '<li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" data-toggle="modal" data-target=".helpModal">Help</a></li>'
 		+ '<li role="presentation" class="divider"></li>'
@@ -32,8 +33,4 @@ function pageLoad() {
 		$("#inputContainer").width($("#searchContainer").width()
 							- parseInt($(".navbar .navbar-right").css("width")) - 3);
 	});
-}
-
-$(document).on("page:load", pageLoad);
-
-$(document).ready(pageLoad);
+});
