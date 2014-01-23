@@ -101,12 +101,16 @@ function pageLoad() {
 		var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
 		var wptAddresses = [];
 		current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
-			wptAddresses.push(current.html());
+			wptAddresses.push($(this).html());
 		});
-		console.log(startAddress, endAddress, wptAddresses);
+		console.log(wptAddresses);
 		var currentRoute = current.parent().parent();
 
 		currentRoute.remove();
+
+		$("#profDeleteRoute").on("click", function() {
+			deleteClick($(this));
+		});
 
 		/*$(".profRouteEntry").on("click", function(route) {
 			if ( route.css("height") == "40px" ) {
