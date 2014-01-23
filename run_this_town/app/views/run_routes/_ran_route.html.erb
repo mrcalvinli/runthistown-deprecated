@@ -1,0 +1,23 @@
+<div class = "profRouteEntry well well-sm">
+	<div class = "profConfirmOrDeny" style = "position: absolute; top: 5px; right: 10px;">
+		<span id = "profRemoveRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>
+	</div>
+	<div class = "profRanRouteInfo" style = "display: inline-block; width: 49%; ">
+		<p>Date: </p>
+		<p>Distance Traveled: </p>
+		<p>Start: <%= @run_route.locations[0].name %></p>
+		<p>End: <%= @run_route.locations[-1].name %></p>
+	</div>
+	<div style = "display: inline-block; width: 49%; height: 100%; position: absolute; top: 0; ">
+		<legend><h4 style = "text-align: center; font-family: Sanchez Regular">Waypoints Visited:</h4></legend>
+		<div class = "wptsList">
+			<ol>
+				<% if @run_route.locations.size > 2 %>
+					<% (1..(@run_route.locations.size - 2)).each do |i| %>
+						<li><%= @run_route.locations[i].name %></li>
+					<% end %>
+				<% end %>
+			</ol>
+		</div>
+	</div>
+</div>

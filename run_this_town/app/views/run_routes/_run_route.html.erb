@@ -1,20 +1,22 @@
 <div class = "profRouteEntry well well-sm">
 	<div class = "profConfirmOrDeny" style = "position: absolute; top: 5px; right: 10px; z-index: 3; ">
-		<span id = "profSuccessRoute" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span>
+		<!-- <span id = "profSuccessRoute" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span> -->
 		<span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>
 	</div>
-	<div style = "display: inline-block; width: 49%; ">
-		<p >Date: <span class = "profRouteDate"></span></p>
-		<p >Distance Traveled: <span class = "profRouteDistance"></span></p>
-		<p >Start: <span class = "profRouteStart"><%= run_route.locations[0].name %></span></p>
-		<p >End: <span class = "profRouteEnd"><%= run_route.locations[-1].name %></span></p>
+	<div class = "profRunRouteInfo" style = "display: inline-block; width: 49%; ">
+		<p class = "profRouteDate">Date: <span></span></p>
+		<p class = "profRouteDistance">Distance Traveled: <span></span></p>
+		<p class = "profRouteStart">Start: <span><%= @run_route.locations[0].name %></span></p>
+		<p class = "profRouteEnd">End: <span><%= @run_route.locations[-1].name %></span></p>
 	</div>
-	<div style = "display: inline-block; width: 49%; height: 100%; position: absolute; top: 0; ">
+	<div class = "profWaypointsContainer" style = "display: inline-block; width: 49%; height: 100%; position: absolute; top: 0; ">
 		<legend><h4 style = "text-align: center; font-family: Sanchez Regular">Waypoints Visited:</h4></legend>
 		<div class = "wptsList">
 			<ol>
-				<% run_route.locations.each do |loc| %>
-					<li><%= loc.name %></li>
+				<% if @run_route.locations.size > 2 %>
+					<% (1..(@run_route.locations.size - 2)).each do |i| %>
+						<li><%= @run_route.locations[i].name %></li>
+					<% end %>
 				<% end %>
 			</ol>
 		</div>

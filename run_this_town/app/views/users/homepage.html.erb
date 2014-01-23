@@ -39,10 +39,21 @@
 				<legend style = "border-color: grey; "><h2 style = "text-align: center; font-family: Sanchez">Routes to run</h2></legend>
 				<div id = "routesToRunContainer">
 					<a href = "RoutePlanner.html" style = "color: transparent"><button type="button" class="btn btn-success btn-lg btn-block" style = "font-size: 18pt; margin-bottom: 10px;"><%= link_to 'Run a new route', routeplanner_path, :style => "color: white; text-decoration: none;" %></button></a>
+					<% current_user.run_route.each do |route| %>
+						<% if !route.has_ran %>
+							<% @run_route = route %>
+							<%= render 'run_routes/run_route', :object => @run_route %>
+						<% end %>
+					<% end %>
 				</div>
 				<legend style = "border-color: grey; "><h2 style = "text-align: center; font-family: Sanchez">Routes that I've ran</h2></legend>
 				<div id = "routesRunContainer">
-					<%= render current_user.run_route %>
+					<% current_user.run_route.each do |route| %>
+						<% if route.has_ran %>
+							<% @run_route = route %>
+							<%= render 'run_routes/ran_route', :object => @run_route %>
+						<% end %>
+					<% end %>
 				</div>
 			</div>
 		</div>
