@@ -1,4 +1,4 @@
-$(document).ready(function() {
+function pageLoad() {
 	/**** Styling JavaScript ***/
 	$("#map").css("height", ($(window).height() - $(".navbar").height));
 	console.log("mapHeight: " + $("#map").height());
@@ -541,4 +541,7 @@ $(document).ready(function() {
 			}
 		});
 	});
-});
+}
+
+$(document).on("page:load", pageLoad);
+$(document).ready(pageLoad);

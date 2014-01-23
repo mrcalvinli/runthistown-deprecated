@@ -1,4 +1,4 @@
-$(document).ready(function() {
+function pageLoad() {
 	// Backend Stuff
 	// $("#name").html("Myname Mcgee");
 
@@ -71,4 +71,7 @@ $(document).ready(function() {
 						</div>
 					</div>'
 		)*/
-});
+}
+
+$(document).on("page:load", pageLoad);
+$(document).ready(pageLoad);
