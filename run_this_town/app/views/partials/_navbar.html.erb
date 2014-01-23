@@ -1,3 +1,20 @@
+<script type="text/javascript">
+  $("#searchContainer").width($(window).width() 
+            - parseInt($(".navbar-brand").css("width"))
+            - parseInt($(".navbar .navbar-right").css("width")));
+
+  $("inputContainer").width($(window).width()
+              - parseInt($(".navbar .navbar-right").css("width")) - 3);
+  $(window).resize(function() {
+    $("#searchContainer").width($(window).width() 
+            - parseInt($(".navbar-brand").css("width"))
+            - parseInt($(".navbar .navbar-right").css("width")));
+
+    $("inputContainer").width($(window).width()
+              - parseInt($(".navbar .navbar-right").css("width")) - 3);
+  });
+</script>
+
 <div class="modal fade" id = "creditsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style = "font-family: 'Sanchez', serif">
   <div class="modal-dialog modal-dialog-center">
     <div class="modal-content" style = "background-color: beige">
