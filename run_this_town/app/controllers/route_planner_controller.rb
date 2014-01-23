@@ -12,6 +12,7 @@ class RoutePlannerController < ApplicationController
 			locDic = params
 			@route.user_id = current_user.id
 			@route.name = nil #Add name if needed
+			@route.has_ran = false
 			(0..(locDic["locations"].size - 1)).each do |i|
 				locInfo = locDic["locations"][i.to_s]
 				p locInfo
