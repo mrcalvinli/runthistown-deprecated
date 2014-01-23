@@ -36,17 +36,11 @@
 }*/
 
 #searchContainer {
-    width: -moz-calc(100% - 279px - 145px);
-    width: -webkit-calc(100% - 279px - 145px);
-    width: -o-calc(100% - 279px - 145px);
-    width: calc(100% - 279px - 145px);
+
     max-width: 604px;
 }
 
 #inputContainer {
-    width: -moz-calc(100% - 77px);
-    width: -webkit-calc(100% - 77px);
-    width: -o-calc(100% - 77px);
-    width: calc(100% - 77px);
+
     display: inline-block;
 }
