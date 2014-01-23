@@ -1,5 +1,4 @@
 <div class="modal-body" style = "text-align: center">
-  <!-- <p>Input your information below</p><br> -->
 
   <div style = 'display: inline-block; text-align: left; min-width: 450px;'>
       <%= form_for(:user, :url => session_path(:user)) do |f| %>
@@ -10,7 +9,6 @@
 
       <div><%= f.label :password, :style => "font-weight: normal" %>
       <%= f.password_field :password , :class => "userInput" %></div>
-
   </div>
 </div>
 <div class="modal-footer">
