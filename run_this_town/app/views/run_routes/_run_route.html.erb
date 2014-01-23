@@ -9,8 +9,10 @@
 		<legend><h4 style = "text-align: center; font-family: Sanchez Regular">Waypoints Visited:</h4></legend>
 		<div class = "wptsList">
 			<ol>
-				<% run_route.locations.each do |loc| %>
-					<li><%= loc.name %></li>
+				<% if run_route.locations.size > 2 %>
+					<% (1..(run_route.locations.size - 2)).each do |i| %>
+						<li><%= run_route.locations[i].name %></li>
+					<% end %>
 				<% end %>
 			</ol>
 		</div>
