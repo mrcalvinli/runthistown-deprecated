@@ -380,7 +380,7 @@ function pageLoad() {
 								if (status == google.maps.DirectionsStatus.OK) {
 									console.log("success");
 									directionsDisplay.setDirections(response);
-
+									console.log(JSON.stringify(response));
 									var wptsOrder = response["routes"][0]["waypoint_order"];
 									var legsArray = response["routes"][0]["legs"];
 									var distanceInMeters = 0;
@@ -397,8 +397,8 @@ function pageLoad() {
 									for (var i = 0; i < wptsOrder.length; i++) {
 										var currentLetter = letterArray[wptsOrder[i]] + 1;
 										var address = $("#routeEntry-" + currentLetter + " input").val();
-										var thisLat = response["Vb"]["waypoints"][wptsOrder[i]]["location"]["d"];
-										var thisLng = response["Vb"]["waypoints"][wptsOrder[i]]["location"]["e"];
+										var thisLat = response["Tb"]["waypoints"][wptsOrder[i]]["location"]["d"];
+										var thisLng = response["Tb"]["waypoints"][wptsOrder[i]]["location"]["e"];
 										var routeInfoEntry = [address, thisLat, thisLng];
 										routeInfoArray.push(routeInfoEntry);
 									}
