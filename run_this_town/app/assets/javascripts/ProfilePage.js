@@ -64,6 +64,16 @@ function pageLoad() {
 						</div>
 					</div>'
 		)*/
+	$("#profSuccessRoute").on("click", function() {
+		console.log("le click");
+		var startAddress = $(this).parent().parent().children(".profRouteStart").html();
+		var endAddress = $(this).parent().parent().children(".profRouteEnd").html();
+		var wptAddresses = [];
+		$(this).parent().parent().children(".wptsList li").each(function() {
+			wptAddresses.push($(this).html());
+		});
+		console.log(startAddress, endAddress, wptAddresses);
+	});
 }
 
 $(document).on("page:load", pageLoad);
