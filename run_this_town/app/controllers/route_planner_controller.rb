@@ -5,6 +5,7 @@ class RoutePlannerController < ApplicationController
 	def create
 		respond_to do |format|
 			#Build new Route
+
 			@route = RunRoute.new
 
 			#Save info into route
