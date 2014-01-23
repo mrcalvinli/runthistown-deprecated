@@ -69,13 +69,36 @@
 		</form>'
 		<ul class = "nav navbar-nav navbar-right" style = "margin-right: 0; right: 0; top: 0; position: fixed">
       <% if user_signed_in? then %>
+
         <li><a style = "cursor: pointer"><%= current_user.first_name  %></a></li>
-        <%= render 'partials/dropdown' %>
+        <li>
+          <div class = "dropdown">
+            <span id = "extraInfo" class = "glyphicon glyphicon-cog" data-toggle="dropdown"></span>
+            <ul class="dropdown-menu pull-right" role="menu" style = "margin-right: 10px;">
+              <li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" data-toggle="modal" data-target=".helpModal">Help</a></li>
+              <li role="presentation" class="divider"></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" ><%= link_to 'My Profile', root_path %></a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" ><%= link_to 'Account Settings', edit_user_registration_path %></a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" ><%= link_to 'Sign Out', destroy_user_session_path %></a></li>
+              <li role="presentation" class="divider"></li>
+              <li role="presentation"><a id = "creditsBtn" role="menuitem" tabindex="-1" style = "cursor: pointer;"  data-toggle="modal" data-target="#creditsModal">Credits</a></li>
+            </ul>
+          </div>
+        </li>
 
       <% else %>
         <li><a data-toggle="modal" data-target="#loginModal" style = "cursor: pointer">Log In</a></li>
-        <%= render 'partials/dropdown' %>
-      <% end %>
+        <li>
+          <div class = "dropdown">
+            <span id = "extraInfo" class = "glyphicon glyphicon-cog" data-toggle="dropdown"></span>
+            <ul class="dropdown-menu pull-right" role="menu" style = "margin-right: 10px;">
+              <li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" data-toggle="modal" data-target=".helpModal">Help</a></li>
+              <li role="presentation" class="divider"></li>
+              <li role="presentation"><a id = "creditsBtn" role="menuitem" tabindex="-1" style = "cursor: pointer;"  data-toggle="modal" data-target="#creditsModal">Credits</a></li>
+            </ul>
+          </div>
+        </li>
+    <% end %>
 		</ul>
 	</div>
 </nav>
