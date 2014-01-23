@@ -14,11 +14,11 @@
 ActiveRecord::Schema.define(version: 20140123085752) do
 
   create_table "run_routes", force: true do |t|
+    t.integer  "user_id"
     t.string   "name"
     t.text     "locations"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
     t.boolean  "has_ran"
   end
 
