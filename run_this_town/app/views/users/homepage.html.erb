@@ -69,29 +69,7 @@
 				</div>
 				<legend><h2 style = "text-align: center; font-family: Sanchez">Routes that I've run</h2></legend>
 				<div id = "routesRunContainer">
-					<div class = "profRouteEntry well well-sm">
-						<div style = "display: inline-block; width: 49%; ">
-							<p>Date: </p>
-							<p>Distance Traveled: </p>
-							<p>Start: </p>
-							<p>End: </p>
-						</div>
-						<div style = "display: inline-block; width: 49%; height: 100%; position: absolute; top: 0; ">
-							<legend><h4 style = "text-align: center; font-family: Sanchez Regular">Waypoints Visited:</h4></legend>
-							<div class = "wptsList">
-								<ol>
-									<li>Place</li>
-									<li>Place</li>
-									<li>Place</li>
-									<li>Place</li>
-									<li>Place</li>
-									<li>Place</li>
-									<li>Place</li>
-									<li>Place</li>
-								</ol>
-							</div>
-						</div>
-					</div>
+					<%= render current_user.run_route %>
 				</div>
 			</div>
 		</div>
