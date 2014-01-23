@@ -25,10 +25,10 @@
       <div class="modal-body">
         <p>Thanks to all these awesome sources for helping make this website possible!</p><br>
         <ul>
-        	<li><p><a href = "http://glyphicons.com">Glyphicons</a></p></li>
-        	<li><p><a href = "http://getbootstrap.com">Bootstrap</a></p></li>
+          <li><p><a href = "http://glyphicons.com">Glyphicons</a></p></li>
+          <li><p><a href = "http://getbootstrap.com">Bootstrap</a></p></li>
           <li><p><a href = "https://developers.google.com/maps/">Google Maps API</a></p></li>
-        	<li><p>Sarah Liu for her amazing photography!</p></li>
+          <li><p>Sarah Liu for her amazing photography!</p></li>
         </ul>
       </div>
       <div class="modal-footer">
@@ -45,29 +45,29 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" style = "font-family: Sanchez Regular, serif">Log In</h4>
       </div>
-<%= render 'partials/login' %>
+      <%= render 'partials/login' %>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
 <nav class = "navbar navbar-inverse navbar-fixed-top" style = "box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5); height: 60px; font-family: Sanchez, serif" role = "navigation" >
-	<div class = "navbar-header">
-		<button class = "navbar-toggle" type = "button" data-toggle="collapse" data-target = "#bsnavbar-collapse">
-			<span class = "sr-only">Toggle navigation</span>
-			<span class = "icon-bar"></span>
-			<span class = "icon-bar"></span>
-			<span class = "icon-bar"></span>
-		</button>
-		<div><%= link_to image_tag("RunThisTownLogo1.png", :style => "height: 48px; padding: 0; margin: 6px 20px 6px", :class => "navbar-brand"), root_path %></div>
-	</div>
-	<div class="collapse navbar-collapse" id="bs-navbar-collapse">
-		<!-- <form id = "searchContainer" class="navbar-form navbar-left" role="search">
-			<div id = "inputContainer" class="form-group" style = "margin-top: 10px;">
-    			<input type="text" id = "routeFinder" class="form-control" placeholder="Find Route" >
-  			</div>
-  			<button type="submit" class="btn btn-warning" style = "margin-top: 10px; margin-left:3px; position: fixed">Search</button>
-		</form> -->
-		<ul class = "nav navbar-nav navbar-right" style = "margin-right: 0; right: 0; top: 0; position: fixed">
+  <div class = "navbar-header">
+    <button class = "navbar-toggle" type = "button" data-toggle="collapse" data-target = "#bsnavbar-collapse">
+      <span class = "sr-only">Toggle navigation</span>
+      <span class = "icon-bar"></span>
+      <span class = "icon-bar"></span>
+      <span class = "icon-bar"></span>
+    </button>
+    <div><a class = "navbar-brand" style = "padding: 6px 20px 6px; at: lef; margin: 0"><%= link_to image_tag("RunThisTownLogo1.png", :style => "height: 48px"), root_path %></a>'</div>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-navbar-collapse">
+    <form id = "searchContainer" class="navbar-form navbar-left" role="search">
+      <div id = "inputContainer" class="form-group" style = "margin-top: 10px;">
+          <input type="text" id = "routeFinder" class="form-control" placeholder="Find Route" >
+        </div>
+        <button type="submit" class="btn btn-warning" style = "margin-top: 10px; margin-left:3px; position: fixed">Search</button>
+    </form>'
+    <ul class = "nav navbar-nav navbar-right" style = "margin-right: 0; right: 0; top: 0; position: fixed">
       <% if user_signed_in? then %>
 
         <li><a style = "cursor: pointer"><%= current_user.first_name  %></a></li>
@@ -79,7 +79,7 @@
               <li role="presentation" class="divider"></li>
               <li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" ><%= link_to 'My Profile', root_path %></a></li>
               <li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" ><%= link_to 'Account Settings', edit_user_registration_path %></a></li>
-              <li id = "signOut" role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" ><%= link_to 'Sign Out', destroy_user_session_path %></a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" ><%= link_to 'Sign Out', destroy_user_session_path %></a></li>
               <li role="presentation" class="divider"></li>
               <li role="presentation"><a id = "creditsBtn" role="menuitem" tabindex="-1" style = "cursor: pointer;"  data-toggle="modal" data-target="#creditsModal">Credits</a></li>
             </ul>
@@ -99,6 +99,6 @@
           </div>
         </li>
     <% end %>
-		</ul>
-	</div>
+    </ul>
+  </div>
 </nav>
