@@ -57,8 +57,8 @@
 
 	<input id = "input" class = "controls">
 	<span id = "buttonContainer" class = "controls">
-		<button class = "btn btn-warning controls btnControls" id = "addPointBtn" style = "outline: none; border-radius: 0"><!-- <i class = "icon-search icon-white"></i> -->Add Point</button>
-		<button class = "btn btn-warning controls btnControls last" id = "pathCreator" style = "outline: none; " disabled>Show Path</button>
+		<button class = "btn btn-warning controls btnControls last" id = "addPointBtn" style = "outline: none; border-radius: 0 2px 2px 0"><!-- <i class = "icon-search icon-white"></i> -->Add Point</button>
+		
 	</span>
 	<div id="map" class = "mainElement" style = "margin-top: 60px"></div>
 	<div  class = "mainElement" id = "locList" style = "margin-top: 60px">
@@ -86,6 +86,7 @@
 		<div id = "routeList"></div>
 		<div id = "routeLengthContainer" style = "font-size: 14pt; padding: 10px; ">Route Length: <span id = "routeLength" style = "float: right">0 mi</span></div>
 		<div class = "btnContainer">
+			<button class = "btn btn-primary btn-block" id = "pathCreator" style = "outline: none; " disabled>Show Path</button>
 			<button id = "createRouteBtn" class = "btn btn-success btn-block" data-toggle="modal" data-target="#confirmationModal" disabled>Submit Route</button>
 		</div>
 	</div>

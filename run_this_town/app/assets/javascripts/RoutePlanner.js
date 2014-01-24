@@ -27,6 +27,24 @@ function pageLoad() {
 
 	}
 
+	function generateRandomAddressesInBoston() {
+		var locations = [];
+		for (var i = 0; i < 100; i++) {
+			var lat = (Math.random() * (0.5 - 0.4) + 0.4) * 100;
+			var lng = (Math.random() * (-0.7 + 0.8) - 0.8) * 100;
+			var point = new google.maps.LatLng(lat, lng);
+			var urlAddress = createUrlAddress(point);
+			$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + urlAddress + '&sensor=false', function(json_data) {
+				var address = json_data.results[0].formatted_address;
+				locations.push([address, lat, lng]);
+			});
+		}
+		console.log(locations);
+	}
+
+	// generateRandomAddressesInBoston();
+
+
 	function createUrlAddress(location) {
 		var address = location.toString();
 		// Address ex: 1600 Amphitheatre Parkway, Mountain View, CA
@@ -133,15 +151,25 @@ function pageLoad() {
 
 	var existingMarker = null;
 	google.maps.event.addListener(map, 'click', function(e) {
+		console.log(e.latLng);
 		addLocation(e.latLng);
 	});
 
 	markerDict = {};
+	randomLocationsArray = {};
 	function addLocation(location) {
 		var urlAddress = createUrlAddress(location);
 		$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + urlAddress + '&sensor=false', function(json_data){
 
 			var address = json_data.results[0].formatted_address;
+
+			var latLong = json_data.results[0].geometry.location;
+			var lat = latLong.lat;
+			var lng = latLong.lng;
+
+			randomLocationsArray[letterIndex] = address;
+
+			console.log(JSON.stringify(randomLocationsArray));
 
 			$("#input").val(address.toString());
 			if (marker != null) {

@@ -145,10 +145,10 @@ html { height: 100% }
 
 				width: 100%;
 
-				height: -moz-calc(100% - 70px - 50px - 20px - 36px - 47px);
-				height: -webkit-calc(100% - 70px - 50px - 20px - 36px - 47px);
-				height: -o-calc(100% - 70px - 50px - 20px - 36px - 47px);
-				height: calc(100% - 70px - 50px - 20px - 36px - 47px);
+				height: -moz-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px);
+				height: -webkit-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px);
+				height: -o-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px);
+				height: calc(100% - 70px - 50px - 20px - 36px - 47px - 32px);
 			}
 				.routeEntry {
 					height: 45px;
