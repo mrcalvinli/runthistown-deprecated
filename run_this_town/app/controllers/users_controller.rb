@@ -4,7 +4,12 @@ class UsersController < ApplicationController
 	def homepage
 	end
 
-	def routeplanner
+
+	## EDIT THIS! 
+	def update_route
+		p params[:route_id]
+		#RunRoute.delete(id)
+		redirect_to homepage_path
 	end
 
 	def show

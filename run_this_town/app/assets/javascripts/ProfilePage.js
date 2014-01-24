@@ -96,7 +96,8 @@ function pageLoad() {
 		// backend stuff goes here, use startAddress, endAddress, and wptAddresses //
 	}*/
 
-	function deleteClick(current) {
+	
+	/*function deleteClick(current) {
 		var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
 		var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
 		var wptAddresses = [];
@@ -110,7 +111,7 @@ function pageLoad() {
 
 		$("#profDeleteRoute").on("click", function() {
 			deleteClick($(this));
-		});
+		}); */
 
 		/*$(".profRouteEntry").on("click", function(route) {
 			if ( route.css("height") == "40px" ) {
@@ -121,7 +122,25 @@ function pageLoad() {
 		});*/
 
 		// backend stuff goes here, use startAddress, endAddress, and wptAddresses
-	}
+		/*$.ajax({
+			beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+			url: '/homepage_post',
+			type: 'POST',
+			data: {
+				"start": startAddress,
+				"end": endAddress,
+				"wptAddress": wptAddresses
+			},
+			dataType: "json",
+			success: function(data, textStatus){
+				console.log("deletion twerked")
+			},
+			error: function(){
+				console.log("did not delete...");
+			}
+		}); 
+
+	} */
 
 /*	function removeClick(current) {
 		var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
@@ -158,9 +177,9 @@ function pageLoad() {
 		successClick($(this));
 	});*/
 
-	$("#profDeleteRoute").on("click", function() {
+	/*$("#profDeleteRoute").on("click", function() {
 		deleteClick($(this));
-	});
+	});*/
 
 /*	$("#profRemoveRoute").on("click", function() {
 		removeClick($(this));
