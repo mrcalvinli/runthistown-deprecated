@@ -27,6 +27,7 @@ function pageLoad() {
 			totalDistanceTraveled += parseFloat($(this).html());
 		}
 		console.log(totalDistanceTraveled);
+		$("#totalDistanceStat").html(totalDistanceTraveled.toString() + " mi");
 	});
 
 	// Route entry template
@@ -37,6 +38,13 @@ function pageLoad() {
 		} else {
 			$(this).css("height", "40px");
 		}
+	});
+
+	$("#profPicCont").on("mouseenter", function() {
+		$("#profPicCover").css("opacity", 1);
+	});
+	$("#profPicCont").on("mouseleave", function() {
+		$("#profPicCover").css("opacity", 0);
 	});
 
 	if ($("#routesRunContainer").html() == "") {

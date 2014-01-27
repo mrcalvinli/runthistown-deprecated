@@ -67,3 +67,6 @@ legend {
  #profDeleteRoute:hover {
  	opacity: 1;
  };
+ #profPicCont {
+ 	cursor: pointer;
+ }

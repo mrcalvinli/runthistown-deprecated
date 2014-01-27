@@ -21,19 +21,19 @@
 }
 .brand { float: left; margin-left: 20px; }
 .popover-title { font-family: 'Sanchez', serif; padding: 10px 30px; font-size: 14pt; }
-/*#routeFinderCont {
+#routeFinderCont {
     width: -moz-calc(100% - 279px - 15px - 40px - 141px);
     width: -webkit-calc(100% - 279px - 15px - 40px - 141px);
     width: -o-calc(100% - 279px - 15px - 40px - 141px);
     width: calc(100% - 279px - 15px - 40px - 141px);
 }
-#routeFinder {
-    width: -moz-calc(100% - 71px - 3px);
-    width: -webkit-calc(100% - 71px - 3px);
-    width: -o-calc(100% - 71px - 3px);
-    width: calc(100% - 71px - 3px);
+#routeAndFriendFinder {
+    width: -moz-calc(100% - 71px - 3px - 12px);
+    width: -webkit-calc(100% - 71px - 3px - 12px);
+    width: -o-calc(100% - 71px - 3px - 12px);
+    width: calc(100% - 71px - 3px - 12px);
     max-width: 500px;
-}*/
+}
 
 #searchContainer {
 
