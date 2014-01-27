@@ -1,9 +1,9 @@
 <div class = "profRouteEntry well well-sm">
 	<div class = "profConfirmOrDeny" style = "position: absolute; top: 5px; right: 10px; z-index: 3; ">
 		<!-- <span id = "profSuccessRoute" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span> -->
-		 <%#= link_to "Update Route", homepage_post_url, { :method => :post, :data => @run_route.id} do %>
+		 <%= link_to homepage_path, {controller: 'users', action: 'destroy_route', id: @run_route.id }, {method: 'post'} do %>
 			<span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>
-		<%# end %>
+		<% end %>
 	</div>
 	<div class = "profRunRouteInfo" style = "display: inline-block; width: 49%; ">
 		<p class = "profRouteDate">Date: <span></span></p>

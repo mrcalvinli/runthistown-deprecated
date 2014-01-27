@@ -23,4 +23,11 @@ class RoutePlannerController < ApplicationController
 			format.json { render json: { :redirect => homepage_url } } 
 		end
 	end
+
+	def destroy
+		@route = RunRoute.find(params[:id])
+		@route.destroy
+		respond_to do |format|
+			format.html { redirect_to homepage_path }
+		end
 end

@@ -9,7 +9,7 @@ RunThisTown::Application.routes.draw do
     match '/homepage',          to: 'users#homepage',           via: 'get'
     match '/routeplanner',      to: 'route_planner#new',        via: 'get'
     match '/routeplanner_post', to: 'route_planner#create',     via: [:post]
-    match '/homepage_post',     to: 'users#update_route',       via: [:post]
+    #match '/destroy/route_id', to: 'users#destroy_route',      via: [:delete]
 
     # The priority is based upon order of creation: first created -> highest priority.
     # See how all your routes lay out with "rake routes".
