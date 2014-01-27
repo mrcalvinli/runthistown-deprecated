@@ -20,6 +20,15 @@ function pageLoad() {
 		$("#newGoalContainer").animate({"height": buttonHeight, "padding-bottom": "5px"}, 300);
 	});
 
+	var totalDistanceTraveled = 0;
+	$("#routesToRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
+		if ($(this).html() != "") {
+			console.log($(this).html());
+			totalDistanceTraveled += parseFloat($(this).html());
+		}
+		console.log(totalDistanceTraveled);
+	});
+
 	// Route entry template
 
 	$(".profRouteEntry").on("click", function() {

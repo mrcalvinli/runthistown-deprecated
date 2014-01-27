@@ -64,3 +64,6 @@ legend {
 	height: calc(100% - 41px);
 	overflow: auto;
  }
+ #profDeleteRoute:hover {
+ 	opacity: 1;
+ };
