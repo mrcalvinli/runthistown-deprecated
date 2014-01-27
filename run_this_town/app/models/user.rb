@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 	has_many :requested_friends, :through => :requested_friendships, :source => :friend
 	has_many :pending_friends, :through => :pending_friendships, :source => :friend
 
+	has_attached_file :avatar
 
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
