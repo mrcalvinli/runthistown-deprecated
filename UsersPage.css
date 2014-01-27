@@ -1,0 +1,10 @@
+body {
+	font-family: Sanchez;
+}
+.userContainer {
+	background-color: white;
+	border-radius: 5px;
+	margin-top: 10px;
+	padding: 5px;
+	height: 115px;
+}

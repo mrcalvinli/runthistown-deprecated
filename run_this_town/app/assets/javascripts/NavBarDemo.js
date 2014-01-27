@@ -32,6 +32,12 @@ function pageLoad() {
 		$("#inputContainer").width($("#searchContainer").width()
 							- parseInt($(".navbar .navbar-right").css("width")) - 3);
 	});
+
+
+	
+	var input = document.getElementById('routeAndFriendFinder');
+	var autocomplete = new google.maps.places.Autocomplete(input);
+	var infowindow = new google.maps.InfoWindow();
 }
 
 $(document).on("page:load", pageLoad);
