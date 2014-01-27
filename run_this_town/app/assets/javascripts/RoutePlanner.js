@@ -422,7 +422,6 @@ function pageLoad() {
 								if (status == google.maps.DirectionsStatus.OK) {
 									console.log("success");
 									directionsDisplay.setDirections(response);
-									console.log(JSON.stringify(response));
 									var wptsOrder = response["routes"][0]["waypoint_order"];
 									var legsArray = response["routes"][0]["legs"];
 									var distanceInMeters = 0;
@@ -434,18 +433,18 @@ function pageLoad() {
 									$("#routeLength").html(distance.toString() + " mi");
 									
 									// create routeInfoArray
-									var routeInfoEntry = [$("#routeEntry-A input").val(), pathArray[0][0], pathArray[0][1]];
-									routeInfoArray.push(routeInfoEntry);
-									for (var i = 0; i < wptsOrder.length; i++) {
-										var currentLetter = letterArray[wptsOrder[i]] + 1;
-										var address = $("#routeEntry-" + currentLetter + " input").val();
-										var thisLat = response["Tb"]["waypoints"][wptsOrder[i]]["location"]["d"];
-										var thisLng = response["Tb"]["waypoints"][wptsOrder[i]]["location"]["e"];
-										var routeInfoEntry = [address, thisLat, thisLng];
-										routeInfoArray.push(routeInfoEntry);
+									if (routeInfoArray.length == 0) {
+										for (var i in pathArray) {
+											var currentLetter = letterArray[i];
+											var address = $("#routeEntry-" + currentLetter + " input").val();
+											var thisLat = pathArray[i][0]
+											var thisLng = pathArray[i][1];
+											var routeInfoEntry = [address, thisLat, thisLng];
+											routeInfoArray.push(routeInfoEntry);
+											console.log("routeInfoArray being created: ", routeInfoArray);
+										}	
 									}
 									var lastLetter = letterArray[letterIndex - 1];
-									routeInfoArray.push(routeInfoEntry);
 									console.log(routeInfoArray);
 									// insert animation here
 									for (var j = 0; j < wptsOrder.length; j++) {
