@@ -432,7 +432,7 @@ function pageLoad() {
 									}
 									distance = Math.round(distanceInMeters * 0.000621371 * 100) / 100;
 									$("#routeLength").html(distance.toString() + " mi");
-									distanceString = distance.toString() + " mi");
+									distanceString = distance.toString() + " mi";
 									
 									// create routeInfoArray
 									if (routeInfoArray.length == 0) {
@@ -513,7 +513,7 @@ function pageLoad() {
 										distanceInMeters += legDistance;
 									}
 									distance = Math.round(distanceInMeters * 0.000621371 * 100) / 100;
-									distanceString = distance.toString() + " mi");
+									distanceString = distance.toString() + " mi";
 									$("#routeLength").html(distance.toString() + " mi");
 
 									// create routeInfoArray
@@ -596,15 +596,14 @@ function pageLoad() {
 		// go to profile page and highlight their new route
 
 		//DO CHECKING FOR REPEATED SENDS AND PREVENT BAD BAD INFO SENDING
-		console.log("here boyyy");
-		console.log(routeInfoArray);
+		var routeName = $("#routeNameInput").val();
 		$.ajax({
 			beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
 			url: '/routeplanner_post',
 			type: 'POST',
 			data: {
 				"user_id": 1,
-				"name": "Dis Route Doh",
+				"name": routeName,
 				"locations": routeInfoArray
 			},
 			dataType: "json",
