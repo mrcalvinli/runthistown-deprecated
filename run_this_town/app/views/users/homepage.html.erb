@@ -32,8 +32,18 @@
 				</div> -->
 				<div class = "stat"><legend style = "border-bottom-color: grey; "><h2 style = "font-family: Sanchez; margin-top: 0; ">Stats</h2></legend></div>
 				<div id = "statContainer"></div>
-				<div class = "stat"><legend style = "border-bottom-color: grey"><h2 style = "margin-top: 0; ">Pending Friends</h2></legend></div>
-				<div id = "pendingFriendsContainer"></div>
+				<% if current_user.pending_friends.size > 0 %>
+					<div class = "stat"><legend style = "border-bottom-color: grey"><h2 style = "margin-top: 0; ">Pending Friends</h2></legend></div>
+					<% for friend in current_user.pending_friends %>
+						<div id = "pendingFriendsContainer">
+							<div>
+								<%= friend.get_name %>
+								<%= link_to "(Ignore)", {controller: "friendships", action: "destroy", user_id: current_user.id, friend_id: friend.id}, {:method => :delete, style: 'float: right;'} %>
+								<%= link_to "(Accept)", {controller: "friendships", action: "update", user_id: current_user.id, friend_id: friend.id}, {:method => :delete, style: 'float: right;'} %>
+							</div>
+						</div>
+					<% end %>
+				<% end %>
 			</div>
 		</div>
 	</div>
