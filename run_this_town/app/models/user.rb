@@ -13,11 +13,11 @@ class User < ActiveRecord::Base
 	has_many :pending_friends, :through => :pending_friendships, :source => :friend
 
 	has_attached_file :avatar,
-						:url => "/assets/users/:id/:basename.:extension"
+						:url => "/assets/users/:id/:basename.:extension",
 						:path => ":rails_root/public/assets/users/:id/:basename.:extension"
 
-	validates_attachment_size :photo, :less_than => 5.megabytes
-	validates_attachment_content_type, :photo, :content_type => ['image/jpeg', 'image/png']
+	validates_attachment_size :avatar, :less_than => 5.megabytes
+	validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png']
 
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
