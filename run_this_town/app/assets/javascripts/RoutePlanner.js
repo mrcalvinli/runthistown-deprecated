@@ -381,6 +381,7 @@ function pageLoad() {
 			map: map, draggable: true
 		};
 		directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+		directionsDisplay.setPanel(document.getElementById('directionsList'));
 		google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
 			console.log("changed route");
 			computeTotalDistance(directionsDisplay.getDirections());
@@ -594,6 +595,7 @@ function pageLoad() {
 		document.getElementById("createRouteBtn").disabled = true;
 		document.getElementById("createLoopBtn").disabled = true;
 		$("#routeLength").html("0 mi");
+		$("#directionsList").html("");
 
 		$(".deleteRouteEntry").css("display", "block");
 
