@@ -357,6 +357,7 @@ function pageLoad() {
 
 	routeInfoArray = [];
 	distance = 0;
+	distanceString = "";
 	$("#pathCreator").on("click", function() {
 		// get rid of markers on map (replaced by )
 
@@ -431,6 +432,7 @@ function pageLoad() {
 									}
 									distance = Math.round(distanceInMeters * 0.000621371 * 100) / 100;
 									$("#routeLength").html(distance.toString() + " mi");
+									distanceString = distance.toString() + " mi");
 									
 									// create routeInfoArray
 									if (routeInfoArray.length == 0) {
@@ -511,6 +513,7 @@ function pageLoad() {
 										distanceInMeters += legDistance;
 									}
 									distance = Math.round(distanceInMeters * 0.000621371 * 100) / 100;
+									distanceString = distance.toString() + " mi");
 									$("#routeLength").html(distance.toString() + " mi");
 
 									// create routeInfoArray
