@@ -27,23 +27,6 @@ function pageLoad() {
 
 	}
 
-	function generateRandomAddressesInBoston() {
-		var locations = [];
-		for (var i = 0; i < 100; i++) {
-			var lat = (Math.random() * (0.5 - 0.4) + 0.4) * 100;
-			var lng = (Math.random() * (-0.7 + 0.8) - 0.8) * 100;
-			var point = new google.maps.LatLng(lat, lng);
-			var urlAddress = createUrlAddress(point);
-			$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + urlAddress + '&sensor=false', function(json_data) {
-				var address = json_data.results[0].formatted_address;
-				locations.push([address, lat, lng]);
-			});
-		}
-		console.log(locations);
-	}
-
-	// generateRandomAddressesInBoston();
-
 
 	function createUrlAddress(location) {
 		var address = location.toString();
@@ -73,19 +56,35 @@ function pageLoad() {
 		customOrder = true;
 		autoOrder = false;
 		shortestPathOrder = false;
-		$("#orderBtnDropdown").html('Order: Custon <span class="caret" style = "border-top: 4px solid white"></span>');
+		$("#orderBtnDropdown").html('Order: Custom <span class="caret" style = "border-top: 4px solid white"></span>');
+		$("#desiredDistanceCont").remove();
+		$("#routeList").css("height", "-moz-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
+		$("#routeList").css("height", "-webkit-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
+		$("#routeList").css("height", "-o-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
+		$("#routeList").css("height", "calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
 	})
 	$("#autoOrderBtn").on("click", function() {
 		customOrder = false;
 		autoOrder = true;
 		shortestPathOrder = false;
 		$("#orderBtnDropdown").html('Order: Auto <span class="caret" style = "border-top: 4px solid white"></span>');
+		var desiredDistanceCont = $("<div id = 'desiredDistanceCont' style = 'font-size: 14pt; padding: 10px;'>Desired Distance: <input placeholder = 'Distance in miles' id = 'desiredLength' class = '' style = 'font-size: 15px; float: right; width: 50%;'></input></div>")
+		$("#routeList").after(desiredDistanceCont);
+		$("#routeList").css("height", "-moz-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px - 47px)");
+		$("#routeList").css("height", "-webkit-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px - 47px)");
+		$("#routeList").css("height", "-o-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px - 47px)");
+		$("#routeList").css("height", "calc(100% - 70px - 50px - 20px - 36px - 47px - 32px - 47px)");
 	})
 	$("#shortestPathOrderBtn").on("click", function() {
 		customOrder = false;
 		autoOrder = false;
 		shortestPathOrder = true;
 		$("#orderBtnDropdown").html('Order: Shortest Path <span class="caret" style = "border-top: 4px solid white"></span>');
+		$("#desiredDistanceCont").remove();
+		$("#routeList").css("height", "-moz-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
+		$("#routeList").css("height", "-webkit-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
+		$("#routeList").css("height", "-o-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
+		$("#routeList").css("height", "calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
 	});
 
 
@@ -151,7 +150,6 @@ function pageLoad() {
 
 	var existingMarker = null;
 	google.maps.event.addListener(map, 'click', function(e) {
-		console.log(e.latLng);
 		addLocation(e.latLng);
 	});
 
@@ -167,9 +165,6 @@ function pageLoad() {
 			var lat = latLong.lat;
 			var lng = latLong.lng;
 
-			randomLocationsArray[letterIndex] = address;
-
-			console.log(JSON.stringify(randomLocationsArray));
 
 			$("#input").val(address.toString());
 			if (marker != null) {
@@ -188,7 +183,7 @@ function pageLoad() {
 		        new google.maps.Point(10, 34));
 
 			marker = new google.maps.Marker({
-				position: location,
+				position: new google.maps.LatLng(lat, lng),
 				map: map,
 				icon: pinImage,
 			});
@@ -196,12 +191,22 @@ function pageLoad() {
 		});	
 	}
 
+	$("#createLoopBtn").on("click", function() {
+		$("#input").val($("#routeEntry-A .routeInput").val());
+		addLocation($("#routeEntry-A .routeInput").val());
+	});
+
 	pathArray = [];
 	var letterArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 	letterIndex = 0;
 	$("#addPointBtn").on("click", function() {
-		var address = $("#input").val();
-		var urlAddress = createUrlAddress(address);
+		if ($("#input").val() !== "") {
+			var address = $("#input").val();
+			var urlAddress = createUrlAddress(address);
+		} else {
+			console.log("No address given");
+		}
+		
 		if (marker != null) {
 			for (var i = 0; i < Object.keys(markerDict).length; i++) {
 				var keysArray = Object.keys(markerDict);
@@ -212,10 +217,10 @@ function pageLoad() {
 			        new google.maps.Point(0,0),
 			        new google.maps.Point(10, 34));
 			    if (keysArray[i] != "A") {
-			    	console.log("creating blue marker");
 			    	markerDict[keysArray[i]].setIcon(pinImage);
 			    }
 			}
+			
 			markerDict[letterArray[letterIndex]] = marker;
 			for (var i = 0; i < Object.keys(markerDict).length; i++) {
 				var keysArray = Object.keys(markerDict);
@@ -224,125 +229,130 @@ function pageLoad() {
 			}
 
 			$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + urlAddress + '&sensor=false', function(json_data){
-				var latLong = json_data.results[0].geometry.location;
-				var lat = latLong.lat;
-				var lng = latLong.lng;
-				var entryClass = "";
-				var letterClass = "";
-				if (letterArray[letterIndex] == "A") {
-					letterClass = "orgEntryLetter";
-					entryClass = "orgEntry"
-				} else {
-					letterClass = "destEntryLetter";
-					entryClass = "destEntry"
-				}
-
-				var center = new google.maps.LatLng(lat, lng);
-			    map.panTo(center);
-
-				pathArray.push([lat, lng]);
-				if (pathArray.length >= 2) {
-					document.getElementById("clearRoute").disabled = false;
-					document.getElementById("pathCreator").disabled = false;
-				}
-
-				$(".destEntryLetter").each(function() {
-					$(this).attr("class", "entryLetter wptsEntryLetter")
-				});
-				$(".destEntry").each(function() {
-					$(this).attr("class", "routeEntry wptsEntry")
-				})
-
-				var marginTop = letterIndex * 45;
-				var marginTopString = marginTop.toString() + "px";
-
-				$("#routeList").append("<div style = 'margin-top: " + marginTopString + "' class = 'routeEntry " + entryClass + "' id = 'routeEntry-" + letterArray[letterIndex] + "'></div>");
-				$("#routeEntry-" + letterArray[letterIndex]).append("<div class = 'entryLetter " + letterClass + "'>" + "<span class = 'entrySpan' id = 'entrySpan-" + letterArray[letterIndex] + "' style = 'margin-top: 3px; display: block'>" + "&bull;" /*letterArray[letterIndex] */ + "</span></div>");
-				entryClass = "orgEntry"
-				$("#routeEntry-" + letterArray[letterIndex]).append("<input class = 'controls routeInput'>");
-				$("#routeEntry-" + letterArray[letterIndex]).append("<button type = 'button' class = 'close deleteRouteEntry' style = 'margin-top: 5px; padding-left; 5px'>&times;</button>")
-				
-				// Delete Button
-				$("#routeEntry-" + letterArray[letterIndex] + " .close").on("click", function() {
-					var thisLetter = $(this).parent().attr("id").toString()[11];
-					console.log(thisLetter);
-					markerDict[thisLetter].setMap(null);
-					markerDict[thisLetter] = null;
-					delete markerDict[thisLetter];
-					var index = letterArray.indexOf(thisLetter);
-					pathArray.pop(index);
-
-					// replace old info with info from new letters
-					var thisLetterIndex = letterArray.indexOf(thisLetter);
-					var markerKeys = Object.keys(markerDict);
-					for (var i = 0; i < markerKeys.length; i++) {
-						var currentLetterIndex = letterArray.indexOf(markerKeys[i]);
-						var currentLetter = letterArray[currentLetterIndex];
-						var prevLetter = letterArray[currentLetterIndex - 1];
-						if (currentLetterIndex > thisLetterIndex) {
-							markerDict[prevLetter] = markerDict[currentLetter];
-							delete markerDict[currentLetter];
-						}
+				if (json_data.results[0] === undefined) {
+					alert("Could not find location; try again");
+					markerDict[letterArray[letterIndex]].setMap(null);
+					markerDict[letterArray[letterIndex]] = null;
+					delete markerDict[letterArray[letterIndex]];
+					console.log("Could not find location; try again");
+				} else{
+					var latLong = json_data.results[0].geometry.location;
+					var lat = latLong.lat;
+					var lng = latLong.lng;
+					var entryClass = "";
+					var letterClass = "";
+					if (letterArray[letterIndex] == "A") {
+						letterClass = "orgEntryLetter";
+						entryClass = "orgEntry"
+					} else {
+						letterClass = "destEntryLetter";
+						entryClass = "destEntry"
 					}
-					// console.log(JSON.stringify(markerDict));
 
-					// remove animation
-					$("#routeEntry-" + thisLetter).animate({"opacity": 0}, 300, function() {
-						$("#routeEntry-" + thisLetter).first().remove();
+					var center = new google.maps.LatLng(lat, lng);
+				    map.panTo(center);
+
+					pathArray.push([lat, lng]);
+					if (pathArray.length >= 2) {
+						document.getElementById("clearRoute").disabled = false;
+						document.getElementById("pathCreator").disabled = false;
+						document.getElementById("createLoopBtn").disabled = false;
+					}
+
+					$(".destEntryLetter").each(function() {
+						$(this).attr("class", "entryLetter wptsEntryLetter")
+					});
+					$(".destEntry").each(function() {
+						$(this).attr("class", "routeEntry wptsEntry")
+					})
+
+					var marginTop = letterIndex * 45;
+					var marginTopString = marginTop.toString() + "px";
+
+					$("#routeList").append("<div style = 'margin-top: " + marginTopString + "' class = 'routeEntry " + entryClass + "' id = 'routeEntry-" + letterArray[letterIndex] + "'></div>");
+					$("#routeEntry-" + letterArray[letterIndex]).append("<div class = 'entryLetter " + letterClass + "'>" + "<span class = 'entrySpan' id = 'entrySpan-" + letterArray[letterIndex] + "' style = 'margin-top: 3px; display: block'>" + "&bull;" /*letterArray[letterIndex] */ + "</span></div>");
+					entryClass = "orgEntry"
+					$("#routeEntry-" + letterArray[letterIndex]).append("<input class = 'controls routeInput'>");
+					$("#routeEntry-" + letterArray[letterIndex]).append("<button type = 'button' class = 'close deleteRouteEntry' style = 'margin-top: 5px; padding-left; 5px'>&times;</button>")
+					
+					// Delete Button
+					$("#routeEntry-" + letterArray[letterIndex] + " .close").on("click", function() {
+						var thisLetter = $(this).parent().attr("id").toString()[11];
+						console.log(thisLetter);
+						markerDict[thisLetter].setMap(null);
+						markerDict[thisLetter] = null;
+						delete markerDict[thisLetter];
+						var index = letterArray.indexOf(thisLetter);
+						pathArray.pop(index);
+
+						// replace old info with info from new letters
+						var thisLetterIndex = letterArray.indexOf(thisLetter);
+						var markerKeys = Object.keys(markerDict);
+						for (var i = 0; i < markerKeys.length; i++) {
+							var currentLetterIndex = letterArray.indexOf(markerKeys[i]);
+							var currentLetter = letterArray[currentLetterIndex];
+							var prevLetter = letterArray[currentLetterIndex - 1];
+							if (currentLetterIndex > thisLetterIndex) {
+								markerDict[prevLetter] = markerDict[currentLetter];
+								delete markerDict[currentLetter];
+							}
+						}
+						// console.log(JSON.stringify(markerDict));
+
+						// remove animation
+						$("#routeEntry-" + thisLetter).animate({"opacity": 0}, 300, function() {
+							$("#routeEntry-" + thisLetter).first().remove();
+						});
+						
+
+						function animateEntriesUp() {
+							var index = letterArray.indexOf(thisLetter) + 1;
+							var i = index;                     //  set your counter to 1
+
+							function myLoop () {           //  create a loop function
+							   setTimeout(function () {    //  call a 3s setTimeout when the loop is called
+							      	var currentLetter = letterArray[i];
+									$("#routeEntry-" + currentLetter).animate(
+										{"margin-top": parseInt($("#routeEntry-" + currentLetter).css("margin-top")) - 45},
+										300
+									);
+
+									console.log(i);        //  your code here
+									i++;                     //  increment the counter
+									if (i < letterIndex) {            //  if the counter < 10, call the loop function
+									 myLoop();             //  ..  again which will trigger another 
+									} else {
+										var newIndex = letterArray.indexOf(thisLetter) + 1;
+										for (var j = newIndex; j < letterIndex; j++) {
+											var currentLetter = letterArray[j];
+											$("#routeEntry-" + currentLetter).attr("id", "routeEntry-" + letterArray[j-1]);
+										}
+										letterIndex--;
+									}                     //  ..  setTimeout()
+							   }, 150)
+							}
+
+							myLoop();  
+						}
+
+						setTimeout(animateEntriesUp(), 150);
+
+
 					});
 					
+					$("#routeEntry-" + letterArray[letterIndex] + " .routeInput").val(address.toString());
+					letterIndex++;
 
-					function animateEntriesUp() {
-						var index = letterArray.indexOf(thisLetter) + 1;
-						var i = index;                     //  set your counter to 1
-
-						function myLoop () {           //  create a loop function
-						   setTimeout(function () {    //  call a 3s setTimeout when the loop is called
-						      	var currentLetter = letterArray[i];
-								$("#routeEntry-" + currentLetter).animate(
-									{"margin-top": parseInt($("#routeEntry-" + currentLetter).css("margin-top")) - 45},
-									300
-								);
-
-								console.log(i);        //  your code here
-								i++;                     //  increment the counter
-								if (i < letterIndex) {            //  if the counter < 10, call the loop function
-								 myLoop();             //  ..  again which will trigger another 
-								} else {
-									var newIndex = letterArray.indexOf(thisLetter) + 1;
-									for (var j = newIndex; j < letterIndex; j++) {
-										var currentLetter = letterArray[j];
-										$("#routeEntry-" + currentLetter).attr("id", "routeEntry-" + letterArray[j-1]);
-									}
-									letterIndex--;
-								}                     //  ..  setTimeout()
-						   }, 150)
-						}
-
-						myLoop();  
-					}
-
-					setTimeout(animateEntriesUp(), 150);
-
-
-				});
+					// Remember that when deleting an element, you should also change the id of all the elements in front of it
+				}
 				
-				$("#routeEntry-" + letterArray[letterIndex] + " .routeInput").val(address.toString());
-				letterIndex++;
-
-				// Remember that when deleting an element, you should also change the id of all the elements in front of it
 				
 			});		
 			marker = null;
 		} else {
-			// alert("Invalid Point");
+			alert("Invalid Point");
+			console.log("marker is null");
 		}
-		
-
-
-		
-
-		
 	});
 
 	routeInfoArray = [];
@@ -359,33 +369,27 @@ function pageLoad() {
 		};
 		directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
 
-		for (var i = 0; i < Object.keys(markerDict).length; i++) {
-			var keysArray = Object.keys(markerDict);
-		    markerDict[keysArray[i]].setMap(null);
-		}
-
-		$(".entrySpan").each(function() {
-			$(this).html("");
-		});
+		
 
 		$(".orgEntryLetter .entrySpan").html("A");
 		$(".destEntryLetter .entrySpan").html(letterArray[letterIndex - 1]);
 
-		$(".routeInput").each(function(i) {
-			(function(i) {
-				console.log("i first: " + i);
-				var address = $("#routeEntry-" + letterArray[i] + " .routeInput").val();
+		$(".routeInput").each(function(j) {
+			(function(j) {
+				var address = $("#routeEntry-" + letterArray[j] + " .routeInput").val();
+				console.log("address: " + address);
 				var urlAddress = createUrlAddress(address);
 				$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + urlAddress + '&sensor=false', function(json_data){
-					console.log("i second: " + i);
+					console.log("j: " + j);
 					var latLong = json_data.results[0].geometry.location;
 					var lat = latLong.lat;
 					var lng = latLong.lng;
 
-					if (i == 0) {
+					if (j == 0) {
 						org = new google.maps.LatLng(lat, lng);
-					} else if (i == pathArray.length - 1) {
+					} else if (j == pathArray.length - 1) {
 						dest = new google.maps.LatLng(lat, lng);
+						console.log("dest: " + dest);
 					} else {
 						wpts.push({
 							location: new google.maps.LatLng(lat, lng),
@@ -393,9 +397,19 @@ function pageLoad() {
 						});
 					}
 
-					console.log("dest: " + dest);
+					
 					if (shortestPathOrder == true) {
 						if (dest != null) {
+
+							for (var i = 0; i < Object.keys(markerDict).length; i++) {
+								var keysArray = Object.keys(markerDict);
+							    markerDict[keysArray[i]].setMap(null);
+							}
+
+							$(".entrySpan").each(function() {
+								$(this).html("");
+							});
+
 							var request = {
 								origin: org,
 								destination: dest,
@@ -431,7 +445,6 @@ function pageLoad() {
 										routeInfoArray.push(routeInfoEntry);
 									}
 									var lastLetter = letterArray[letterIndex - 1];
-									var routeInfoEntry = [$("#routeEntry-" + lastLetter +" input").val(), pathArray[pathArray.length - 1][0], pathArray[pathArray.length - 1][1]];
 									routeInfoArray.push(routeInfoEntry);
 									console.log(routeInfoArray);
 									// insert animation here
@@ -454,6 +467,10 @@ function pageLoad() {
 										$("#routeEntry-" + letterToChange).attr("id", "#routeEntry-" + thisLetter);
 
 									}
+
+									for (var i = 0; i < letterIndex; i++) {
+										$("#routeEntry-" + letterArray[i] + " .entrySpan").html(letterArray[i]);
+									}
 									document.getElementById("createRouteBtn").disabled = false;
 									$(".deleteRouteEntry").css("display", "none");
 									marker.setMap(null);
@@ -465,6 +482,16 @@ function pageLoad() {
 						}
 					} else if (customOrder == true) {
 						if (dest != null) {
+
+							for (var i = 0; i < Object.keys(markerDict).length; i++) {
+								var keysArray = Object.keys(markerDict);
+							    markerDict[keysArray[i]].setMap(null);
+							}
+
+							$(".entrySpan").each(function() {
+								$(this).html("");
+							});
+
 							var request = {
 								origin: org,
 								destination: dest,
@@ -488,19 +515,21 @@ function pageLoad() {
 									$("#routeLength").html(distance.toString() + " mi");
 
 									// create routeInfoArray
-									for (var i in pathArray) {
-										var currentLetter = letterArray[i];
-										var address = $("#routeEntry-" + currentLetter + " input").val();
-										var thisLat = pathArray[i][0]
-										var thisLng = pathArray[i][1];
-										var routeInfoEntry = [address, thisLat, thisLng];
-										routeInfoArray.push(routeInfoEntry);
+									if (routeInfoArray.length == 0) {
+										for (var i in pathArray) {
+											var currentLetter = letterArray[i];
+											var address = $("#routeEntry-" + currentLetter + " input").val();
+											var thisLat = pathArray[i][0]
+											var thisLng = pathArray[i][1];
+											var routeInfoEntry = [address, thisLat, thisLng];
+											routeInfoArray.push(routeInfoEntry);
+											console.log("routeInfoArray being created: ", routeInfoArray);
+										}	
 									}
 									var lastLetter = letterArray[letterIndex - 1];
-									var routeInfoEntry = [$("#routeEntry-" + lastLetter +" input").val(), pathArray[pathArray.length - 1][0], pathArray[pathArray.length - 1][1]];
-									console.log(routeInfoArray);
+									console.log("routeInfoArray: ", routeInfoArray);
 
-									for (var i = 1; i < letterIndex - 1; i++) {
+									for (var i = 0; i < letterIndex; i++) {
 										$("#routeEntry-" + letterArray[i] + " .entrySpan").html(letterArray[i]);
 									}
 								document.getElementById("createRouteBtn").disabled = false;
@@ -510,9 +539,23 @@ function pageLoad() {
 								}
 							});
 						}
-					}
+					}/* else if (autoOrder) {
+						if (isNaN(parseFloat($("#desiredLength").val()))) {
+							alert("Invalid desired distance");
+							console.log("Invalid desired distance");
+						} else {
+							for (var i = 0; i < Object.keys(markerDict).length; i++) {
+								var keysArray = Object.keys(markerDict);
+							    markerDict[keysArray[i]].setMap(null);
+							}
+
+							$(".entrySpan").each(function() {
+								$(this).html("");
+							});
+						}
+					}*/
 				});
-			})(i);
+			})(j);
 		});
 	});
 
@@ -532,11 +575,17 @@ function pageLoad() {
 		document.getElementById("clearRoute").disabled = true;
 		document.getElementById("pathCreator").disabled = true;
 		document.getElementById("createRouteBtn").disabled = true;
+		document.getElementById("createLoopBtn").disabled = true;
 
 		$(".deleteRouteEntry").css("display", "block");
 
 		directionsDisplay.setMap(null);
 		letterIndex = 0;
+
+		marker = new google.maps.Marker({
+			map:map
+		});
+		routeInfoArray = [];
 	});
 
 	$("#confirmRouteBtn").on("click", function() {
