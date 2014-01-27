@@ -50,6 +50,9 @@ function pageLoad() {
 	if ($("#routesRunContainer").html() == "") {
 		$("#routesRunContainer").append($("<div style = 'height: 100%; text-align: center; '>You have no routes yet.  Click the button above to get started!</div>"));
 	}
+
+	//deleteRouteLink
+	$(".deleteRouteLink").append($('<span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>'))
 	
 
 	// Backend Stuff

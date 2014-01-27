@@ -28,10 +28,9 @@ class RoutePlannerController < ApplicationController
 	end
 
 	def destroy
-		@route = RunRoute.find(params[:id])
+		puts "tighttight"
+		@route = RunRoute.find(params[:route_id])
 		@route.destroy
-		respond_to do |format|
-			format.html { redirect_to homepage_path }
-		end
+		redirect_to homepage_path
 	end
 end
