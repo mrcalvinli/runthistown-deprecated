@@ -30,4 +30,5 @@ class RoutePlannerController < ApplicationController
 		respond_to do |format|
 			format.html { redirect_to homepage_path }
 		end
+	end
 end

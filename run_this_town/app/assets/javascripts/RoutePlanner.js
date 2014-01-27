@@ -593,6 +593,7 @@ function pageLoad() {
 		document.getElementById("pathCreator").disabled = true;
 		document.getElementById("createRouteBtn").disabled = true;
 		document.getElementById("createLoopBtn").disabled = true;
+		$("#routeLength").html("0 mi");
 
 		$(".deleteRouteEntry").css("display", "block");
 
