@@ -8,7 +8,7 @@ function pageLoad() {
 	$("#locList").height($(window).height() - $(".navbar").height);
 
 	var map = null;
-	var rendererOptions = {map: map};
+	var rendererOptions = {map: map, draggable: true};
 
 	directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
 
@@ -149,6 +149,7 @@ function pageLoad() {
   	});
 
 	var existingMarker = null;
+	// Map click listener
 	google.maps.event.addListener(map, 'click', function(e) {
 		addLocation(e.latLng);
 	});
@@ -358,6 +359,17 @@ function pageLoad() {
 	routeInfoArray = [];
 	distance = 0;
 	distanceString = "";
+
+	function computeTotalDistance(result) {
+	  var total = 0;
+	  var myroute = result.routes[0];
+	  for (var i = 0; i < myroute.legs.length; i++) {
+	    total += myroute.legs[i].distance.value;
+	  }
+	  distance = Math.round(total * 0.000621371 * 100) / 100;
+	  document.getElementById('routeLength').innerHTML = distance + ' mi';
+	}
+
 	$("#pathCreator").on("click", function() {
 		// get rid of markers on map (replaced by )
 
@@ -366,10 +378,13 @@ function pageLoad() {
 		var wpts = [];
 		var newPathArray = [];
 		var rendererOptions = { 
-			map: map,
+			map: map, draggable: true
 		};
 		directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
-
+		google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
+			console.log("changed route");
+			computeTotalDistance(directionsDisplay.getDirections());
+		});
 		
 
 		$(".orgEntryLetter .entrySpan").html("A");
