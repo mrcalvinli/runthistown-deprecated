@@ -9,6 +9,15 @@
 
 .tooltip { min-width: none; font-size: 13pt; }
 .tooltip-inner {background-color: rgba(0, 0, 0, 0.5); }
+.tooltip-arrow {opacity: 0.5; }
+#map .tooltip { font-size: 11px; }
+#map .tooltip-inner {background-color: black; }
+#map .tooltip-arrow {opacity: 1; }
+#locList .tooltip { font-size: 11px; font-family: Roboto, Arial, sans-serif; }
+#locList .tooltip-inner {background-color: black; }
+#locList .tooltip-arrow {opacity: 1; }
+
+
 
 .yellow {
 	color: #ffffff;

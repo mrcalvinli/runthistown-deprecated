@@ -8,11 +8,11 @@
 	        <h3 class="modal-title" style = "font-family: Sanchez, serif">Confirm</h3>
 	      </div>
 	      <div class="modal-body">
-	        <p>Are you sure you want to submit this route?</p><br>
+	        <input id = "routeNameInput" style = "border: 1px solid #ccc; margin-left: auto; margin-right: auto; display: block; padding: 5px; font-family: Roboto, Sanchez, serif; width: 400px; border-radius: 5px; font-weight: lighter" placeholder = "Input name of your route here"></input><br>
 	      </div>
 	      <div class="modal-footer">
-	      	<button id = "confirmRouteBtn" type="button" class="btn btn-success">Yes</button>
-	        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+	      	<button id = "confirmRouteBtn" type="button" class="btn btn-success">Submit</button>
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 	      </div>
 	    </div>
 	  </div>
@@ -87,7 +87,7 @@
 		<div id = "routeLengthContainer" style = "font-size: 14pt; padding: 10px; ">Route Length: <span id = "routeLength" style = "float: right">0 mi</span></div>
 		<div class = "btnContainer">
 			<button class = "btn btn-primary btn-block" id = "pathCreator" style = "outline: none; " disabled>Show Path</button>
-			<button id = "createRouteBtn" class = "btn btn-success btn-block" data-toggle="modal" data-target="#confirmationModal" disabled>Submit Route</button>
+			<button id = "createRouteBtn" class = "btn btn-success btn-block" data-toggle="modal" style = "margin-top: 5px;" data-target="#confirmationModal" disabled>Submit Route</button>
 		</div>
 	</div>
 

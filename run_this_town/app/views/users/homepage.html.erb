@@ -27,7 +27,9 @@
 					</div>
 				</div> -->
 				<div class = "stat"><legend style = "border-bottom-color: grey; "><h2 style = "font-family: Sanchez; margin-top: 0; ">Stats</h2></legend></div>
-				
+				<div id = "statContainer"></div>
+				<div class = "stat"><legend style = "border-bottom-color: grey"><h2 style = "margin-top: 0; ">Pending Friends</h2></legend></div>
+				<div id = "pendingFriendsContainer"></div>
 			</div>
 		</div>
 	</div>
@@ -38,7 +40,7 @@
 			<div class = "routeContainer well" style = "margin-bottom: 0; ">
 				<legend style = "border-color: grey; "><h2 style = "text-align: center; font-family: Sanchez">Routes to run</h2></legend>
 				<div id = "routesToRunContainer">
-					<button type="button" class="btn btn-success btn-lg btn-block" style = "font-size: 18pt; margin-bottom: 10px;"><%= link_to 'Run a new route', routeplanner_path, :style => "color: white; text-decoration: none;" %></button>
+					<button type="button" class="btn btn-success btn-lg btn-block" style = "font-size: 18pt; margin-bottom: 10px;"><%= link_to 'Create a new route', routeplanner_path, :style => "color: white; text-decoration: none;" %></button>
 					<% current_user.run_routes.each do |route| %>
 						<% if !route.has_ran %>
 							<% @run_route = route %>
@@ -46,7 +48,7 @@
 						<% end %>
 					<% end %>
 				</div>
-				<legend style = "border-color: grey; "><h2 style = "text-align: center; font-family: Sanchez">Routes that I've ran</h2></legend>
+				<legend style = "border-color: grey; "><h2 style = "text-align: center; font-family: Sanchez">Routes that I've run</h2></legend>
 				<div id = "routesRunContainer">
 					<% current_user.run_routes.each do |route| %>
 						<% if route.has_ran %>
