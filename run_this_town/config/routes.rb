@@ -1,5 +1,8 @@
 RunThisTown::Application.routes.draw do
 
+  get "friendships/new"
+  get "friendships/create"
+  get "friendships/delete"
     devise_for :users
     resources :users do
         post :route_id, :on => :member

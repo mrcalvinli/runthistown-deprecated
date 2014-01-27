@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 	
 	def homepage
 		@user = current_user
-		@routes = @user.run_route.all
+		@routes = @user.run_routes
 	end
 
 

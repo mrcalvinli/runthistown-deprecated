@@ -1,0 +1,24 @@
+<div class = "container">
+	<h1 style = "text-align: center; margin-top: 60px">Friendships</h1>
+	<h3>Friends</h3>
+	<% for friend in current_user.friends %>
+		<li><%= friend.get_name %></li>
+	<% end %>
+	
+	<h3>Requested Friends</h3>
+	<% for friend in current_user.requested_friends %>
+		<li><%= friend.get_name %></li>
+	<% end %>
+
+	<h3>Pending Friends</h3>
+	<% for friend in current_user.pending_friends %>
+		<li><%= friend.get_name %></li>
+	<% end %>
+
+	<h3
+	
+	<h3>People</h3>
+	<% for user in User.all %>
+		<li><%= user.get_name %> <%= link_to "(FRIEND ME!)", {controller: "friendships", action: "create", user_id: current_user.id, friend_id: user.id}, {:method => :post} %></li>
+	<% end %>
+</div>
