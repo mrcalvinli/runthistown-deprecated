@@ -1,8 +1,6 @@
 RunThisTown::Application.routes.draw do
 
-  get "friendships/new"
-  get "friendships/create"
-  get "friendships/delete"
+
     devise_for :users
     resources :users do
         post :route_id, :on => :member
@@ -13,6 +11,11 @@ RunThisTown::Application.routes.draw do
     match '/routeplanner',      to: 'route_planner#new',        via: 'get'
     match '/routeplanner_post', to: 'route_planner#create',     via: [:post]
     #match '/destroy/route_id', to: 'users#destroy_route',      via: [:delete]
+
+    get "friendships/new"
+    get "friendships/create"
+    get "friendships/destroy"
+    get "friendships/update"
 
     # The priority is based upon order of creation: first created -> highest priority.
     # See how all your routes lay out with "rake routes".

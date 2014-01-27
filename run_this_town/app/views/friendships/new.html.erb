@@ -2,7 +2,10 @@
 	<h1 style = "text-align: center; margin-top: 60px">Friendships</h1>
 	<h3>Friends</h3>
 	<% for friend in current_user.friends %>
-		<li><%= friend.get_name %></li>
+		<li>
+			<%= friend.get_name %>
+			<%= link_to "(I NO LIKE ANYMOAR!)", {controller: "friendships", action: "destroy", user_id: current_user.id, friend_id: friend.id}, {:method => :delete} %>
+		</li>
 	<% end %>
 	
 	<h3>Requested Friends</h3>
@@ -12,13 +15,18 @@
 
 	<h3>Pending Friends</h3>
 	<% for friend in current_user.pending_friends %>
-		<li><%= friend.get_name %></li>
+		<li>
+			<%= friend.get_name %>
+			<%= link_to "(I ACCEPT!)", {controller: "friendships", action: "update", user_id: current_user.id, friend_id: friend.id}, {:method => :post} %>
+			<%= link_to "(NEVER!)", {controller: "friendships", action: "destroy", user_id: current_user.id, friend_id: friend.id}, {:method => :delete} %>
+		</li>
 	<% end %>
-
-	<h3
 	
 	<h3>People</h3>
 	<% for user in User.all %>
-		<li><%= user.get_name %> <%= link_to "(FRIEND ME!)", {controller: "friendships", action: "create", user_id: current_user.id, friend_id: user.id}, {:method => :post} %></li>
+		<li>
+			<%= user.get_name %> 
+			<%= link_to "(FRIEND ME!)", {controller: "friendships", action: "create", user_id: current_user.id, friend_id: user.id}, {:method => :post} %>
+		</li>
 	<% end %>
 </div>
