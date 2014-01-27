@@ -5,16 +5,6 @@ class UsersController < ApplicationController
 		@user = current_user
 		@routes = @user.run_routes
 	end
-	
-
-	## EDIT THIS! 
-	def destroy_route
-		puts "tests"
-		@user = current_user
-		@route = @user.run_routes.find(params[:route_id])
-		@route.destroy
-		redirect_to homepage
-	end
 
 	def show
 	    sign_out :user

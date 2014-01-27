@@ -10,7 +10,7 @@ RunThisTown::Application.routes.draw do
     match '/homepage',          to: 'users#homepage',           via: 'get'
     match '/routeplanner',      to: 'route_planner#new',        via: 'get'
     match '/routeplanner_post', to: 'route_planner#create',     via: [:post]
-    #match '/destroy/route_id', to: 'users#destroy_route',      via: [:delete]
+    match '/destroy_route',     to: 'route_planner#destroy',    via: 'get'
 
     get "friendships/new"
     get "friendships/create"
