@@ -62,7 +62,8 @@ function pageLoad() {
 		$("#routeList").css("height", "-webkit-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
 		$("#routeList").css("height", "-o-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
 		$("#routeList").css("height", "calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
-	})
+	});
+	
 	$("#autoOrderBtn").on("click", function() {
 		customOrder = false;
 		autoOrder = true;
@@ -74,7 +75,8 @@ function pageLoad() {
 		$("#routeList").css("height", "-webkit-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px - 47px)");
 		$("#routeList").css("height", "-o-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px - 47px)");
 		$("#routeList").css("height", "calc(100% - 70px - 50px - 20px - 36px - 47px - 32px - 47px)");
-	})
+	});
+	
 	$("#shortestPathOrderBtn").on("click", function() {
 		customOrder = false;
 		autoOrder = false;
