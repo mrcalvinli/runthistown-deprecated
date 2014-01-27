@@ -617,6 +617,17 @@ function pageLoad() {
 			}
 		});
 	});
+
+	// Informative Tooltips
+	
+	$("#addPointBtn").tooltip({"placement": "bottom", "title": "Adds location in input box to route"});
+	$("#createLoopBtn").tooltip({"placement": "bottom", "title": "Makes a new point, which is the same as your first point"});
+	$("#orderBtnDropdown").tooltip({"placement": "top", "title": "Choose how you'd like the waypoints ordered"});
+	$("#clearRoute").tooltip({"placement": "top", "title": "Clears all entries in your current route"});
+	$("#pathCreator").tooltip({"placement": "left", "title": "Shows you what your route looks like"});
+	$("#createRouteBtn").tooltip({"placement": "left", "title": "Confirm that you want to submit this route to your profile"});
+
+
 }
 
 $(document).on("page:load", pageLoad);
