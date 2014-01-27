@@ -1,7 +1,7 @@
 <div class = "container" style = "margin-top: 60px;"> 
   <legend style = "border-color: grey"><h2>Edit <%= resource_name.to_s.humanize %></h2></legend>
 
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true}) do |f| %>
     <%= devise_error_messages! %>
 
     <div style = "margin: 10px;"><%= f.label :email %>
@@ -24,6 +24,8 @@
 
     <div style = "margin: 10px;"><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
     <%= f.password_field :current_password , :class => "userInput" %></div>
+
+    <div style = "margin: 10px"><%= f.file_field :avatar %></div>
 
     <div style = "margin: 10px;"><%= f.submit "Update" , :class => "btn btn-warning" %></div>
   <% end %>

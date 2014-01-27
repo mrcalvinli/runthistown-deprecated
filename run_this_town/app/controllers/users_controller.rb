@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 		@user = current_user
 		@routes = @user.run_routes
 	end
-
+	
 
 	## EDIT THIS! 
 	def destroy_route
