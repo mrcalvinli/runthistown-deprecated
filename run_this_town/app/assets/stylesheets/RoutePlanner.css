@@ -138,9 +138,8 @@ html { height: 100% }
 			#addPointBtn:active {
 				background-color: #F69C1E;
 			}
-			#routeList {
+			#routeListContainer {
 				position: relative;
-				overflow: auto;
 				padding: 10px;
 				padding-bottom: 0;
 
@@ -153,7 +152,7 @@ html { height: 100% }
 			}
 				.routeEntry {
 					height: 45px;
-					width: 351px;
+					width: 340px;
 					position: absolute;
 				}
 				.entryLetter {
