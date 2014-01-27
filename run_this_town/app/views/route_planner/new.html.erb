@@ -57,8 +57,8 @@
 
 	<input id = "input" class = "controls">
 	<span id = "buttonContainer" class = "controls">
-		<button class = "btn btn-warning controls btnControls" id = "addPointBtn" style = "outline: none; border-radius: 0"><!-- <i class = "icon-search icon-white"></i> -->Add Point</button>
-		<button class = "btn btn-warning controls btnControls last" id = "pathCreator" style = "outline: none; " disabled>Show Path</button>
+		<button class = "btn btn-warning controls btnControls" id = "addPointBtn" style = "outline: none;"><!-- <i class = "icon-search icon-white"></i> -->Add Point</button>
+		<button class = "btn btn-warning controls btnControls last" id = "createLoopBtn" style = "outline: none; box-shadow: none; " disabled>Create Loop</button>
 	</span>
 	<div id="map" class = "mainElement" style = "margin-top: 60px"></div>
 	<div  class = "mainElement" id = "locList" style = "margin-top: 60px">
@@ -73,7 +73,7 @@
 					  </button>
 					  <ul class="dropdown-menu" role = "menu">
 					  	<li><a id = "customOrderBtn" style = "cursor: pointer">Custom</a></li>
-					  	<li><a id = "autoOrderBtn" style = "cursor: pointer">Auto</a></li>
+					  	<!-- <li><a id = "autoOrderBtn" style = "cursor: pointer">Auto</a></li> -->
 					  	<li><a id = "shortestPathOrderBtn" style = "cursor: pointer">Shortest Path</a></li>
 					  </ul>
 					</div>
@@ -86,6 +86,7 @@
 		<div id = "routeList"></div>
 		<div id = "routeLengthContainer" style = "font-size: 14pt; padding: 10px; ">Route Length: <span id = "routeLength" style = "float: right">0 mi</span></div>
 		<div class = "btnContainer">
+			<button class = "btn btn-primary btn-block" id = "pathCreator" style = "outline: none; " disabled>Show Path</button>
 			<button id = "createRouteBtn" class = "btn btn-success btn-block" data-toggle="modal" data-target="#confirmationModal" disabled>Submit Route</button>
 		</div>
 	</div>
