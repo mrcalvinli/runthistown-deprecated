@@ -241,7 +241,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 #infoSection1 {
 	background-color: white;
-	background: rgba(255, 255, 255, 0.5) image-url("MapBg1Blur.png") no-repeat center center fixed;
+	background: rgba(255, 255, 255, 0.5) image-url("MapBg2.png") no-repeat center center fixed;
   	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -268,3 +268,11 @@ h1, h2, h3, h4, h5, h6, p {
 .btn:hover, .btn:focus {
 	color: white;
 };
+
+#homePageBostonMap {
+	max-width: 640px;
+	max-height: -moz-calc(100% - 240px);
+	max-height: -webkit-calc(100% - 240px);
+	max-height: -o-calc(100% - 240px);
+	max-height: calc(100% - 240px);
+}
