@@ -6,8 +6,8 @@
 		<% end %>
 	</div>
 	<div class = "profRunRouteInfo" style = "display: inline-block; width: 49%; ">
-		<p class = "profRouteDate">Date: <span></span></p>
-		<p class = "profRouteDistance">Distance Traveled: <span></span></p>
+		<p class = "profRouteDate">Date: <span><%= @run_route.created_at.to_s %></span></p>
+		<p class = "profRouteDistance">Distance Traveled: <span><%= @run_route.distance %></span></p>
 		<p class = "profRouteStart">Start: <span><%= @run_route.locations[0].name %></span></p>
 		<p class = "profRouteEnd">End: <span><%= @run_route.locations[-1].name %></span></p>
 	</div>

@@ -618,9 +618,9 @@ function pageLoad() {
 			url: '/routeplanner_post',
 			type: 'POST',
 			data: {
-				"user_id": 1,
 				"name": routeName,
-				"locations": routeInfoArray
+				"locations": routeInfoArray,
+				"distance": distanceString
 			},
 			dataType: "json",
 			success: function(data, textStatus){
