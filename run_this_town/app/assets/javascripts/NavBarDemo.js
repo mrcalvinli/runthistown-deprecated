@@ -34,10 +34,65 @@ function pageLoad() {
 	});
 
 
+
 	
+
+	findPeople = false;
+	findRoutes = true;
 	var input = document.getElementById('routeAndFriendFinder');
-	var autocomplete = new google.maps.places.Autocomplete(input);
-	var infowindow = new google.maps.InfoWindow();
+	autocomplete = new google.maps.places.Autocomplete(input);
+
+	$("#findPeopleBtn").on("click", function() {
+		var input = document.getElementById('routeAndFriendFinder');
+		findPeople = true;
+		findRoutes = false;
+		$("#routePeopleDropdown").html('People <span class="caret"></span>');
+		$("#routeAndFriendFinder").attr("placeholder", "Find People");
+		input.parentNode.replaceChild(input.cloneNode(true),input);
+	});
+
+	$("#findRoutesBtn").on("click", function() {
+		var input = document.getElementById('routeAndFriendFinder');
+		findPeople = false;
+		findRoutes = true;
+		$("#routePeopleDropdown").html('Routes <span class="caret"></span>');
+		$("#routeAndFriendFinder").attr("placeholder", "Find Routes");
+		autocomplete = new google.maps.places.Autocomplete(input);
+	});
+
+	function createUrlAddress(location) {
+		var address = location.toString();
+		// Address ex: 1600 Amphitheatre Parkway, Mountain View, CA
+		var addressArray = address.split(" ");
+		var urlAddress = "";
+		for (var i = 0; i < addressArray.length; i++){
+			if (i != addressArray.length - 1) {
+				urlAddress += addressArray[i] + "+";
+			} else {
+				urlAddress += addressArray[i];
+			}
+		}
+		return urlAddress;
+	}
+
+	lat = 0;
+	lng = 0;
+	$("#navSearchBtn").on("click", function() {
+		if (findRoutes) {
+			var location = $("#routeAndFriendFinder").val();
+			var urlAddress = createUrlAddress(location);
+			$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + urlAddress + '&sensor=false', function(json_data){
+
+				var address = json_data.results[0].formatted_address;
+
+				var latLong = json_data.results[0].geometry.location;
+				lat = latLong.lat;
+				lng = latLong.lng;
+				console.log("lat: " + lat);
+				console.log("lng: " + lng);
+			});
+		}
+	});
 }
 
 $(document).on("page:load", pageLoad);
