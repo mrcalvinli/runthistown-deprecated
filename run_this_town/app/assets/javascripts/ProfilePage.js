@@ -98,9 +98,10 @@ function pageLoad1() {
 		});
 		$("#totalCalStat").html(totalCalBurned.toString() + " cal");
 
-
-		if (visualizationData[0].length < 1) {
-
+		console.log("yis??");
+		console.log(visualizationData[0].length);
+		if (visualizationData[0].length < 2) {
+			console.log("yissss");
 			$("#toggleRouteVisualization").css("display", "none"); 
 		}
 		longestRun = Math.round(longestRun * 100) / 100;
@@ -298,7 +299,7 @@ function pageLoad1() {
 			
 			currentRoute.remove();
 			$("#routesRunContainer").append(currentRoute);
-			currentRoute.children(".profConfirmOrDeny").children(".profDeleteRoute").attr("class", "glyphicon glyphicon-arrow-up profRemoveRoute").attr("id", "Rroute-" + routeId);
+			currentRoute.children(".profConfirmOrDeny").children(".profDeleteRoute").attr("class", "glyphicon glyphicon-arrow-up profRemoveRoute").attr("id", "Rroute-" + routeId).attr("data-toggle", "").attr("data-target", "");
 
 			$(".profRouteEntry").on("click", function() {
 				if ( $(this).css("height") == "40px" ) {
@@ -367,10 +368,6 @@ function pageLoad1() {
 
 			currentRoute.remove();
 
-			$(".profDeleteRoute").on("click", function() {
-				deleteClick($(this));
-			});
-
 			$(".profRouteEntry").on("click", function(route) {
 				if ( route.css("height") == "40px" ) {
 					route.css("height", "auto");
@@ -429,7 +426,7 @@ function pageLoad1() {
 			});
 			console.log(startAddress, endAddress, wptAddresses);
 			var currentRoute = current.parent().parent();
-			currentRoute.children(".profConfirmOrDeny").html('<span id = "Croute-' + routeId + '" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span><span id = "Droute-' + routeId + '" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>');
+			currentRoute.children(".profConfirmOrDeny").html('<span id = "Croute-' + routeId + '" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span><span id = "Droute-' + routeId + '" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute" data-toggle="modal" data-target="#profDeleteConfirmModal"></span>');
 			currentRoute.remove();
 			$("#routesToRunContainer").append(currentRoute);
 
@@ -446,8 +443,11 @@ function pageLoad1() {
 			});
 
 			$(".profDeleteRoute").on("click", function() {
-				deleteClick($(this));
-			});
+		 		var current = $(this);
+		 		$("#profConfirmDeleteRoute").on("click", function() {
+			 		deleteClick(current);
+			 	});
+		 	});
 
 			$(".profConfirmRoute").on("mouseenter", function() {
 			$(this).css("opacity", 1);
@@ -493,8 +493,13 @@ function pageLoad1() {
 	 	});
 
 	 	$(".profDeleteRoute").on("click", function() {
-	 		deleteClick($(this));
+	 		var current = $(this);
+	 		$("#profConfirmDeleteRoute").on("click", function() {
+		 		deleteClick(current);
+		 	});
 	 	});
+		 	
+
 
 	 	$(".profRemoveRoute").on("click", function() {
 	 		removeClick($(this));
