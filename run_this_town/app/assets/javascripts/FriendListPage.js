@@ -10,19 +10,22 @@ function friendListLoad() {
 				
 				$("#userListContainer").animate({"height": containerHeight}, 1000, "easeOutBounce", function() {
 					$("#userListContainer").css("overflow", "auto");
+
 				});
 				setTimeout(function() {
 					var containerHeight = $(window).height() - 55
-					$("#userListContainer").animate({"height": containerHeight}, 800, "easeOutBounce");
+					$("#userListContainer").animate({"height": containerHeight}, 800, "easeOutBounce", function() {
+						$("#userListContainer").height(containerHeight);
+					});
 				},
 					100
 				);
 			}, 300
 		);
-		var col1html = $("#userCol1").val();
-		var col2html = $("#userCol2").val();
+		var col1Children = $("#userCol1").children().length;
+		var col2Children = $("#userCol2").children().length;
 
-		if (col1html == "" && col2html == "") {
+		if (col1Children == 0 && col2Children == 0) {
 			console.log("yes");
 			$("#userListContainer").append($("<div style = 'z-index: -1; position: absolute; height: 100%; width: 100%; text-align: center; '><h2 style = 'margin-top: 30%; '>You have no friends :( <br> ...yet. Click the search bar above to look for people you know</h2></div>"));
 		}
