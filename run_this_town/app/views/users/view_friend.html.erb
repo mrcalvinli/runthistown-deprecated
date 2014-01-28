@@ -7,10 +7,10 @@
 				<% if user.avatar_file_name == nil %>
 					<%= image_tag "ProfPic.jpg", :style => "width: 100%"%>
 				<% else %>
-					<%= image_tag current_user.avatar.url, :style => "width: 100%"%>
+					<%= image_tag user.avatar.url, :style => "width: 100%"%>
    				<% end %>
 			</div>
-			<legend style = "border-color: grey; "><h1 id = "name" style = "text-align: center; margin-bottom: 15px; font-family: Sanchez"><%= current_user.first_name + " " + current_user.last_name%></h1></legend>
+			<legend style = "border-color: grey; "><h1 id = "name" style = "text-align: center; margin-bottom: 15px; font-family: Sanchez"><%= user.get_name %></h1></legend>
 			<div class = "stat"><legend style = "border-bottom-color: grey; "><h2 style = "font-family: Sanchez; margin-top: 0; ">Stats</h2></legend></div>
 			<div id = "statContainer">
 				<div class = "stat"><p id = "totalDistanceStat" class = "statVal">0 mi</p> <%= image_tag "RunningMan.png", :id => "totalDistIcon", :style  => "width: 16px", :title => "Total distance run" %></div>

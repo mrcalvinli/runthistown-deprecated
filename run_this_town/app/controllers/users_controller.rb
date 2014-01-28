@@ -8,6 +8,9 @@ class UsersController < ApplicationController
 
 	def search
 		@user_ids = User.search_people(params[:search])
+		if @user_ids.include? (current_user.id)
+			@user_ids.delete(current_user.id)
+		end
 	end
 
 	def view_friend
