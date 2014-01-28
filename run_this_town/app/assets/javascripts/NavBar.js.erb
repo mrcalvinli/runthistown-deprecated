@@ -96,7 +96,9 @@ function pageLoad() {
 				window.location.href = "<%= $url.route_search_path %>" + "/?latitude=" + lat + "&longitude=" + lng
 			});
 		} else {
+			search_input = $("#routeAndFriendFinder").val()
 
+			window.location.href = "<%= $url.user_search_path %>" + "/?search=" + search_input
 		}
 	});
 }

@@ -25,7 +25,40 @@ class User < ActiveRecord::Base
 	     :recoverable, :rememberable, :trackable, :validatable
 
 
+	#UserNode for searching
+	#value is total number of successful matches with first/last name/email
+	UserNode = Struct.new(:id, :value)
+
 	def get_name
 		return "#{self.first_name} #{self.last_name}"
+	end
+
+	def self.search_people(input)
+		vals = input.split
+		possible_friends = []
+		self.all.each do |user|
+			points = 0
+			for string in vals
+				if string.include? "@" and string.downcase == user.email.downcase
+					points += 1
+				end
+
+				if string.downcase == user.first_name.downcase
+					points += 1
+				end
+
+				if string.downcase == user.last_name.downcase
+					points += 1
+				end
+			end
+
+			#Check if there is a match, and if so, add to array
+			if points > 0
+				possible_friends.push(UserNode.new(user.id, points))
+			end
+		end
+
+		possible_friends.sort_by! { |node| -node.value }
+		return possible_friends.map { |node| node.id }
 	end
 end

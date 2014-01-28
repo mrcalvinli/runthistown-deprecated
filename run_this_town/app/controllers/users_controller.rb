@@ -6,6 +6,10 @@ class UsersController < ApplicationController
 		@routes = @user.run_routes
 	end
 
+	def search
+		@user_ids = User.search_people(params[:search])
+	end
+
 	def show
 	    sign_out :user
 	    redirect_to root_path
