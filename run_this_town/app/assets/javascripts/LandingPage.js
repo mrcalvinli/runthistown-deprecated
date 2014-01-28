@@ -40,7 +40,6 @@ if ($('#landingPage').length) {
 
 		// Chevron animation
 		function animateChevron() {
-			console.log("called");
 			$("#learnMoreChevron").animate({"margin-top": "10px"}, 750, 'linear', function() {
 				$("#learnMoreChevron").animate({"margin-top": "0px"}, 750, 'linear');
 			});

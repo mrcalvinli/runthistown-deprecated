@@ -25,7 +25,6 @@ function userListLoad() {
 		var col2Children = $("#userCol2").children().length;
 
 		if (col1Children == 0 && col2Children == 0) {
-			console.log("yes");
 			$("#userSearchListContainer").append($("<div style = 'z-index: -1; position: absolute; height: 100%; width: 100%; text-align: center; '><h2 style = 'margin-top: 30%; '>Could not find any users</h2></div>"));
 		}
 	}

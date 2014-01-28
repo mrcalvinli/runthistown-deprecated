@@ -10,7 +10,6 @@ function toolbarLoad() {
 	+ '</ul>';
 	/*$("#extraInfo").popover({'placement': 'bottom', 'html': true, 'content': extraInfohtml});
 	$("#extraInfo").on("click", function() {
-		console.log("swag");
 		var popoverRight = $(".popover").offset().left + $(".popover").width();
 		if ( popoverRight > $(window).width() ) {
 			var difference = popoverRight - $(window).width();
@@ -90,8 +89,6 @@ function createUrlAddress(location) {
 				var latLong = json_data.results[0].geometry.location;
 				lat = latLong.lat;
 				lng = latLong.lng;
-				console.log("lat: " + lat);
-				console.log("lng: " + lng);
 
 				window.location.href = "<%= url.route_search_path %>" + "?latitude=" + lat + "&longitude=" + lng;
 			});

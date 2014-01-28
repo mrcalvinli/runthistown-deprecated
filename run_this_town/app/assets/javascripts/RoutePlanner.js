@@ -3,7 +3,6 @@ function pageLoad2() {
 		$("#navHelpItem").attr('style', "display: block ");
 		/**** Styling JavaScript ***/
 		$("#map").css("height", ($(window).height() - $(".navbar").height));
-		console.log("mapHeight: " + $("#map").height());
 		$("#locList").css("height", ($(window).height() - $(".navbar").height));
 
 		$("#map").height($(window).height() - $(".navbar").height);
@@ -212,7 +211,6 @@ function pageLoad2() {
 				console.log("No address given");
 			}
 
-			console.log("addpoint clicked");
 			
 			if (marker != null) {
 				for (var i = 0; i < Object.keys(markerDict).length; i++) {
@@ -285,7 +283,6 @@ function pageLoad2() {
 						// Delete Button
 						$("#routeEntry-" + letterArray[letterIndex] + " .close").on("click", function() {
 							var thisLetter = $(this).parent().attr("id").toString()[11];
-							console.log(thisLetter);
 							markerDict[thisLetter].setMap(null);
 							markerDict[thisLetter] = null;
 							delete markerDict[thisLetter];
@@ -304,7 +301,6 @@ function pageLoad2() {
 									delete markerDict[currentLetter];
 								}
 							}
-							// console.log(JSON.stringify(markerDict));
 
 							// remove animation
 							$("#routeEntry-" + thisLetter).animate({"opacity": 0}, 300, function() {
@@ -324,7 +320,6 @@ function pageLoad2() {
 											300
 										);
 
-										console.log(i);        //  your code here
 										i++;                     //  increment the counter
 										if (i < letterIndex) {            //  if the counter < 10, call the loop function
 										 myLoop();             //  ..  again which will trigger another 
@@ -390,7 +385,6 @@ function pageLoad2() {
 			directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
 			directionsDisplay.setPanel(document.getElementById('directionsList'));
 			google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
-				console.log("changed route");
 				computeTotalDistance(directionsDisplay.getDirections());
 			});
 			
@@ -401,10 +395,8 @@ function pageLoad2() {
 			$(".routeInput").each(function(j) {
 				(function(j) {
 					var address = $("#routeEntry-" + letterArray[j] + " .routeInput").val();
-					console.log("address: " + address);
 					var urlAddress = createUrlAddress(address);
 					$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + urlAddress + '&sensor=false', function(json_data){
-						console.log("j: " + j);
 						var latLong = json_data.results[0].geometry.location;
 						var lat = latLong.lat;
 						var lng = latLong.lng;
@@ -413,7 +405,6 @@ function pageLoad2() {
 							org = new google.maps.LatLng(lat, lng);
 						} else if (j == pathArray.length - 1) {
 							dest = new google.maps.LatLng(lat, lng);
-							console.log("dest: " + dest);
 						} else {
 							wpts.push({
 								location: new google.maps.LatLng(lat, lng),
@@ -466,11 +457,9 @@ function pageLoad2() {
 												var thisLng = pathArray[i][1];
 												var routeInfoEntry = [address, thisLat, thisLng];
 												routeInfoArray.push(routeInfoEntry);
-												console.log("routeInfoArray being created: ", routeInfoArray);
 											}	
 										}
 										var lastLetter = letterArray[letterIndex - 1];
-										console.log(routeInfoArray);
 										// insert animation here
 										for (var j = 0; j < wptsOrder.length; j++) {
 											// [1, 2, 0]
@@ -485,7 +474,6 @@ function pageLoad2() {
 											var newMarginTopString = newMarginTop.toString();
 											var newMarginTopPxString = newMarginTopString + "px";
 
-											console.log(newMarginTopPxString);
 											$("#routeEntry-" + letterToChange).animate({"margin-top": newMarginTopPxString}, 500);
 											$("#routeEntry-" + letterToChange + " .entrySpan").html(thisLetter);
 											$("#routeEntry-" + letterToChange).attr("id", "#routeEntry-" + thisLetter);
@@ -548,11 +536,9 @@ function pageLoad2() {
 												var thisLng = pathArray[i][1];
 												var routeInfoEntry = [address, thisLat, thisLng];
 												routeInfoArray.push(routeInfoEntry);
-												console.log("routeInfoArray being created: ", routeInfoArray);
 											}	
 										}
 										var lastLetter = letterArray[letterIndex - 1];
-										console.log("routeInfoArray: ", routeInfoArray);
 
 										for (var i = 0; i < letterIndex; i++) {
 											$("#routeEntry-" + letterArray[i] + " .entrySpan").html(letterArray[i]);
@@ -640,7 +626,7 @@ function pageLoad2() {
 					}
 				},
 				error: function(){
-					console.log("it no twerked...");
+					console.log("error in json request");
 				}
 			});
 		});
