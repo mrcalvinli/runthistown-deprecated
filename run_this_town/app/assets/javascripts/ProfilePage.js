@@ -47,23 +47,22 @@ function pageLoad1() {
 
 
 		var totalDistanceTraveled = 0;
-		$("#routesToRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
+		$("#routesRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
 			if ($(this).html() != "") {
-				console.log($(this).html());
 				totalDistanceTraveled += parseFloat($(this).html());
-			}
-			console.log(totalDistanceTraveled);
-			
+			}			
 		});
 		totalDistanceTraveled = Math.round(totalDistanceTraveled * 100) / 100;
 		$("#totalDistanceStat").html(totalDistanceTraveled.toString() + " mi");
+
+
+
 		visualizationData = [[]];
 		longestRun = 0;
-		$("#routesToRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
+		$("#routesRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
 			var date = $(this).parent().parent().parent().children(".profWaypointsContainer").children(".profRouteDate").children(".profRouteDateVal").html();
 			var shortDate = parseDateShort(date);
 			if ($(this).html() != "") {
-				console.log($(this).html());
 				thisDistance = parseFloat($(this).html());
 				if (thisDistance > longestRun) {
 					longestRun = thisDistance;
@@ -72,9 +71,20 @@ function pageLoad1() {
 			}
 			
 		});
+
+		var totalCalBurned = 0;
+		$("#routesRunContainer .profRouteEntry .profCaloriesBurnedVal").each(function(i) {
+			if ($(this).html() != "") {
+				console.log($(this).html());
+				totalCalBurned += parseInt($(this).html());
+			}			
+		});
+		$("#totalCalStat").html(totalCalBurned.toString() + " cal");
+
+
 		if (visualizationData[0].length < 1) {
 
-			$("#visualizationData").css("display", "none"); 
+			$("#toggleRouteVisualization").css("display", "none"); 
 		}
 		longestRun = Math.round(longestRun * 100) / 100;
 		$("#longestRunStat").html(longestRun.toString() + " mi");
@@ -101,11 +111,11 @@ function pageLoad1() {
 			$("#profPicCover").css("opacity", 0);
 		});
 
-		if ($("#routesRunContainer").html() == "") {
+		if ($("#routesRunContainer").children().length == 0) {
 			$("#routesRunContainer").append($("<div style = 'font-size: 14pt; height: 100%; text-align: center; '>You have not run a route yet.  Click the check mark on any routes above that you've completed</div>"));
 		}
 
-		if ($("#routesToRunContainer").html() == "") {
+		if ($("#routesToRunContainer").children().length == 0) {
 			$("#routesToRunContainer").append($("<div style = 'font-size: 14pt; height: 100%; text-align: center; '>You have no pending routes.  Click the button above to create a new route!</div>"));
 		}
 

@@ -44,7 +44,7 @@
 
 				<div class = "stat"><p id = "longestRunStat" class = "statVal">0 mi</p><span id = "longestRunIcon" class = "glyphicon glyphicon-road" data-toggle = "tooltip" title = "Longest Run"></span></div>
 
-				<div class = "stat"><p class = "statVal">0 cal</p><span id = "totalCalIcon" class = "glyphicon glyphicon-fire" data-toggle = "tooltip" title = "Total Calories Burned"></span></div>
+				<div class = "stat"><p id = "totalCalStat" class = "statVal">0 cal</p><span id = "totalCalIcon" class = "glyphicon glyphicon-fire" data-toggle = "tooltip" title = "Total Calories Burned"></span></div>
 			</div>
 
 			
@@ -79,7 +79,7 @@
 						<% end %>
 					<% end %>
 				</div>
-				<legend style = "border-color: grey; position: relative; "><h2 style = "text-align: center; font-family: Sanchez">Routes that I've run</h2><a id = "toggleRouteVisualization" style = "float: right; cursor: pointer; position: absolute; top: 5px; right: 5px; ">Visualize</a></legend>
+				<legend style = "border-color: grey; position: relative; "><h2 style = "text-align: center; font-family: Sanchez">Routes that I've run</h2><a id = "toggleRouteVisualization" style = "float: right; cursor: pointer; position: absolute; top: 5px; right: 5px; ">Toggle Visualization</a></legend>
 				<div id = "routeVisualizationContainer"></div>
 				<div id = "routesRunContainer">
 					<% current_user.run_routes.each do |route| %>
