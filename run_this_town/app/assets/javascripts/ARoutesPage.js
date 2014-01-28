@@ -1,8 +1,8 @@
 function aRoutesPageLoad() {
 	if (document.getElementById("routeSearchContainer") != null) {
-		var containerHeight = $(window).height() - 80;
+		var containerHeight = $(window).height() - 55;
 		$(window).resize(function(){
-			$("#routeSearchContainer").height($(window).height() - 80)
+			$("#routeSearchContainer").height($(window).height() - 55)
 		});
 		setTimeout(function() {
 			$("#routeSearchContainer").animate({"width": "100%", "padding": "10px"}, 500, "easeOutExpo");
@@ -25,6 +25,11 @@ function aRoutesPageLoad() {
 				$(this).css("height", "40px");
 			}
 		});
+
+		if ($("#routeSearchContainer").children().length == 0) {
+			console.log("yes");
+			$("#routeSearchContainer").append($("<div style = 'z-index: -1; position: absolute; height: 100%; width: 100%; text-align: center; '><h2 style = 'margin-top: 30%; '>Could not find any routes</h2></div>"));
+		}
 	}
 }
 

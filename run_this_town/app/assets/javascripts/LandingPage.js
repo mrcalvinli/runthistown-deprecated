@@ -2,6 +2,8 @@ if ($('#landingPage').length) {
 	function landingPageLoad() {
 		// Styling javascript
 
+	var bostonAspectRatio = 629.0/572.0;
+
 	var mainHeight = $(window).height() - 60;
 	$(".jumbotron").css("height", mainHeight - 100);
 	$("#infoSection1").height(mainHeight);
@@ -35,21 +37,6 @@ if ($('#landingPage').length) {
 			$('.jumbotron').css('min-height', '500px');
 		}
 	});
-
-		$(window).resize(function() {
-			var mainHeight = $(window).height() - 60;
-			$(".jumbotron").css("height", $(window).height() - 60 - 100);
-			$("#infoSection1").height($(window).height() - 60);
-			$("#infoSection2").height($(window).height() - 60);
-			$("#infoSection3").height($(window).height() - 60);
-			$("#navigator").css("margin-top", (($(window).height() - 60)/2) - $("#navigator").height()/2 + 60 - 20);
-			$("#infoSection1 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
-			if ( $(window).width() < 1440 ){
-				$('.jumbotron').css("min-height", '793px');
-			} else {
-				$('.jumbotron').css('min-height', '500px');
-			}
-		});
 
 		// Chevron animation
 		function animateChevron() {
