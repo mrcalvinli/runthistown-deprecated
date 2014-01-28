@@ -2009,8 +2009,91 @@
 
 
 
-function pageLoad() {
-	// Styling javascript
+function aRoutesPageLoad() {
+	if (document.getElementById("routesSearchPage") != null) {
+		var containerHeight = $(window).height() - 80;
+		$(window).resize(function(){
+			$("#routeListContainer").height($(window).height() - 80)
+		});
+		setTimeout(function() {
+			$("#routeListContainer").animate({"width": "100%", "padding": "10px"}, 500, "easeOutExpo");
+			
+			$("#routeListContainer").animate({"height": containerHeight}, 1000, "easeOutBounce", function() {
+				$("#routeListContainer").css("overflow", "auto");
+			});
+			/*setTimeout(function() {
+				var containerHeight = $(window).height() - 55
+				$("#routeListContainer").animate({"height": containerHeight}, 800, "easeOutBounce");
+			},
+				100
+				);*/
+	}, 300
+	);	
+	}
+});
+
+$(document).on("page:load", aRoutesPageLoad);
+$(document).ready(aRoutesPageLoad);
+
+
+function editUserPageLoad() {
+  if (document.getElementById("registrationForm") != null) {
+    if ($("#currentPasswordEdit").val() == "") {
+      document.getElementById("updateProfBtn").disabled = true;
+    }
+    $("#currentPasswordEdit").bind("propertychange keyup input paste", function() {
+      if ($("#currentPasswordEdit").val() == "") {
+        document.getElementById("updateProfBtn").disabled = true;
+      } else {
+        document.getElementById("updateProfBtn").disabled = false;
+      }
+    });
+
+  }
+}
+
+$(document).on("page:load", editUserPageLoad);
+$(document).ready(editUserPageLoad);
+
+
+function friendListLoad() {
+	if (document.getElementById("userListContainer") != null) {
+		var containerHeight = $(window).height() - 80;
+		$(window).resize(function(){
+			$("#userListContainer").height($(window).height() - 80)
+		});
+		setTimeout(function() {
+				$("#userListContainer").animate({"width": "100%"}, 500, "easeOutExpo");
+				
+				$("#userListContainer").animate({"height": containerHeight}, 1000, "easeOutBounce", function() {
+					$("#userListContainer").css("overflow", "auto");
+				});
+				setTimeout(function() {
+					var containerHeight = $(window).height() - 55
+					$("#userListContainer").animate({"height": containerHeight}, 800, "easeOutBounce");
+				},
+					100
+				);
+			}, 300
+		);
+		var col1html = $("#userCol1").val();
+		var col2html = $("#userCol2").val();
+
+		if (col1html == "" && col2html == "") {
+			console.log("yes");
+			$("#userListContainer").append($("<div style = 'z-index: -1; position: absolute; height: 100%; width: 100%; text-align: center; '><h2 style = 'margin-top: 30%; '>You have no friends :( <br> ...yet. Click the search bar above to look for people you know</h2></div>"));
+		}
+	}
+}
+
+
+$(document).on("page:load", friendListLoad);
+$(document).ready(friendListLoad);
+
+
+if ($('#landingPage').length) {
+	function landingPageLoad() {
+		// Styling javascript
 
 	var mainHeight = $(window).height() - 60;
 	$(".jumbotron").css("height", mainHeight - 100);
@@ -2018,13 +2101,22 @@ function pageLoad() {
 	$("#infoSection2").height(mainHeight);
 	$("#infoSection3").height(mainHeight);
 	$("#navigator").css("margin-top", (mainHeight/2) - $("#navigator").height()/2 + 60 - 20);
+	$("#infoSection1 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
+	$("#infoSection2 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
+	$(".landingSection3Icon").css("height", (mainHeight - 365)/3);
+	$("#landingSection3Icon2").css("font-size", (mainHeight - 365)/3);
+	$("#landingSection3Icon3").css("font-size", (mainHeight - 365)/3);
+
 
 	$(window).resize(function() {
-		$(".jumbotron").css("height", $(window).height() - 60 - 100);
-		$("#infoSection1").height($(window).height() - 60);
-		$("#infoSection2").height($(window).height() - 60);
-		$("#infoSection3").height($(window).height() - 60);
-		$("#navigator").css("margin-top", (($(window).height() - 60)/2) - $("#navigator").height()/2 + 60 - 20);
+		var mainHeight = $(window).height() - 60;
+		$(".jumbotron").css("height", mainHeight - 100);
+		$("#infoSection1").height(mainHeight);
+		$("#infoSection2").height(mainHeight);
+		$("#infoSection3").height(mainHeight);
+		$("#navigator").css("margin-top", (mainHeight/2) - $("#navigator").height()/2 + 60 - 20);
+		$("#infoSection1 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
+		$("#infoSection2 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
 		if ( $(window).width() < 1440 ){
 			$('.jumbotron').css("min-height", '793px');
 		} else {
@@ -2032,98 +2124,130 @@ function pageLoad() {
 		}
 	});
 
-	// Chevron animation
-	function animateChevron() {
-		console.log("called");
-		$("#learnMoreChevron").animate({"margin-top": "10px"}, 750, 'linear', function() {
-			$("#learnMoreChevron").animate({"margin-top": "0px"}, 750, 'linear');
+		$(window).resize(function() {
+			var mainHeight = $(window).height() - 60;
+			$(".jumbotron").css("height", $(window).height() - 60 - 100);
+			$("#infoSection1").height($(window).height() - 60);
+			$("#infoSection2").height($(window).height() - 60);
+			$("#infoSection3").height($(window).height() - 60);
+			$("#navigator").css("margin-top", (($(window).height() - 60)/2) - $("#navigator").height()/2 + 60 - 20);
+			$("#infoSection1 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
+			if ( $(window).width() < 1440 ){
+				$('.jumbotron').css("min-height", '793px');
+			} else {
+				$('.jumbotron').css('min-height', '500px');
+			}
 		});
+
+		// Chevron animation
+		function animateChevron() {
+			console.log("called");
+			$("#learnMoreChevron").animate({"margin-top": "10px"}, 750, 'linear', function() {
+				$("#learnMoreChevron").animate({"margin-top": "0px"}, 750, 'linear');
+			});
+		}
+		animateChevron();
+		var chevronInterval = setInterval(animateChevron, 1500);
+
+		// Bullet Hover
+		$("#homeBullet").tooltip({placement: 'left'});
+		$("#navBullet1").tooltip({placement: 'left'});
+		$("#navBullet2").tooltip({placement: 'left'});
+		$("#navBullet3").tooltip({placement: 'left'});
+
+		$(".navBullet").on("mouseenter", function() {
+			$(this).animate({"opacity": 1}, 200);
+		});
+		$(".navBullet").on("mouseleave", function() {
+			$(this).animate({"opacity": 0.5}, 200);
+			// $(this).tooltip('hide');
+		});
+
+		// Bullet Click
+		$("#homeBullet").on("click", function() {
+			var container = $("body"), scrollTo = 60;
+			container.animate({scrollTop: scrollTo - 60}, 1500, "easeInOutQuint");
+			$("#homeBullet").css("opacity", 1);
+			$("#navBullet1").css("opacity", 0.5);
+			$("#navBullet2").css("opacity", 0.5);
+			$("#navBullet3").css("opacity", 0.5);
+		})
+		$("#navBullet1").on("click", function() {
+			var container = $("body"), scrollTo = $("#infoSection1");
+			container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint");
+			$("#homeBullet").css("opacity", 0.5);
+			$("#navBullet1").css("opacity", 1);
+			$("#navBullet2").css("opacity", 0.5);
+			$("#navBullet3").css("opacity", 0.5);
+		})
+		$("#navBullet2").on("click", function() {
+			var container = $("body"), scrollTo = $("#infoSection2");
+			container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint");
+			$("#homeBullet").css("opacity", 0.5);
+			$("#navBullet1").css("opacity", 0.5);
+			$("#navBullet2").css("opacity", 1);
+			$("#navBullet3").css("opacity", 0.5);
+		})
+		$("#navBullet3").on("click", function() {
+			var container = $("body"), scrollTo = $("#infoSection3");
+			container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint");
+			$("#homeBullet").css("opacity", 0.5);
+			$("#navBullet1").css("opacity", 0.5);
+			$("#navBullet2").css("opacity", 0.5);
+			$("#navBullet3").css("opacity", 1);
+		})
+		
+		
+		// User Login Modal
+		$("#getStarted").on("click", function() {
+			$("#myModal").modal();
+		});
+
+		// Chevron Scroll click
+		$("#learnMoreChevron").on("click", function() {
+			var container = $("body"),
+			scrollTo = $("#infoSection1");
+			container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")    
+		});
+		$("#toHomeChevron").on("click", function() {
+			var container = $("body");
+			container.animate({scrollTop: 0}, 1500, "easeInOutQuint") 
+		})
+		$("#toSection2DownChevron").on("click", function() {
+			var container = $("body"),
+			scrollTo = $("#infoSection2");
+			container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")
+		})
+		$("#toSection1UpChevron").on("click", function() {
+			var container = $("body"),
+			scrollTo = $("#infoSection1");
+			container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")
+		})
+		$("#toSection3DownChevron").on("click", function() {
+			var container = $("body"),
+			scrollTo = $("#infoSection3");
+			container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")
+		})
+		$("#toSection2UpChevron").on("click", function() {
+			var container = $("body"),
+			scrollTo = $("#infoSection2");
+			container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")
+		})
 	}
-	animateChevron();
-	var chevronInterval = setInterval(animateChevron, 1500);
-
-	// Bullet Hover
-	$("#homeBullet").tooltip({placement: 'left'});
-	$("#navBullet1").tooltip({placement: 'left'});
-	$("#navBullet2").tooltip({placement: 'left'});
-	$("#navBullet3").tooltip({placement: 'left'});
-
-	$(".navBullet").on("mouseenter", function() {
-		$(this).animate({"opacity": 1}, 200);
-	});
-	$(".navBullet").on("mouseleave", function() {
-		$(this).animate({"opacity": 0.5}, 200);
-		// $(this).tooltip('hide');
-	});
-
-	// Bullet Click
-	$("#homeBullet").on("click", function() {
-		var container = $("body"), scrollTo = 60;
-		container.animate({scrollTop: scrollTo - 60}, 1500, "easeInOutQuint")
-	})
-	$("#navBullet1").on("click", function() {
-		var container = $("body"), scrollTo = $("#infoSection1");
-		container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")
-	})
-	$("#navBullet2").on("click", function() {
-		var container = $("body"), scrollTo = $("#infoSection2");
-		container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")
-	})
-	$("#navBullet3").on("click", function() {
-		var container = $("body"), scrollTo = $("#infoSection3");
-		container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")
-	})
-	
-	
-	// User Login Modal
-	$("#getStarted").on("click", function() {
-		$("#myModal").modal();
-	});
-
-	// Chevron Scroll click
-	$("#learnMoreChevron").on("click", function() {
-		var container = $("body"),
-		scrollTo = $("#infoSection1");
-		container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")    
-	});
-	$("#toHomeChevron").on("click", function() {
-		var container = $("body");
-		container.animate({scrollTop: 0}, 1500, "easeInOutQuint") 
-	})
-	$("#toSection2DownChevron").on("click", function() {
-		var container = $("body"),
-		scrollTo = $("#infoSection2");
-		container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")
-	})
-	$("#toSection1UpChevron").on("click", function() {
-		var container = $("body"),
-		scrollTo = $("#infoSection1");
-		container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")
-	})
-	$("#toSection3DownChevron").on("click", function() {
-		var container = $("body"),
-		scrollTo = $("#infoSection3");
-		container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")
-	})
-	$("#toSection2UpChevron").on("click", function() {
-		var container = $("body"),
-		scrollTo = $("#infoSection2");
-		container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")
-	})
+	landingPageLoad()
 }
 
-$(document).on('page:load', pageLoad);
+$(document).ready(landingPageLoad);
 
-$(document).ready(pageLoad);
-function pageLoad() {
+function toolbarLoad() {
 	var extraInfohtml = '<ul class="dropdown-menu" role="menu" style = "display: block; position: relative; border: none; box-shadow: none; margin-top: -8px;">'
-		+ '<li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" data-toggle="modal" data-target=".helpModal">Help</a></li>'
-		+ '<li role="presentation" class="divider"></li>'
-	    + '<li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" >My Profile</a></li>'
-	    + '<li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" >Account Settings</a></li>'
-	    + '<li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" >Log Out</a></li>'
-	    + '<li role="presentation" class="divider"></li>'
-	    + '<li role="presentation"><a id = "creditsBtn" role="menuitem" tabindex="-1" style = "cursor: pointer;"  data-toggle="modal" data-target="#creditsModal">Credits</a></li>'
+	+ '<li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" data-toggle="modal" data-target=".helpModal">Help</a></li>'
+	+ '<li role="presentation" class="divider"></li>'
+	+ '<li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" >My Profile</a></li>'
+	+ '<li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" >Account Settings</a></li>'
+	+ '<li role="presentation"><a role="menuitem" tabindex="-1" style = "cursor: pointer;" >Log Out</a></li>'
+	+ '<li role="presentation" class="divider"></li>'
+	+ '<li role="presentation"><a id = "creditsBtn" role="menuitem" tabindex="-1" style = "cursor: pointer;"  data-toggle="modal" data-target="#creditsModal">Credits</a></li>'
 	+ '</ul>';
 	/*$("#extraInfo").popover({'placement': 'bottom', 'html': true, 'content': extraInfohtml});
 	$("#extraInfo").on("click", function() {
@@ -2135,126 +2259,50 @@ function pageLoad() {
 			$(".arrow").css("left", parseInt($(".arrow").css("left")) + difference + 10);
 		}
 	});*/
+$("#searchContainer").width($(window).width() 
+	- parseInt($(".navbar-brand").css("width"))
+	- parseInt($(".navbar .navbar-right").css("width")));
+
+$("#inputContainer").width($("#searchContainer").width()
+	- parseInt($(".navbar .navbar-right").css("width")) - 3);
+$(window).resize(function() {
 	$("#searchContainer").width($(window).width() 
-						- parseInt($(".navbar-brand").css("width"))
-						- parseInt($(".navbar .navbar-right").css("width")));
+		- parseInt($(".navbar-brand").css("width"))
+		- parseInt($(".navbar .navbar-right").css("width")));
 
 	$("#inputContainer").width($("#searchContainer").width()
-							- parseInt($(".navbar .navbar-right").css("width")) - 3);
-	$(window).resize(function() {
-		$("#searchContainer").width($(window).width() 
-						- parseInt($(".navbar-brand").css("width"))
-						- parseInt($(".navbar .navbar-right").css("width")));
+		- parseInt($(".navbar .navbar-right").css("width")) - 3);
+});
 
-		$("#inputContainer").width($("#searchContainer").width()
-							- parseInt($(".navbar .navbar-right").css("width")) - 3);
-	});
-}
 
-$(document).on("page:load", pageLoad);
 
-$(document).ready(pageLoad);
-function pageLoad() {
-	// Backend Stuff
-	// $("#name").html("Myname Mcgee");
 
-	// Styling Javascript
-	/*$("html").height($(window).height());*/
 
-	/*$(window).resize(function() {
-		$("html").height($(window).height());
-	});*/
+findPeople = false;
+findRoutes = true;
+var input = document.getElementById('routeAndFriendFinder');
+autocomplete = new google.maps.places.Autocomplete(input);
 
-	// Functional JavaScript
+$("#findPeopleBtn").on("click", function() {
+	var input = document.getElementById('routeAndFriendFinder');
+	findPeople = true;
+	findRoutes = false;
+	$("#routePeopleDropdown").html('People <span class="caret"></span>');
+	$("#routeAndFriendFinder").attr("placeholder", "Find People");
+	input.parentNode.replaceChild(input.cloneNode(true),input);
+});
 
-	$("#totalDistIcon").tooltip({"placement": "right"});
-	$("#totalCalIcon").tooltip({"placement": "right"});
+$("#findRoutesBtn").on("click", function() {
+	var input = document.getElementById('routeAndFriendFinder');
+	findPeople = false;
+	findRoutes = true;
+	$("#routePeopleDropdown").html('Routes <span class="caret"></span>');
+	$("#routeAndFriendFinder").attr("placeholder", "Find Routes");
+	autocomplete = new google.maps.places.Autocomplete(input);
+});
 
-	$("#goalsPlus").on("click", function() {
-		var buttonHeight = parseInt($("#newGoalBtn").css("height")) + parseInt($("#newGoalContainer").css("padding")) + parseInt($("#newGoalContainer").css("padding"));
-		$("#newGoalContainer").css("border-top", "1px solid grey");
-		$("#newGoalContainer").animate({"height": buttonHeight, "padding-bottom": "5px"}, 300);
-	});
-
-	// Route entry template
-
-	$(".profRouteEntry").on("click", function() {
-		if ( $(this).css("height") == "40px" ) {
-			$(this).css("height", "auto");
-		} else {
-			$(this).css("height", "40px");
-		}
-	});
-
-	if ($("#routesRunContainer").html() == "") {
-		$("#routesRunContainer").append($("<div style = 'height: 100%; text-align: center; '>You have no routes yet.  Click the button above to get started!</div>"));
-	}
-	
-
-	// Backend Stuff
-	// New Stat template
-		// $(".statContainer").append('<div class = "stat"><p class = "statVal">Stat goes here</p><span class = "glyphicon glyphicon-search"></span></div>');
-	// New Route Template
-		/*$(".routesRunContainer").append(
-			'<div class = "profRouteEntry well well-sm">
-						<div style = "display: inline-block; width: 49%; ">
-							<p>Date: </p>
-							<p>Distance Traveled: </p>
-							<p>Start: </p>
-							<p>End: </p>
-						</div>
-						<div style = "display: inline-block; width: 49%; height: 100%; position: absolute; top: 0; ">
-							<legend><h4 style = "text-align: center; font-family: Sanchez Regular">Waypoints Visited:</h4></legend>
-							<div class = "wptsList">
-								<ol>
-									<li>Place</li>
-									<li>Place</li>
-									<li>Place</li>
-									<li>Place</li>
-									<li>Place</li>
-									<li>Place</li>
-									<li>Place</li>
-									<li>Place</li>
-								</ol>
-							</div>
-						</div>
-					</div>'
-		)*/
-}
-
-$(document).on("page:load", pageLoad);
-$(document).ready(pageLoad);
-function pageLoad() {
-	/**** Styling JavaScript ***/
-	$("#map").css("height", ($(window).height() - $(".navbar").height));
-	console.log("mapHeight: " + $("#map").height());
-	$("#locList").css("height", ($(window).height() - $(".navbar").height));
-
-	$("#map").height($(window).height() - $(".navbar").height);
-	$("#locList").height($(window).height() - $(".navbar").height);
-
-	var map = null;
-	var rendererOptions = {map: map};
-
-	directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
-
-	function initialize() {
-		var mapOptions = {
-			center: new google.maps.LatLng(51.505, -0.09),
-			zoom: 15
-		};
-		map = new google.maps.Map(document.getElementById("map"), mapOptions);
-		if (navigator.geolocation) {
-		     navigator.geolocation.getCurrentPosition(function (position) {
-		         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-		         map.setCenter(initialLocation);
-		     });
-		 }
-
-	}
-
-	function createUrlAddress(location) {
-		var address = location.toString();
+function createUrlAddress(location) {
+	var address = location.toString();
 		// Address ex: 1600 Amphitheatre Parkway, Mountain View, CA
 		var addressArray = address.split(" ");
 		var urlAddress = "";
@@ -2268,521 +2316,1063 @@ function pageLoad() {
 		return urlAddress;
 	}
 
-	initialize();
+	lat = 0;
+	lng = 0;
+	$("#navSearchBtn").on("click", function() {
+		
 
-	// Order buttons
-	// $("#orderBtnDropdown").css("width", $("#orderBtnDropdown").width() + 28);
-	customOrder = true;
-	autoOrder = false;
-	shortestPathOrder = false;
+		if (findRoutes) {
+			var location = $("#routeAndFriendFinder").val();
+			var urlAddress = createUrlAddress(location);
+			$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + urlAddress + '&sensor=false', function(json_data){
+
+				var address = json_data.results[0].formatted_address;
+
+				var latLong = json_data.results[0].geometry.location;
+				lat = latLong.lat;
+				lng = latLong.lng;
+				console.log("lat: " + lat);
+				console.log("lng: " + lng);
+
+				window.location.href = "/route_search" + "?latitude=" + lat + "&longitude=" + lng;
+			});
+		} else {
+			search = $('#routeAndFriendFinder').val()
+			window.location.href = "/user_search" + "?search=" + search
+		}
+	});
+}
+
+$(document).ready(toolbarLoad);
+
+function pageLoad1() {
+	if (document.getElementById('profileContainer') != null) {
+		// Backend Stuff
+		// $("#name").html("Myname Mcgee");
+
+		// Styling Javascript
+		/*$("html").height($(window).height());*/
+
+		/*$(window).resize(function() {
+			$("html").height($(window).height());
+		});*/
+
+		// Functional JavaScript
+
+		$("#totalDistIcon").tooltip({"placement": "right"});
+		$("#totalCalIcon").tooltip({"placement": "right"});
+		$("#longestRunIcon").tooltip({"placement": "right"});
+
+		//confirmRouteLink
+		$(".confirmRouteLink").append($('<span id = "profSuccessRoute" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span>'));
+		$(".deleteRouteLink").append($('<span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>'));
+		$(".removeRouteLink").append($('<span id = "profRemoveRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-arrow-up profRemoveRoute"></span>'));
+		
+		$(".profDeleteRoute").on("mouseenter", function() {
+			$(this).css("opacity", 1);
+		});
+
+		$(".profDeleteRoute").on("mouseleave", function() {
+			$(this).css("opacity", 0.5);
+		});
+
+		function parseDateShort(rubyDate) {
+			// 2014-01-28 08:25:48 UTC
+			var yearMonthDay = rubyDate.substring(0, 10);
+			var year = yearMonthDay.substring(0, 4);
+			var month = yearMonthDay.substring(5, 7);
+			var day = yearMonthDay.substring(8, 10);
+			return month + "/" + day + "/" + year;
+		}
 
 
-	$("#customOrderBtn").on("click", function() {
+		$("#goalsPlus").on("click", function() {
+			var buttonHeight = parseInt($("#newGoalBtn").css("height")) + parseInt($("#newGoalContainer").css("padding")) + parseInt($("#newGoalContainer").css("padding"));
+			$("#newGoalContainer").css("border-top", "1px solid grey");
+			$("#newGoalContainer").animate({"height": buttonHeight, "padding-bottom": "5px"}, 300);
+		});
+
+
+		var totalDistanceTraveled = 0;
+		$("#routesToRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
+			if ($(this).html() != "") {
+				console.log($(this).html());
+				totalDistanceTraveled += parseFloat($(this).html());
+			}
+			console.log(totalDistanceTraveled);
+			
+		});
+		totalDistanceTraveled = Math.round(totalDistanceTraveled * 100) / 100;
+		$("#totalDistanceStat").html(totalDistanceTraveled.toString() + " mi");
+		visualizationData = [[]];
+		longestRun = 0;
+		$("#routesToRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
+			var date = $(this).parent().parent().parent().children(".profWaypointsContainer").children(".profRouteDate").children(".profRouteDateVal").html();
+			var shortDate = parseDateShort(date);
+			if ($(this).html() != "") {
+				console.log($(this).html());
+				thisDistance = parseFloat($(this).html());
+				if (thisDistance > longestRun) {
+					longestRun = thisDistance;
+				}
+				visualizationData[0].push({"y": thisDistance, "x": shortDate});
+			}
+			
+		});
+		if (visualizationData[0].length < 1) {
+
+			$("#visualizationData").css("display", "none"); 
+		}
+		longestRun = Math.round(longestRun * 100) / 100;
+		$("#longestRunStat").html(longestRun.toString() + " mi");
+
+		// Route entry template
+
+
+		$(".profRouteEntry").on("click", function() {
+			if ( $(this).css("height") == "40px" ) {
+				$(this).css("height", "auto");
+			} else {
+				$(this).css("height", "40px");
+			}
+		});
+
+
+		
+
+
+		$("#profPicCont").on("mouseenter", function() {
+			$("#profPicCover").css("opacity", 1);
+		});
+		$("#profPicCont").on("mouseleave", function() {
+			$("#profPicCover").css("opacity", 0);
+		});
+
+		if ($("#routesRunContainer").html() == "") {
+			$("#routesRunContainer").append($("<div style = 'font-size: 14pt; height: 100%; text-align: center; '>You have not run a route yet.  Click the check mark on any routes above that you've completed</div>"));
+		}
+
+		if ($("#routesToRunContainer").html() == "") {
+			$("#routesToRunContainer").append($("<div style = 'font-size: 14pt; height: 100%; text-align: center; '>You have no pending routes.  Click the button above to create a new route!</div>"));
+		}
+
+		//deleteRouteLink
+		// $(".deleteRouteLink").append($('<span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>'))
+		
+		$(".profDeleteRoute").on("mouseenter", function() {
+			$(this).css("opacity", 1);
+		});
+
+
+		$(".profDeleteRoute").on("mouseleave", function() {
+			$(this).css("opacity", 0.5);
+		});
+
+		$("#toggleRouteVisualization").on("click", function() {
+			var routeVisualizationContainer = $("#routeVisualizationContainer");
+			if (routeVisualizationContainer.height() == 0) {
+				routeVisualizationContainer.animate({"height": "500px"}, 500);
+			} else {
+				routeVisualizationContainer.animate({"height": "0px"}, 500);
+			}
+		});
+
+
+
+		if (visualizationData[0].length >= 1) {
+			console.log("here: ", visualizationData);
+			var outerWidth = $("#routeVisualizationContainer").width();
+			var outerHeight = 500;
+			
+			var margin = {top: 40, right: 20, bottom: 80, left: 80};
+			
+			var chartWidth = outerWidth - margin.left - margin.right;
+			var chartHeight = outerHeight - margin.top - margin.bottom;
+			
+			var stack = d3.layout.stack();
+			//var stack = d3.layout.partition(); //left it as stack for simplicity
+			var stackedData = stack(visualizationData);
+			
+			var yStackMax = d3.max(stackedData, function(layer){return d3.max(layer, function(d){return d.y + d.y0;});});
+			
+			var yGroupMax = d3.max(stackedData, function(layer){return d3.max(layer, function(d){return d.y;});});
+			
+			var xScale = d3.scale.ordinal().domain(d3.range(visualizationData[0].length)).rangeBands([0, chartWidth]);
+			var yScale = d3.scale.linear().domain([0, yStackMax]).range([chartHeight, 0]);
+			
+			
+			var grouped = false;
+
+			var topIndex = 3;
+
+
+			var chart = d3
+			.select("#routeVisualizationContainer") // equivalent to jQuery $("") selector
+			.append("svg") // Here we are appending divs to what we selected
+			.attr("class", "chart").attr("height", outerHeight).attr("width",outerWidth)
+			.append("g") // group element
+			.attr("transform", "translate(" + margin.left + "," + margin.top +")")
+			//.on("click", function(){ grouped ? shrinkWindow() : expandWindow();});
+			 // Same as jQuery
+
+			// adds lines
+			chart.selectAll("line").data(yScale.ticks(10)).enter().append("line")
+			.attr("x1", 0).attr("x2", chartWidth).attr("y1", yScale).attr("y2", yScale);
+
+			// adds labels to y axis
+
+			chart.selectAll("text").data([visualizationData[0][0]["x"], visualizationData[0][visualizationData[0].length - 1]["x"]]).enter().append("text")
+			.attr("class", "xScaleLabel")
+			.attr("x", function(d, i){console.log("i: " + i); if (i == 0) {return 101; } else {return 675; }})
+			.attr("y", 460)
+			.attr("dx", "0.3em")
+			.attr("dy", -margin.bottom/visualizationData[0].length)
+			.attr("text-anchor", "end")
+			.text(String);
+
+			chart.selectAll("text").data(yScale.ticks(10)).enter().append("text")
+			.attr("class", "yScaleLabel")
+			.attr("x", 0)
+			.attr("y", yScale)
+			.attr("dx", -margin.left/8)
+			.attr("dy", "0.3em")
+			.attr("text-anchor", "end")
+			.text(String);
+
+
+
+			var layerGroups = chart.selectAll(".layer").data(stackedData).enter()
+			.append("g")
+			.attr("class", "layer");
+
+			chart.append("g")
+			  .attr("class", "y axis")
+			  .call(yScale)
+			.append("text")
+			  .attr("transform", "rotate(-90)")
+			  .attr("y", 6)
+			  .attr("dy", "-55px")
+			  .attr("dx", "-150px")
+			  .style("text-anchor", "end")
+			  .text("Miles Run");
+
+			for (var i; i<=3; i++){
+				chart.selectAll(".layer").attr("class", "layer" + i);
+			}
+
+			var rects = layerGroups.selectAll("rect").data(function(d){ return d;}).enter().append("rect")
+			.attr("x", function(d, i) {return xScale(i);})
+			.attr("y", function(d) {return yScale(d.y0+d.y);})
+			.attr("width", xScale.rangeBand)
+			.attr("height", function(d){return yScale(d.y0) - yScale(d.y0 + d.y);})
+			.attr("class", "rect");
+		}
+
+
+
+		// Backend Stuff
+		// New Stat template
+			// $(".statContainer").append('<div class = "stat"><p class = "statVal">Stat goes here</p><span class = "glyphicon glyphicon-search"></span></div>');
+		// New Route Template
+			/*$(".routesRunContainer").append(
+				'<div class = "profRouteEntry well well-sm">
+							<div style = "display: inline-block; width: 49%; ">
+								<p>Date: </p>
+								<p>Distance Traveled: </p>
+								<p>Start: </p>
+								<p>End: </p>
+							</div>
+							<div style = "display: inline-block; width: 49%; height: 100%; position: absolute; top: 0; ">
+								<legend><h4 style = "text-align: center; font-family: Sanchez Regular">Waypoints Visited:</h4></legend>
+								<div class = "wptsList">
+									<ol>
+										<li>Place</li>
+										<li>Place</li>
+										<li>Place</li>
+										<li>Place</li>
+										<li>Place</li>
+										<li>Place</li>
+										<li>Place</li>
+										<li>Place</li>
+									</ol>
+								</div>
+							</div>
+						</div>'
+			)*/
+
+		function successClick(current) {
+			var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
+			var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
+			var wptAddresses = [];
+			current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
+				wptAddresses.push(current.html());
+			});
+			console.log(startAddress, endAddress, wptAddresses);
+
+			
+			var currentRoute = current.parent().parent();
+			current.remove();
+			
+			
+			currentRoute.remove();
+			$("#routesRunContainer").append(currentRoute);
+			currentRoute.children(".profConfirmOrDeny").children(".profDeleteRoute").attr("class", "glyphicon glyphicon-remove profRemoveRoute");
+
+			$(".profRouteEntry").on("click", function() {
+				if ( $(this).css("height") == "40px" ) {
+					$(this).css("height", "auto");
+				} else {
+					$(this).css("height", "40px");
+				}
+			});
+
+			$(".profRemoveRoute").on("click", function() {
+				removeClick($(this));
+			});
+
+			// backend stuff goes here, use startAddress, endAddress, and wptAddresses //
+		}	
+
+			
+		function deleteClick(current) {
+			var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
+			var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
+			var wptAddresses = [];
+			current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
+				wptAddresses.push($(this).html());
+			});
+			console.log(wptAddresses);
+			var currentRoute = current.parent().parent();
+
+			currentRoute.remove();
+
+			$(".profDeleteRoute").on("click", function() {
+				deleteClick($(this));
+			});
+
+			$(".profRouteEntry").on("click", function(route) {
+				if ( route.css("height") == "40px" ) {
+					route.css("height", "auto");
+				} else {
+					route.css("height", "40px");
+				}
+			});
+
+			// backend stuff goes here, use startAddress, endAddress, and wptAddresses
+
+		} 
+
+		function removeClick(current) {
+			var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
+			var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
+			var wptAddresses = [];
+			current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
+				wptAddresses.push(current.html());
+			});
+			console.log(startAddress, endAddress, wptAddresses);
+			var currentRoute = current.parent().parent();
+			currentRoute.children(".profConfirmOrDeny").html('<span id = "profSuccessRoute" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span><span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>');
+			currentRoute.remove();
+			$("#routesToRunContainer").append(currentRoute);
+
+			$(".profRouteEntry").on("click", function() {
+				if ( $(this).css("height") == "40px" ) {
+					$(this).css("height", "auto");
+				} else {
+					$(this).css("height", "40px");
+				}
+			});
+
+			$(".profConfirmRoute").on("click", function() {
+				successClick($(this));
+			});
+
+			$(".profDeleteRoute").on("click", function() {
+				deleteClick($(this));
+			});
+
+			// backend stuff goes here, use startAddress, endAddress, and wptAddresses
+		}
+	 	$(".profConfirmRoute").on("click", function() {
+	 		successClick($(this));
+	 	});
+
+	 	$(".profDeleteRoute").on("click", function() {
+	 		deleteClick($(this));
+	 	});
+
+	 	$(".profRemoveRoute").on("click", function() {
+	 		removeClick($(this));
+	 	});
+	}
+}
+
+$(document).on("page:load", pageLoad1);
+$(document).ready(pageLoad1);
+	
+
+function pageLoad2() {
+	if (document.getElementById('map') != null) {
+		/**** Styling JavaScript ***/
+		$("#map").css("height", ($(window).height() - $(".navbar").height));
+		console.log("mapHeight: " + $("#map").height());
+		$("#locList").css("height", ($(window).height() - $(".navbar").height));
+
+		$("#map").height($(window).height() - $(".navbar").height);
+		$("#locList").height($(window).height() - $(".navbar").height);
+
+		var map = null;
+		var rendererOptions = {map: map, draggable: true};
+
+		directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+
+		function initialize() {
+			var mapOptions = {
+				center: new google.maps.LatLng(51.505, -0.09),
+				zoom: 15
+			};
+			map = new google.maps.Map(document.getElementById("map"), mapOptions);
+			if (navigator.geolocation) {
+			     navigator.geolocation.getCurrentPosition(function (position) {
+			         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			         map.setCenter(initialLocation);
+			     });
+			 }
+
+		}
+
+
+		function createUrlAddress(location) {
+			var address = location.toString();
+			// Address ex: 1600 Amphitheatre Parkway, Mountain View, CA
+			var addressArray = address.split(" ");
+			var urlAddress = "";
+			for (var i = 0; i < addressArray.length; i++){
+				if (i != addressArray.length - 1) {
+					urlAddress += addressArray[i] + "+";
+				} else {
+					urlAddress += addressArray[i];
+				}
+			}
+			return urlAddress;
+		}
+
+		initialize();
+
+		// Order buttons
+		// $("#orderBtnDropdown").css("width", $("#orderBtnDropdown").width() + 28);
 		customOrder = true;
 		autoOrder = false;
 		shortestPathOrder = false;
-		$("#orderBtnDropdown").html('Order: Custon <span class="caret" style = "border-top: 4px solid white"></span>');
-	})
-	$("#autoOrderBtn").on("click", function() {
-		customOrder = false;
-		autoOrder = true;
-		shortestPathOrder = false;
-		$("#orderBtnDropdown").html('Order: Auto <span class="caret" style = "border-top: 4px solid white"></span>');
-	})
-	$("#shortestPathOrderBtn").on("click", function() {
-		customOrder = false;
-		autoOrder = false;
-		shortestPathOrder = true;
-		$("#orderBtnDropdown").html('Order: Shortest Path <span class="caret" style = "border-top: 4px solid white"></span>');
-	});
 
 
-	// Add autocomplete
-	var input = document.getElementById('input'); 
-	var buttons = document.getElementById('buttonContainer');
-	map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-	map.controls[google.maps.ControlPosition.TOP_LEFT].push(buttons);
-	var autocomplete = new google.maps.places.Autocomplete(input);
-	autocomplete.bindTo('bounds', map);
-	var infowindow = new google.maps.InfoWindow();
-	
-	marker = new google.maps.Marker({
-		map:map
-	});
+		$("#customOrderBtn").on("click", function() {
+			customOrder = true;
+			autoOrder = false;
+			shortestPathOrder = false;
+			$("#orderBtnDropdown").html('Order: Custom <span class="caret" style = "border-top: 4px solid white"></span>');
+			$("#desiredDistanceCont").remove();
+			$("#routeList").css("height", "-moz-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
+			$("#routeList").css("height", "-webkit-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
+			$("#routeList").css("height", "-o-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
+			$("#routeList").css("height", "calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
+		});
+		
+		$("#autoOrderBtn").on("click", function() {
+			customOrder = false;
+			autoOrder = true;
+			shortestPathOrder = false;
+			$("#orderBtnDropdown").html('Order: Auto <span class="caret" style = "border-top: 4px solid white"></span>');
+			var desiredDistanceCont = $("<div id = 'desiredDistanceCont' style = 'font-size: 14pt; padding: 10px;'>Desired Distance: <input placeholder = 'Distance in miles' id = 'desiredLength' class = '' style = 'font-size: 15px; float: right; width: 50%;'></input></div>")
+			$("#routeList").after(desiredDistanceCont);
+			$("#routeList").css("height", "-moz-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px - 47px)");
+			$("#routeList").css("height", "-webkit-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px - 47px)");
+			$("#routeList").css("height", "-o-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px - 47px)");
+			$("#routeList").css("height", "calc(100% - 70px - 50px - 20px - 36px - 47px - 32px - 47px)");
+		});
+		
+		$("#shortestPathOrderBtn").on("click", function() {
+			customOrder = false;
+			autoOrder = false;
+			shortestPathOrder = true;
+			$("#orderBtnDropdown").html('Order: Shortest Path <span class="caret" style = "border-top: 4px solid white"></span>');
+			$("#desiredDistanceCont").remove();
+			$("#routeList").css("height", "-moz-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
+			$("#routeList").css("height", "-webkit-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
+			$("#routeList").css("height", "-o-calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
+			$("#routeList").css("height", "calc(100% - 70px - 50px - 20px - 36px - 47px - 32px)");
+		});
 
-	google.maps.event.addListener(autocomplete, 'place_changed', function() {
-	    infowindow.close();
-	    if (marker != null) {
-	    	marker.setVisible(false);
-	    }
-	    marker = new google.maps.Marker({
+
+		// Add autocomplete
+		var input = document.getElementById('input'); 
+		var buttons = document.getElementById('buttonContainer');
+		map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+		map.controls[google.maps.ControlPosition.TOP_LEFT].push(buttons);
+		var autocomplete = new google.maps.places.Autocomplete(input);
+		autocomplete.bindTo('bounds', map);
+		var infowindow = new google.maps.InfoWindow();
+		
+		marker = new google.maps.Marker({
 			map:map
 		});
-	    
-	    var place = autocomplete.getPlace();
-	    if (!place.geometry) {
-	      return;
-	    }
 
-	    // If the place has a geometry, then present it on a map.
-	    if (place.geometry.viewport) {
-	      map.fitBounds(place.geometry.viewport);
-	    } else {
-	      map.setCenter(place.geometry.location);
-	      map.setZoom(17);  // Why 17? Because it looks good.
-	    }
-	    var pinColor = "e6463d";  // red
-		if (Object.keys(markerDict).length == 0) {
-			pinColor = "2eba3e"; // green
-		}
-	    marker.setIcon(/** @type {google.maps.Icon} */({
-	      url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
-	      size: new google.maps.Size(21, 34),
-	      origin: new google.maps.Point(0, 0),
-	      anchor: new google.maps.Point(10, 34)
-	    }));
-	    marker.setPosition(place.geometry.location);
-	    marker.setVisible(true);
+		google.maps.event.addListener(autocomplete, 'place_changed', function() {
+		    infowindow.close();
+		    if (marker != null) {
+		    	marker.setVisible(false);
+		    }
+		    marker = new google.maps.Marker({
+				map:map
+			});
+		    
+		    var place = autocomplete.getPlace();
+		    if (!place.geometry) {
+		      return;
+		    }
 
-	    var address = '';
-	    if (place.address_components) {
-	      address = [
-	        (place.address_components[0] && place.address_components[0].short_name || ''),
-	        (place.address_components[1] && place.address_components[1].short_name || ''),
-	        (place.address_components[2] && place.address_components[2].short_name || '')
-	      ].join(' ');
-	    }
-
-	    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-	    infowindow.open(map, marker);
-  	});
-
-	var existingMarker = null;
-	google.maps.event.addListener(map, 'click', function(e) {
-		addLocation(e.latLng);
-	});
-
-	markerDict = {};
-	function addLocation(location) {
-		var urlAddress = createUrlAddress(location);
-		$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + urlAddress + '&sensor=false', function(json_data){
-
-			var address = json_data.results[0].formatted_address;
-
-			$("#input").val(address.toString());
-			if (marker != null) {
-				marker.setMap(null);
-				marker = null;
-			}			
-
-			var pinColor = "e6463d";  // red
+		    // If the place has a geometry, then present it on a map.
+		    if (place.geometry.viewport) {
+		      map.fitBounds(place.geometry.viewport);
+		    } else {
+		      map.setCenter(place.geometry.location);
+		      map.setZoom(17);  // Why 17? Because it looks good.
+		    }
+		    var pinColor = "e6463d";  // red
 			if (Object.keys(markerDict).length == 0) {
 				pinColor = "2eba3e"; // green
 			}
+		    marker.setIcon(/** @type {google.maps.Icon} */({
+		      url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+		      size: new google.maps.Size(21, 34),
+		      origin: new google.maps.Point(0, 0),
+		      anchor: new google.maps.Point(10, 34)
+		    }));
+		    marker.setPosition(place.geometry.location);
+		    marker.setVisible(true);
 
-			var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
-		        new google.maps.Size(21, 34),
-		        new google.maps.Point(0,0),
-		        new google.maps.Point(10, 34));
+		    var address = '';
+		    if (place.address_components) {
+		      address = [
+		        (place.address_components[0] && place.address_components[0].short_name || ''),
+		        (place.address_components[1] && place.address_components[1].short_name || ''),
+		        (place.address_components[2] && place.address_components[2].short_name || '')
+		      ].join(' ');
+		    }
 
-			marker = new google.maps.Marker({
-				position: location,
-				map: map,
-				icon: pinImage,
-			});
-			$("#addPointBtn").click();
-		});	
-	}
+		    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+		    infowindow.open(map, marker);
+	  	});
 
-	pathArray = [];
-	var letterArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-	letterIndex = 0;
-	$("#addPointBtn").on("click", function() {
-		var address = $("#input").val();
-		var urlAddress = createUrlAddress(address);
-		if (marker != null) {
-			for (var i = 0; i < Object.keys(markerDict).length; i++) {
-				var keysArray = Object.keys(markerDict);
-				// var pinColor = "5B84EF"; // blue marker;
-				var pinColor = "2eba3e"; // green marker;
+		var existingMarker = null;
+		// Map click listener
+		google.maps.event.addListener(map, 'click', function(e) {
+			addLocation(e.latLng);
+		});
+
+		markerDict = {};
+		randomLocationsArray = {};
+		function addLocation(location) {
+			var urlAddress = createUrlAddress(location);
+			$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + urlAddress + '&sensor=false', function(json_data){
+
+				var address = json_data.results[0].formatted_address;
+
+				var latLong = json_data.results[0].geometry.location;
+				var lat = latLong.lat;
+				var lng = latLong.lng;
+
+
+				$("#input").val(address.toString());
+				if (marker != null) {
+					marker.setMap(null);
+					marker = null;
+				}			
+
+				var pinColor = "e6463d";  // red
+				if (Object.keys(markerDict).length == 0) {
+					pinColor = "2eba3e"; // green
+				}
+
 				var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
 			        new google.maps.Size(21, 34),
 			        new google.maps.Point(0,0),
 			        new google.maps.Point(10, 34));
-			    if (keysArray[i] != "A") {
-			    	console.log("creating blue marker");
-			    	markerDict[keysArray[i]].setIcon(pinImage);
-			    }
-			}
-			markerDict[letterArray[letterIndex]] = marker;
-			for (var i = 0; i < Object.keys(markerDict).length; i++) {
-				var keysArray = Object.keys(markerDict);
-				var thisMarker = markerDict[keysArray[i]];
-				// thisMarker.setMap(map);
-			}
 
-			$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + urlAddress + '&sensor=false', function(json_data){
-				var latLong = json_data.results[0].geometry.location;
-				var lat = latLong.lat;
-				var lng = latLong.lng;
-				var entryClass = "";
-				var letterClass = "";
-				if (letterArray[letterIndex] == "A") {
-					letterClass = "orgEntryLetter";
-					entryClass = "orgEntry"
-				} else {
-					letterClass = "destEntryLetter";
-					entryClass = "destEntry"
-				}
-
-				var center = new google.maps.LatLng(lat, lng);
-			    map.panTo(center);
-
-				pathArray.push([lat, lng]);
-				if (pathArray.length >= 2) {
-					document.getElementById("clearRoute").disabled = false;
-					document.getElementById("pathCreator").disabled = false;
-				}
-
-				$(".destEntryLetter").each(function() {
-					$(this).attr("class", "entryLetter wptsEntryLetter")
+				marker = new google.maps.Marker({
+					position: new google.maps.LatLng(lat, lng),
+					map: map,
+					icon: pinImage,
 				});
-				$(".destEntry").each(function() {
-					$(this).attr("class", "routeEntry wptsEntry")
-				})
-
-				var marginTop = letterIndex * 45;
-				var marginTopString = marginTop.toString() + "px";
-
-				$("#routeList").append("<div style = 'margin-top: " + marginTopString + "' class = 'routeEntry " + entryClass + "' id = 'routeEntry-" + letterArray[letterIndex] + "'></div>");
-				$("#routeEntry-" + letterArray[letterIndex]).append("<div class = 'entryLetter " + letterClass + "'>" + "<span class = 'entrySpan' id = 'entrySpan-" + letterArray[letterIndex] + "' style = 'margin-top: 3px; display: block'>" + "&bull;" /*letterArray[letterIndex] */ + "</span></div>");
-				entryClass = "orgEntry"
-				$("#routeEntry-" + letterArray[letterIndex]).append("<input class = 'controls routeInput'>");
-				$("#routeEntry-" + letterArray[letterIndex]).append("<button type = 'button' class = 'close deleteRouteEntry' style = 'margin-top: 5px; padding-left; 5px'>&times;</button>")
-				
-				// Delete Button
-				$("#routeEntry-" + letterArray[letterIndex] + " .close").on("click", function() {
-					var thisLetter = $(this).parent().attr("id").toString()[11];
-					console.log(thisLetter);
-					markerDict[thisLetter].setMap(null);
-					markerDict[thisLetter] = null;
-					delete markerDict[thisLetter];
-					var index = letterArray.indexOf(thisLetter);
-					pathArray.pop(index);
-
-					// replace old info with info from new letters
-					var thisLetterIndex = letterArray.indexOf(thisLetter);
-					var markerKeys = Object.keys(markerDict);
-					for (var i = 0; i < markerKeys.length; i++) {
-						var currentLetterIndex = letterArray.indexOf(markerKeys[i]);
-						var currentLetter = letterArray[currentLetterIndex];
-						var prevLetter = letterArray[currentLetterIndex - 1];
-						if (currentLetterIndex > thisLetterIndex) {
-							markerDict[prevLetter] = markerDict[currentLetter];
-							delete markerDict[currentLetter];
-						}
-					}
-					// console.log(JSON.stringify(markerDict));
-
-					// remove animation
-					$("#routeEntry-" + thisLetter).animate({"opacity": 0}, 300, function() {
-						$("#routeEntry-" + thisLetter).first().remove();
-					});
-					
-
-					function animateEntriesUp() {
-						var index = letterArray.indexOf(thisLetter) + 1;
-						var i = index;                     //  set your counter to 1
-
-						function myLoop () {           //  create a loop function
-						   setTimeout(function () {    //  call a 3s setTimeout when the loop is called
-						      	var currentLetter = letterArray[i];
-								$("#routeEntry-" + currentLetter).animate(
-									{"margin-top": parseInt($("#routeEntry-" + currentLetter).css("margin-top")) - 45},
-									300
-								);
-
-								console.log(i);        //  your code here
-								i++;                     //  increment the counter
-								if (i < letterIndex) {            //  if the counter < 10, call the loop function
-								 myLoop();             //  ..  again which will trigger another 
-								} else {
-									var newIndex = letterArray.indexOf(thisLetter) + 1;
-									for (var j = newIndex; j < letterIndex; j++) {
-										var currentLetter = letterArray[j];
-										$("#routeEntry-" + currentLetter).attr("id", "routeEntry-" + letterArray[j-1]);
-									}
-									letterIndex--;
-								}                     //  ..  setTimeout()
-						   }, 150)
-						}
-
-						myLoop();  
-					}
-
-					setTimeout(animateEntriesUp(), 150);
-
-
-				});
-				
-				$("#routeEntry-" + letterArray[letterIndex] + " .routeInput").val(address.toString());
-				letterIndex++;
-
-				// Remember that when deleting an element, you should also change the id of all the elements in front of it
-				
-			});		
-			marker = null;
-		} else {
-			// alert("Invalid Point");
-		}
-		
-
-
-		
-
-		
-	});
-
-	routeInfoArray = [];
-	distance = 0;
-	$("#pathCreator").on("click", function() {
-		// get rid of markers on map (replaced by )
-
-		var org = null;
-		var dest = null;
-		var wpts = [];
-		var newPathArray = [];
-		var rendererOptions = { 
-			map: map,
-		};
-		directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
-
-		for (var i = 0; i < Object.keys(markerDict).length; i++) {
-			var keysArray = Object.keys(markerDict);
-		    markerDict[keysArray[i]].setMap(null);
+				$("#addPointBtn").click();
+			});	
 		}
 
-		$(".entrySpan").each(function() {
-			$(this).html("");
+		$("#createLoopBtn").on("click", function() {
+			$("#input").val($("#routeEntry-A .routeInput").val());
+			addLocation($("#routeEntry-A .routeInput").val());
 		});
 
-		$(".orgEntryLetter .entrySpan").html("A");
-		$(".destEntryLetter .entrySpan").html(letterArray[letterIndex - 1]);
-
-		$(".routeInput").each(function(i) {
-			(function(i) {
-				console.log("i first: " + i);
-				var address = $("#routeEntry-" + letterArray[i] + " .routeInput").val();
+		pathArray = [];
+		var letterArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+		letterIndex = 0;
+		$("#addPointBtn").on("click", function() {
+			if ($("#input").val() !== "") {
+				var address = $("#input").val();
 				var urlAddress = createUrlAddress(address);
+			} else {
+				console.log("No address given");
+			}
+
+			console.log("addpoint clicked");
+			
+			if (marker != null) {
+				for (var i = 0; i < Object.keys(markerDict).length; i++) {
+					var keysArray = Object.keys(markerDict);
+					// var pinColor = "5B84EF"; // blue marker;
+					var pinColor = "2eba3e"; // green marker;
+					var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+				        new google.maps.Size(21, 34),
+				        new google.maps.Point(0,0),
+				        new google.maps.Point(10, 34));
+				    if (keysArray[i] != "A") {
+				    	markerDict[keysArray[i]].setIcon(pinImage);
+				    }
+				}
+				
+				markerDict[letterArray[letterIndex]] = marker;
+				for (var i = 0; i < Object.keys(markerDict).length; i++) {
+					var keysArray = Object.keys(markerDict);
+					var thisMarker = markerDict[keysArray[i]];
+					// thisMarker.setMap(map);
+				}
+
 				$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + urlAddress + '&sensor=false', function(json_data){
-					console.log("i second: " + i);
-					var latLong = json_data.results[0].geometry.location;
-					var lat = latLong.lat;
-					var lng = latLong.lng;
+					if (json_data.results[0] === undefined) {
+						alert("Could not find location; try again");
+						markerDict[letterArray[letterIndex]].setMap(null);
+						markerDict[letterArray[letterIndex]] = null;
+						delete markerDict[letterArray[letterIndex]];
+						console.log("Could not find location; try again");
+					} else{
+						var latLong = json_data.results[0].geometry.location;
+						var lat = latLong.lat;
+						var lng = latLong.lng;
+						var entryClass = "";
+						var letterClass = "";
+						if (letterArray[letterIndex] == "A") {
+							letterClass = "orgEntryLetter";
+							entryClass = "orgEntry"
+						} else {
+							letterClass = "destEntryLetter";
+							entryClass = "destEntry"
+						}
 
-					if (i == 0) {
-						org = new google.maps.LatLng(lat, lng);
-					} else if (i == pathArray.length - 1) {
-						dest = new google.maps.LatLng(lat, lng);
-					} else {
-						wpts.push({
-							location: new google.maps.LatLng(lat, lng),
-							stopover: true
+						var center = new google.maps.LatLng(lat, lng);
+					    map.panTo(center);
+
+						pathArray.push([lat, lng]);
+						if (pathArray.length >= 2) {
+							document.getElementById("clearRoute").disabled = false;
+							document.getElementById("pathCreator").disabled = false;
+							document.getElementById("createLoopBtn").disabled = false;
+						}
+
+						$(".destEntryLetter").each(function() {
+							$(this).attr("class", "entryLetter wptsEntryLetter")
 						});
+						$(".destEntry").each(function() {
+							$(this).attr("class", "routeEntry wptsEntry")
+						})
+
+						var marginTop = letterIndex * 45;
+						var marginTopString = marginTop.toString() + "px";
+
+						$("#routeList").append("<div style = 'margin-top: " + marginTopString + "' class = 'routeEntry " + entryClass + "' id = 'routeEntry-" + letterArray[letterIndex] + "'></div>");
+						$("#routeEntry-" + letterArray[letterIndex]).append("<div class = 'entryLetter " + letterClass + "'>" + "<span class = 'entrySpan' id = 'entrySpan-" + letterArray[letterIndex] + "' style = 'margin-top: 3px; display: block'>" + "&bull;" /*letterArray[letterIndex] */ + "</span></div>");
+						entryClass = "orgEntry"
+						$("#routeEntry-" + letterArray[letterIndex]).append("<input class = 'controls routeInput'>");
+						$("#routeEntry-" + letterArray[letterIndex]).append("<button type = 'button' class = 'close deleteRouteEntry' style = 'margin-top: 5px; padding-left; 5px'>&times;</button>")
+						
+						// Delete Button
+						$("#routeEntry-" + letterArray[letterIndex] + " .close").on("click", function() {
+							var thisLetter = $(this).parent().attr("id").toString()[11];
+							console.log(thisLetter);
+							markerDict[thisLetter].setMap(null);
+							markerDict[thisLetter] = null;
+							delete markerDict[thisLetter];
+							var index = letterArray.indexOf(thisLetter);
+							pathArray.pop(index);
+
+							// replace old info with info from new letters
+							var thisLetterIndex = letterArray.indexOf(thisLetter);
+							var markerKeys = Object.keys(markerDict);
+							for (var i = 0; i < markerKeys.length; i++) {
+								var currentLetterIndex = letterArray.indexOf(markerKeys[i]);
+								var currentLetter = letterArray[currentLetterIndex];
+								var prevLetter = letterArray[currentLetterIndex - 1];
+								if (currentLetterIndex > thisLetterIndex) {
+									markerDict[prevLetter] = markerDict[currentLetter];
+									delete markerDict[currentLetter];
+								}
+							}
+							// console.log(JSON.stringify(markerDict));
+
+							// remove animation
+							$("#routeEntry-" + thisLetter).animate({"opacity": 0}, 300, function() {
+								$("#routeEntry-" + thisLetter).first().remove();
+							});
+							
+
+							function animateEntriesUp() {
+								var index = letterArray.indexOf(thisLetter) + 1;
+								var i = index;                     //  set your counter to 1
+
+								function myLoop () {           //  create a loop function
+								   setTimeout(function () {    //  call a 3s setTimeout when the loop is called
+								      	var currentLetter = letterArray[i];
+										$("#routeEntry-" + currentLetter).animate(
+											{"margin-top": parseInt($("#routeEntry-" + currentLetter).css("margin-top")) - 45},
+											300
+										);
+
+										console.log(i);        //  your code here
+										i++;                     //  increment the counter
+										if (i < letterIndex) {            //  if the counter < 10, call the loop function
+										 myLoop();             //  ..  again which will trigger another 
+										} else {
+											var newIndex = letterArray.indexOf(thisLetter) + 1;
+											for (var j = newIndex; j < letterIndex; j++) {
+												var currentLetter = letterArray[j];
+												$("#routeEntry-" + currentLetter).attr("id", "routeEntry-" + letterArray[j-1]);
+											}
+											letterIndex--;
+										}                     //  ..  setTimeout()
+								   }, 150)
+								}
+
+								myLoop();  
+							}
+
+							setTimeout(animateEntriesUp(), 150);
+
+
+						});
+						
+						$("#routeEntry-" + letterArray[letterIndex] + " .routeInput").val(address.toString());
+						letterIndex++;
+
+						// Remember that when deleting an element, you should also change the id of all the elements in front of it
 					}
+					
+					
+				});		
+				marker = null;
+			} else {
+				alert("Invalid Point");
+				console.log("marker is null");
+			}
+		});
 
-					console.log("dest: " + dest);
-					if (shortestPathOrder == true) {
-						if (dest != null) {
-							var request = {
-								origin: org,
-								destination: dest,
-								waypoints: wpts,
-								optimizeWaypoints: true,
-								travelMode: google.maps.DirectionsTravelMode.WALKING
-							};
-							directionsService = new google.maps.DirectionsService();
-							directionsService.route(request, function(response, status) {
-								if (status == google.maps.DirectionsStatus.OK) {
-									console.log("success");
-									directionsDisplay.setDirections(response);
+		routeInfoArray = [];
+		distance = 0;
+		distanceString = "";
 
-									var wptsOrder = response["routes"][0]["waypoint_order"];
-									var legsArray = response["routes"][0]["legs"];
-									var distanceInMeters = 0;
-									for (var i in legsArray){
-										var legDistance = parseFloat(legsArray[i]["distance"]["value"]);
-										distanceInMeters += legDistance;
+		function computeTotalDistance(result) {
+		  var total = 0;
+		  var myroute = result.routes[0];
+		  for (var i = 0; i < myroute.legs.length; i++) {
+		    total += myroute.legs[i].distance.value;
+		  }
+		  distance = Math.round(total * 0.000621371 * 100) / 100;
+		  document.getElementById('routeLength').innerHTML = distance + ' mi';
+		}
+
+		$("#pathCreator").on("click", function() {
+			// get rid of markers on map (replaced by )
+
+
+			var org = null;
+			var dest = null;
+			var wpts = [];
+			var newPathArray = [];
+			var rendererOptions = { 
+				map: map, draggable: true
+			};
+			directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+			directionsDisplay.setPanel(document.getElementById('directionsList'));
+			google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
+				console.log("changed route");
+				computeTotalDistance(directionsDisplay.getDirections());
+			});
+			
+
+			$(".orgEntryLetter .entrySpan").html("A");
+			$(".destEntryLetter .entrySpan").html(letterArray[letterIndex - 1]);
+
+			$(".routeInput").each(function(j) {
+				(function(j) {
+					var address = $("#routeEntry-" + letterArray[j] + " .routeInput").val();
+					console.log("address: " + address);
+					var urlAddress = createUrlAddress(address);
+					$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address=' + urlAddress + '&sensor=false', function(json_data){
+						console.log("j: " + j);
+						var latLong = json_data.results[0].geometry.location;
+						var lat = latLong.lat;
+						var lng = latLong.lng;
+
+						if (j == 0) {
+							org = new google.maps.LatLng(lat, lng);
+						} else if (j == pathArray.length - 1) {
+							dest = new google.maps.LatLng(lat, lng);
+							console.log("dest: " + dest);
+						} else {
+							wpts.push({
+								location: new google.maps.LatLng(lat, lng),
+								stopover: true
+							});
+						}
+
+						
+						if (shortestPathOrder == true) {
+							if (dest != null) {
+
+								for (var i = 0; i < Object.keys(markerDict).length; i++) {
+									var keysArray = Object.keys(markerDict);
+								    markerDict[keysArray[i]].setMap(null);
+								}
+
+								$(".entrySpan").each(function() {
+									$(this).html("");
+								});
+
+								var request = {
+									origin: org,
+									destination: dest,
+									waypoints: wpts,
+									optimizeWaypoints: true,
+									travelMode: google.maps.DirectionsTravelMode.WALKING
+								};
+								directionsService = new google.maps.DirectionsService();
+								directionsService.route(request, function(response, status) {
+									if (status == google.maps.DirectionsStatus.OK) {
+										console.log("success");
+										directionsDisplay.setDirections(response);
+										var wptsOrder = response["routes"][0]["waypoint_order"];
+										var legsArray = response["routes"][0]["legs"];
+										var distanceInMeters = 0;
+										for (var i in legsArray){
+											var legDistance = parseFloat(legsArray[i]["distance"]["value"]);
+											distanceInMeters += legDistance;
+										}
+										distance = Math.round(distanceInMeters * 0.000621371 * 100) / 100;
+										$("#routeLength").html(distance.toString() + " mi");
+										distanceString = distance.toString() + " mi";
+										
+										// create routeInfoArray
+										if (routeInfoArray.length == 0) {
+											for (var i in pathArray) {
+												var currentLetter = letterArray[i];
+												var address = $("#routeEntry-" + currentLetter + " input").val();
+												var thisLat = pathArray[i][0]
+												var thisLng = pathArray[i][1];
+												var routeInfoEntry = [address, thisLat, thisLng];
+												routeInfoArray.push(routeInfoEntry);
+												console.log("routeInfoArray being created: ", routeInfoArray);
+											}	
+										}
+										var lastLetter = letterArray[letterIndex - 1];
+										console.log(routeInfoArray);
+										// insert animation here
+										for (var j = 0; j < wptsOrder.length; j++) {
+											// [1, 2, 0]
+											var thisLetterIndex = j + 1;
+											var wptIndex = wptsOrder[j];
+											var letterToChangeIndex = wptsOrder[j] + 1;
+											var thisLetter = letterArray[thisLetterIndex];
+
+											var letterToChange = letterArray[letterToChangeIndex];
+
+											var newMarginTop = thisLetterIndex * 45;
+											var newMarginTopString = newMarginTop.toString();
+											var newMarginTopPxString = newMarginTopString + "px";
+
+											console.log(newMarginTopPxString);
+											$("#routeEntry-" + letterToChange).animate({"margin-top": newMarginTopPxString}, 500);
+											$("#routeEntry-" + letterToChange + " .entrySpan").html(thisLetter);
+											$("#routeEntry-" + letterToChange).attr("id", "#routeEntry-" + thisLetter);
+
+										}
+
+										for (var i = 0; i < letterIndex; i++) {
+											$("#routeEntry-" + letterArray[i] + " .entrySpan").html(letterArray[i]);
+										}
+										document.getElementById("createRouteBtn").disabled = false;
+										$(".deleteRouteEntry").css("display", "none");
+										marker.setMap(null);
+										marker = null;
+									} else {
+										alert('failed to get directions');
 									}
-									distance = Math.round(distanceInMeters * 0.000621371 * 100) / 100;
-									$("#routeLength").html(distance.toString() + " mi");
-									
-									// create routeInfoArray
-									var routeInfoEntry = [$("#routeEntry-A input").val(), pathArray[0][0], pathArray[0][1]];
-									routeInfoArray.push(routeInfoEntry);
-									for (var i = 0; i < wptsOrder.length; i++) {
-										var currentLetter = letterArray[wptsOrder[i]] + 1;
-										var address = $("#routeEntry-" + currentLetter + " input").val();
-										var thisLat = response["Vb"]["waypoints"][wptsOrder[i]]["location"]["d"];
-										var thisLng = response["Vb"]["waypoints"][wptsOrder[i]]["location"]["e"];
-										var routeInfoEntry = [address, thisLat, thisLng];
-										routeInfoArray.push(routeInfoEntry);
-									}
-									var lastLetter = letterArray[letterIndex - 1];
-									var routeInfoEntry = [$("#routeEntry-" + lastLetter +" input").val(), pathArray[pathArray.length - 1][0], pathArray[pathArray.length - 1][1]];
-									routeInfoArray.push(routeInfoEntry);
-									console.log(routeInfoArray);
-									// insert animation here
-									for (var j = 0; j < wptsOrder.length; j++) {
-										// [1, 2, 0]
-										var thisLetterIndex = j + 1;
-										var wptIndex = wptsOrder[j];
-										var letterToChangeIndex = wptsOrder[j] + 1;
-										var thisLetter = letterArray[thisLetterIndex];
+								});
+							}
+						} else if (customOrder == true) {
+							if (dest != null) {
 
-										var letterToChange = letterArray[letterToChangeIndex];
+								for (var i = 0; i < Object.keys(markerDict).length; i++) {
+									var keysArray = Object.keys(markerDict);
+								    markerDict[keysArray[i]].setMap(null);
+								}
 
-										var newMarginTop = thisLetterIndex * 45;
-										var newMarginTopString = newMarginTop.toString();
-										var newMarginTopPxString = newMarginTopString + "px";
+								$(".entrySpan").each(function() {
+									$(this).html("");
+								});
 
-										console.log(newMarginTopPxString);
-										$("#routeEntry-" + letterToChange).animate({"margin-top": newMarginTopPxString}, 500);
-										$("#routeEntry-" + letterToChange + " .entrySpan").html(thisLetter);
-										$("#routeEntry-" + letterToChange).attr("id", "#routeEntry-" + thisLetter);
+								var request = {
+									origin: org,
+									destination: dest,
+									waypoints: wpts,
+									optimizeWaypoints: false,
+									travelMode: google.maps.DirectionsTravelMode.WALKING
+								};
+								directionsService = new google.maps.DirectionsService();
+								directionsService.route(request, function(response, status) {
+									if (status == google.maps.DirectionsStatus.OK) {
+										console.log("success");
+										directionsDisplay.setDirections(response);
 
-									}
+										var legsArray = response["routes"][0]["legs"];
+										var distanceInMeters = 0;
+										for (var i in legsArray){
+											var legDistance = parseFloat(legsArray[i]["distance"]["value"]);
+											distanceInMeters += legDistance;
+										}
+										distance = Math.round(distanceInMeters * 0.000621371 * 100) / 100;
+										distanceString = distance.toString() + " mi";
+										$("#routeLength").html(distance.toString() + " mi");
+
+										// create routeInfoArray
+										if (routeInfoArray.length == 0) {
+											for (var i in pathArray) {
+												var currentLetter = letterArray[i];
+												var address = $("#routeEntry-" + currentLetter + " input").val();
+												var thisLat = pathArray[i][0]
+												var thisLng = pathArray[i][1];
+												var routeInfoEntry = [address, thisLat, thisLng];
+												routeInfoArray.push(routeInfoEntry);
+												console.log("routeInfoArray being created: ", routeInfoArray);
+											}	
+										}
+										var lastLetter = letterArray[letterIndex - 1];
+										console.log("routeInfoArray: ", routeInfoArray);
+
+										for (var i = 0; i < letterIndex; i++) {
+											$("#routeEntry-" + letterArray[i] + " .entrySpan").html(letterArray[i]);
+										}
 									document.getElementById("createRouteBtn").disabled = false;
 									$(".deleteRouteEntry").css("display", "none");
-									marker.setMap(null);
-									marker = null;
-								} else {
-									alert('failed to get directions');
+									} else {
+										alert('failed to get directions');
+									}
+								});
+							}
+						}/* else if (autoOrder) {
+							if (isNaN(parseFloat($("#desiredLength").val()))) {
+								alert("Invalid desired distance");
+								console.log("Invalid desired distance");
+							} else {
+								for (var i = 0; i < Object.keys(markerDict).length; i++) {
+									var keysArray = Object.keys(markerDict);
+								    markerDict[keysArray[i]].setMap(null);
 								}
-							});
-						}
-					} else if (customOrder == true) {
-						if (dest != null) {
-							var request = {
-								origin: org,
-								destination: dest,
-								waypoints: wpts,
-								optimizeWaypoints: false,
-								travelMode: google.maps.DirectionsTravelMode.WALKING
-							};
-							directionsService = new google.maps.DirectionsService();
-							directionsService.route(request, function(response, status) {
-								if (status == google.maps.DirectionsStatus.OK) {
-									console.log("success");
-									directionsDisplay.setDirections(response);
 
-									var legsArray = response["routes"][0]["legs"];
-									var distanceInMeters = 0;
-									for (var i in legsArray){
-										var legDistance = parseFloat(legsArray[i]["distance"]["value"]);
-										distanceInMeters += legDistance;
-									}
-									distance = Math.round(distanceInMeters * 0.000621371 * 100) / 100;
-									$("#routeLength").html(distance.toString() + " mi");
-
-									// create routeInfoArray
-									for (var i in pathArray) {
-										var currentLetter = letterArray[i];
-										var address = $("#routeEntry-" + currentLetter + " input").val();
-										var thisLat = pathArray[i][0]
-										var thisLng = pathArray[i][1];
-										var routeInfoEntry = [address, thisLat, thisLng];
-										routeInfoArray.push(routeInfoEntry);
-									}
-									var lastLetter = letterArray[letterIndex - 1];
-									var routeInfoEntry = [$("#routeEntry-" + lastLetter +" input").val(), pathArray[pathArray.length - 1][0], pathArray[pathArray.length - 1][1]];
-									console.log(routeInfoArray);
-
-									for (var i = 1; i < letterIndex - 1; i++) {
-										$("#routeEntry-" + letterArray[i] + " .entrySpan").html(letterArray[i]);
-									}
-								document.getElementById("createRouteBtn").disabled = false;
-								$(".deleteRouteEntry").css("display", "none");
-								} else {
-									alert('failed to get directions');
-								}
-							});
-						}
-					}
-				});
-			})(i);
+								$(".entrySpan").each(function() {
+									$(this).html("");
+								});
+							}
+						}*/
+					});
+				})(j);
+			});
 		});
-	});
 
-	$("#clearRoute").on("click", function() {
-		$("#routeList").html("");
-		// Set markers to null and remove them
-		pathArray = [];
+		$("#clearRoute").on("click", function() {
+			$("#routeList").html("");
+			// Set markers to null and remove them
+			pathArray = [];
 
-		var markerKeys = Object.keys(markerDict);
-		for (var i in markerKeys) {
-			var key = markerKeys[i];
-			markerDict[key].setMap(null);
-			markerDict[key] = null;
-		}
-		markerDict = {};
-		
-		document.getElementById("clearRoute").disabled = true;
-		document.getElementById("pathCreator").disabled = true;
-		document.getElementById("createRouteBtn").disabled = true;
-
-		$(".deleteRouteEntry").css("display", "block");
-
-		directionsDisplay.setMap(null);
-		letterIndex = 0;
-	});
-
-	$("#confirmRouteBtn").on("click", function() {
-		// insert backend stuff here
-		// send route data to server
-		// go to profile page and highlight their new route
-
-		//DO CHECKING FOR REPEATED SENDS AND PREVENT BAD BAD INFO SENDING
-		console.log("here boyyy");
-		console.log(routeInfoArray);
-		$.ajax({
-			beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-			url: '/routeplanner_post',
-			type: 'POST',
-			data: {
-				"user_id": 1,
-				"name": "Dis Route Doh",
-				"locations": routeInfoArray
-			},
-			dataType: "json",
-			success: function(data, textStatus){
-				if (data.redirect) {
-					window.location.href = data.redirect;
-				} else {
-					console.log("redirect failed");
-				}
-			},
-			error: function(){
-				console.log("it no twerked...");
+			var markerKeys = Object.keys(markerDict);
+			for (var i in markerKeys) {
+				var key = markerKeys[i];
+				markerDict[key].setMap(null);
+				markerDict[key] = null;
 			}
+			markerDict = {};
+			
+			document.getElementById("clearRoute").disabled = true;
+			document.getElementById("pathCreator").disabled = true;
+			document.getElementById("createRouteBtn").disabled = true;
+			document.getElementById("createLoopBtn").disabled = true;
+			$("#routeLength").html("0 mi");
+			$("#directionsList").html("");
+
+			$(".deleteRouteEntry").css("display", "block");
+
+			directionsDisplay.setMap(null);
+			letterIndex = 0;
+
+			marker = new google.maps.Marker({
+				map:map
+			});
+			routeInfoArray = [];
 		});
-	});
+
+		$("#confirmRouteBtn").on("click", function() {
+			// insert backend stuff here
+			// send route data to server
+			// go to profile page and highlight their new route
+
+			//DO CHECKING FOR REPEATED SENDS AND PREVENT BAD BAD INFO SENDING
+			var routeName = $("#routeNameInput").val();
+			$.ajax({
+				beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+				url: '/routeplanner_post',
+				type: 'POST',
+				data: {
+					"name": routeName,
+					"locations": routeInfoArray,
+					"distance": distanceString
+				},
+				dataType: "json",
+				success: function(data, textStatus){
+					if (data.redirect) {
+						window.location.href = data.redirect;
+					} else {
+						console.log("redirect failed");
+					}
+				},
+				error: function(){
+					console.log("it no twerked...");
+				}
+			});
+		});
+
+		// Informative Tooltips
+		
+		$("#addPointBtn").tooltip({"placement": "bottom", "title": "Adds location in input box to route"});
+		$("#createLoopBtn").tooltip({"placement": "bottom", "title": "Makes a new point, which is the same as your first point"});
+		$("#orderBtnDropdown").tooltip({"placement": "top", "title": "Choose how you'd like the waypoints ordered"});
+		$("#clearRoute").tooltip({"placement": "top", "title": "Clears all entries in your current route"});
+		$("#pathCreator").tooltip({"placement": "left", "title": "Shows you what your route looks like"});
+		$("#createRouteBtn").tooltip({"placement": "left", "title": "Confirm that you want to submit this route to your profile"});
+
+	}	
 }
 
-$(document).on("page:load", pageLoad);
-$(document).ready(pageLoad);
-(function() {
 
+$(document).on("page:load", pageLoad2);
+$(document).ready(pageLoad2);
 
-}).call(this);
-(function() {
-
-
-}).call(this);
-(function() {
-
-
-}).call(this);
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
