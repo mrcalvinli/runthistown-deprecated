@@ -1,3 +1,4 @@
+
 function friendListLoad() {
 	if (document.getElementById("userListContainer") != null) {
 		var containerHeight = $(window).height() - 80;
@@ -31,6 +32,7 @@ function friendListLoad() {
 		}
 	}
 }
+
 
 $(document).on("page:load", friendListLoad);
 $(document).ready(friendListLoad);
