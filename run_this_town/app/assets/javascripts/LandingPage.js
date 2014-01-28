@@ -51,19 +51,35 @@ function pageLoad() {
 	// Bullet Click
 	$("#homeBullet").on("click", function() {
 		var container = $("body"), scrollTo = 60;
-		container.animate({scrollTop: scrollTo - 60}, 1500, "easeInOutQuint")
+		container.animate({scrollTop: scrollTo - 60}, 1500, "easeInOutQuint");
+		$("#homeBullet").css("opacity", 1);
+		$("#navBullet1").css("opacity", 0.5);
+		$("#navBullet2").css("opacity", 0.5);
+		$("#navBullet3").css("opacity", 0.5);
 	})
 	$("#navBullet1").on("click", function() {
 		var container = $("body"), scrollTo = $("#infoSection1");
-		container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")
+		container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint");
+		$("#homeBullet").css("opacity", 0.5);
+		$("#navBullet1").css("opacity", 1);
+		$("#navBullet2").css("opacity", 0.5);
+		$("#navBullet3").css("opacity", 0.5);
 	})
 	$("#navBullet2").on("click", function() {
 		var container = $("body"), scrollTo = $("#infoSection2");
-		container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")
+		container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint");
+		$("#homeBullet").css("opacity", 0.5);
+		$("#navBullet1").css("opacity", 0.5);
+		$("#navBullet2").css("opacity", 1);
+		$("#navBullet3").css("opacity", 0.5);
 	})
 	$("#navBullet3").on("click", function() {
 		var container = $("body"), scrollTo = $("#infoSection3");
-		container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")
+		container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint");
+		$("#homeBullet").css("opacity", 0.5);
+		$("#navBullet1").css("opacity", 0.5);
+		$("#navBullet2").css("opacity", 0.5);
+		$("#navBullet3").css("opacity", 1);
 	})
 	
 	

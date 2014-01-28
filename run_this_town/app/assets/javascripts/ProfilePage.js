@@ -13,6 +13,7 @@ function pageLoad() {
 
 	$("#totalDistIcon").tooltip({"placement": "right"});
 	$("#totalCalIcon").tooltip({"placement": "right"});
+	$("#longestRunIcon").tooltip({"placement": "right"});
 
 	$("#goalsPlus").on("click", function() {
 		var buttonHeight = parseInt($("#newGoalBtn").css("height")) + parseInt($("#newGoalContainer").css("padding")) + parseInt($("#newGoalContainer").css("padding"));
@@ -28,6 +29,18 @@ function pageLoad() {
 		}
 		console.log(totalDistanceTraveled);
 		$("#totalDistanceStat").html(totalDistanceTraveled.toString() + " mi");
+	});
+
+	var longestRun = 0;
+	$("#routesToRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
+		if ($(this).html() != "") {
+			console.log($(this).html());
+			thisDistance = parseFloat($(this).html());
+			if (thisDistance > longestRun) {
+				longestRun = thisDistance;
+			}
+		}
+		$("#longestRunStat").html(longestRun.toString() + " mi");
 	});
 
 	// Route entry template

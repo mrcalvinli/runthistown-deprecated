@@ -1,32 +1,20 @@
-<div class = "container">
-	<h1 style = "text-align: center; margin-top: 60px">Friendships</h1>
-	<h3>Friends</h3>
-	<% for friend in current_user.friends %>
-		<li>
-			<%= friend.get_name %>
-			<%= link_to "(I NO LIKE ANYMOAR!)", {controller: "friendships", action: "destroy", user_id: current_user.id, friend_id: friend.id}, {:method => :delete} %>
-		</li>
-	<% end %>
-	
-	<h3>Requested Friends</h3>
-	<% for friend in current_user.requested_friends %>
-		<li><%= friend.get_name %></li>
-	<% end %>
 
-	<h3>Pending Friends</h3>
-	<% for friend in current_user.pending_friends %>
-		<li>
-			<%= friend.get_name %>
-			<%= link_to "(I ACCEPT!)", {controller: "friendships", action: "update", user_id: current_user.id, friend_id: friend.id}, {:method => :post} %>
-			<%= link_to "(NEVER!)", {controller: "friendships", action: "destroy", user_id: current_user.id, friend_id: friend.id}, {:method => :delete} %>
-		</li>
-	<% end %>
-	
-	<h3>People</h3>
-	<% for user in User.all %>
-		<li>
-			<%= user.get_name %> 
-			<%= link_to "(FRIEND ME!)", {controller: "friendships", action: "create", user_id: current_user.id, friend_id: user.id}, {:method => :post} %>
-		</li>
-	<% end %>
+<div class = "container" style = "height: 100%">
+	<div id = "userListContainer" style = "margin-top: 70px; border-radius: 5px; width: 10px; height: 10px; background-color: rgba(66, 139, 202, 0.3); padding: 0; margin-left: auto; margin-right: auto; overflow: hidden; position: relative; ">
+			<div id = "userCol1" class = "col-xs-6" style = "height: 100%;">
+				<% $index = 0 %>
+				<% while $index < current_user.friends.size do %>
+					<% p current_user.friends[$index] %>
+					<%= render 'partials/user_info', user: current_user.friends[$index], friend_status: 'accepted' %>
+					<% $index += 2 %>
+				<% end %>
+			</div>
+			<div id = "userCol2" class = "col-xs-6" style = "height: 100%;">
+				<% $index = 1 %>
+				<% while $index < current_user.friends.size do %>
+					<%= render 'partials/user_info', user: current_user.friends[$index], friend_status: 'accepted' %>
+					<% $index += 2 %>
+				<% end %>
+			</div>
+	</div>
 </div>
