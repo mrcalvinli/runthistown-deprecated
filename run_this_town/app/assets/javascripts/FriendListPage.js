@@ -19,16 +19,12 @@ function friendListLoad() {
 				);*/
 			}, 300
 		);
-
-		$(".userDelFriendLink").append('<button id = "userDelFriendBtn" class = "btn btn-warning" style = "float: right; margin-top: 36px; margin-right: 10px; ">Delete Friend</button>')
-		$(".userAddFriendLink").append('<button id = "userAddFriendBtn" class = "btn btn-warning" style = "float: right; margin-top: 36px; margin-right: 10px; ">Add Friend</button>')
-
 		var col1html = $("#userCol1").val();
 		var col2html = $("#userCol2").val();
 
 		if (col1html == "" && col2html == "") {
 			console.log("yes");
-			$("#userListContainer").append($("<div style = 'position: absolute; height: 100%; width: 100%; text-align: center; '><h2 style = 'margin-top: 30%; '>You have no friends :( <br> ...yet. Click the search bar above to look for people you know</h2></div>"));
+			$("#userListContainer").append($("<div style = 'z-index: -1; position: absolute; height: 100%; width: 100%; text-align: center; '><h2 style = 'margin-top: 30%; '>You have no friends :( <br> ...yet. Click the search bar above to look for people you know</h2></div>"));
 		}
 	}
 }
@@ -36,4 +32,5 @@ function friendListLoad() {
 
 $(document).on("page:load", friendListLoad);
 $(document).ready(friendListLoad);
+
 
