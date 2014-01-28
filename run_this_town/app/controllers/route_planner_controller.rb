@@ -27,6 +27,10 @@ class RoutePlannerController < ApplicationController
 		end
 	end
 
+	def search
+		@route_ids = RunRoute.search_closest_routes(params[:latitude], params[:longitude])
+	end
+
 	def destroy
 		puts "tighttight"
 		@route = RunRoute.find(params[:route_id])
