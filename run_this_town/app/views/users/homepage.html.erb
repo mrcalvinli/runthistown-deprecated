@@ -55,8 +55,8 @@
 					<div id = "pendingFriendsContainer">
 						<div>
 							<%= friend.get_name %>
-							<%= link_to "(Ignore)", {controller: "friendships", action: "destroy", user_id: current_user.id, friend_id: friend.id}, {:method => :delete, style: 'float: right;'} %>
-							<%= link_to "(Accept)", {controller: "friendships", action: "update", user_id: current_user.id, friend_id: friend.id}, {:method => :delete, style: 'float: right;'} %>
+							<%= link_to "(Ignore)", {controller: "friendships", action: "destroy", user_id: current_user.id, friend_id: friend.id}, {:method => :post, style: 'float: right;'} %>
+							<%= link_to "(Accept)", {controller: "friendships", action: "update", user_id: current_user.id, friend_id: friend.id}, {:method => :post, style: 'float: right;'} %>
 						</div>
 					</div>
 				<% end %>

@@ -10,6 +10,15 @@ class UsersController < ApplicationController
 		@user_ids = User.search_people(params[:search])
 	end
 
+	def view_friend
+		@friend_id = params[:friend_id]
+		if (current_user.id.to_s == @friend_id || !Friendship.exists?(user_id: current_user.id.to_i, friend_id: @friend_id.to_i))
+			redirect_to homepage_path
+		elsif Friendship.find_by(user_id: current_user.id.to_i, friend_id: @friend_id.to_i).state != 'accepted'
+			redirect_to homepage_path
+		end
+	end
+
 	def show
 	    sign_out :user
 	    redirect_to root_path
