@@ -1,7 +1,7 @@
 <div class = "profRouteEntry well well-sm">
 	<div class = "profConfirmOrDeny" style = "position: absolute; top: 5px; right: 10px; z-index: 3; ">
-		<!-- <span id = "profSuccessRoute" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span> -->
-		 <%= link_to "", {controller: "route_planner", action: "destroy", route_id: @run_route.id}, class: "deleteRouteLink", id: "route-#{@run_route.id}" %>
+		<%= link_to "", {controller: "route_planner", action: "update", route_id: @run_route.id, has_ran: true}, class: "confirmRouteLink", id: "route-#{@run_route.id}" %>
+		<%= link_to "", {controller: "route_planner", action: "destroy", route_id: @run_route.id}, class: "deleteRouteLink", id: "route-#{@run_route.id}" %>
 	</div>
 	<div class = "profRunRouteInfo" style = "display: inline-block; width: 49%; ">
 		<p class = "profRouteName">Name: <span><%= @run_route.name %></span></p>

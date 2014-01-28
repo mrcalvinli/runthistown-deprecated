@@ -1,6 +1,6 @@
 <div class = "profRouteEntry well well-sm">
 	<div class = "profConfirmOrDeny" style = "position: absolute; top: 5px; right: 10px;">
-		<span id = "profRemoveRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>
+		<%= link_to "", {controller: "route_planner", action: "update", route_id: @run_route.id, has_ran: false}, class: "removeRouteLink", id: "route-#{@run_route.id}" %>
 	</div>
 	<div class = "profRanRouteInfo" style = "display: inline-block; width: 49%; ">
 		<p>Date: </p>
