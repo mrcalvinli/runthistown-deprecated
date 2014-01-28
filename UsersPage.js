@@ -6,7 +6,9 @@ $(document).ready(function() {
 	setTimeout(function() {
 			$("#userListContainer").animate({"width": "100%"}, 500, "easeOutExpo");
 			
-			$("#userListContainer").animate({"height": containerHeight}, 1000, "easeOutBounce");
+			$("#userListContainer").animate({"height": containerHeight}, 1000, "easeOutBounce", function() {
+				$("#userListContainer").css("overflow", "auto");
+			});
 			/*setTimeout(function() {
 				var containerHeight = $(window).height() - 55
 				$("#userListContainer").animate({"height": containerHeight}, 800, "easeOutBounce");

@@ -30,8 +30,8 @@ function pageLoad() {
 		console.log(totalDistanceTraveled);
 		$("#totalDistanceStat").html(totalDistanceTraveled.toString() + " mi");
 	});
-
-	var longestRun = 0;
+	visualizationData = [];
+	longestRun = 0;
 	$("#routesToRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
 		if ($(this).html() != "") {
 			console.log($(this).html());
@@ -39,6 +39,7 @@ function pageLoad() {
 			if (thisDistance > longestRun) {
 				longestRun = thisDistance;
 			}
+			visualizationData.push({"y": thisDistance});
 		}
 		$("#longestRunStat").html(longestRun.toString() + " mi");
 	});
@@ -76,6 +77,57 @@ function pageLoad() {
 	$(".profDeleteRoute").on("mouseleave", function() {
 		$(this).css("opacity", 0.5);
 	});
+
+	$("#toggleRouteVisualization").on("click", function() {
+		var routeVisualizationContainer = $("#routeVisualizationContainer");
+		if (routeVisualizationContainer.height() == 0) {
+			routeVisualizationContainer.animate({"height": "500px"}, 500);
+		} else {
+			routeVisualizationContainer.animate({"height": "0px"}, 500);
+		}
+	});
+
+	// Visualization stuff
+	var outerWidth = "100%";
+	var outerHeight = "100%";
+
+	var margin = {top: 20, right: 20, bottom: 20, left: 20};
+
+	var chartWidth = outerWidth - margin.left - margin.right;
+	var chartHeight = outerHeight - margin.top - margin.bottom;
+
+	var xScale = d3.scale.ordinal().domain(d3.range(visualizationData.length)).rangeBands([0, chartWidth]);
+	var yScale = d3.scale.linear().domain([0, longestRun]).range([chartHeight, 0]);
+
+	var chart = d3
+	.select("#routeVisualizationContainer")
+	.append("svg")
+	.attr("class", "chart").attr("height", outerHeight).attr("width", outerWidth)
+	.attr("transform", "translate(" + margin.left + "," + margin.top +")");
+
+	chart.selectAll("line").data(yScale.ticks(10)).enter().append("line")
+	.attr("x1", 0).attr("x2", chartWidth).attr("y1", yScale).attr("y2", yScale);
+
+	chart.selectAll("text").data(yScale.ticks(10)).enter().append("text")
+	.attr("class", "yScaleLabel")
+	.attr("x", 0)
+	.attr("y", yScale)
+	.attr("dx", -margin.left/8)
+	.attr("dy", "0.3em")
+	.attr("text-anchor", "end")
+	.text(String);
+
+	var layerGroups = chart.selectAll(".layer").data(visualizationData).enter()
+	.append("g")
+	.attr("class", "layer");
+
+	var rects = layerGroups.selectAll("rect").data(function(d){ return d;}).enter().append("rect")
+	.attr("x", function(d, i) {return xScale(i);})
+	.attr("y", function(d) {return yScale(d.y0+d.y);})
+	.attr("width", xScale.rangeBand)
+	.attr("height", function(d){return yScale(d.y0) - yScale(d.y0 + d.y);})
+	.attr("class", "rect")
+	.style("fill", "#000000")
 
 
 	// Backend Stuff
