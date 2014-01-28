@@ -367,7 +367,7 @@ if ($('#routePlanningPage').length) {
 		var total = 0;
 		var myroute = result.routes[0];
 		for (var i = 0; i < myroute.legs.length; i++) {
-			total += myroute.legs[i].distance.value;
+		//	total += myroute.legs[i].distance.value;
 		}
 		distance = Math.round(total * 0.000621371 * 100) / 100;
 		document.getElementById('routeLength').innerHTML = distance + ' mi';
