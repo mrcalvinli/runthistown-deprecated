@@ -30,16 +30,17 @@ function pageLoad() {
 		console.log(totalDistanceTraveled);
 		$("#totalDistanceStat").html(totalDistanceTraveled.toString() + " mi");
 	});
-	visualizationData = [];
+	visualizationData = [[]];
 	longestRun = 0;
 	$("#routesToRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
+		var date = $(this).parent().children($(".profRouteDateVal"));
 		if ($(this).html() != "") {
 			console.log($(this).html());
 			thisDistance = parseFloat($(this).html());
 			if (thisDistance > longestRun) {
 				longestRun = thisDistance;
 			}
-			visualizationData.push({"y": thisDistance});
+			visualizationData[0].push({"y": thisDistance, "x": "D"});
 		}
 		$("#longestRunStat").html(longestRun.toString() + " mi");
 	});
@@ -87,26 +88,59 @@ function pageLoad() {
 		}
 	});
 
-	// Visualization stuff
-	var outerWidth = "100%";
-	var outerHeight = "100%";
 
-	var margin = {top: 20, right: 20, bottom: 20, left: 20};
 
+	/*var outerWidth = $("#routeVisualizationContainer").width();
+	var outerHeight = 500;
+	
+	var margin = {top: 20, right: 20, bottom: 80, left: 80};
+	
 	var chartWidth = outerWidth - margin.left - margin.right;
 	var chartHeight = outerHeight - margin.top - margin.bottom;
+	
+	var stack = d3.layout.stack();
+	//var stack = d3.layout.partition(); //left it as stack for simplicity
+	var stackedData = stack(visualizationData);
+	
+	var yStackMax = d3.max(stackedData, function(layer){return d3.max(layer, function(d){return d.y + d.y0;});});
+	
+	var yGroupMax = d3.max(stackedData, function(layer){return d3.max(layer, function(d){return d.y;});});
+	
+	var xScale = d3.scale.ordinal().domain(d3.range(visualizationData[0].length)).rangeBands([0, chartWidth]);
+	var yScale = d3.scale.linear().domain([0, yStackMax]).range([chartHeight, 0]);
+	
+	
+	var grouped = false;
 
-	var xScale = d3.scale.ordinal().domain(d3.range(visualizationData.length)).rangeBands([0, chartWidth]);
-	var yScale = d3.scale.linear().domain([0, longestRun]).range([chartHeight, 0]);
+	var topIndex = 3;
+
 
 	var chart = d3
-	.select("#routeVisualizationContainer")
-	.append("svg")
-	.attr("class", "chart").attr("height", outerHeight).attr("width", outerWidth)
-	.attr("transform", "translate(" + margin.left + "," + margin.top +")");
+	.select("#routeVisualizationContainer") // equivalent to jQuery $("") selector
+	.append("svg") // Here we are appending divs to what we selected
+	.attr("class", "chart").attr("height", outerHeight).attr("width",outerWidth)
+	.append("g") // group element
+	.attr("transform", "translate(" + margin.left + "," + margin.top +")")
+	//.on("click", function(){ grouped ? shrinkWindow() : expandWindow();});
+	 // Same as jQuery
 
+	// adds lines
 	chart.selectAll("line").data(yScale.ticks(10)).enter().append("line")
 	.attr("x1", 0).attr("x2", chartWidth).attr("y1", yScale).attr("y2", yScale);
+
+	// adds labels to y axis
+	console.log(yScale.ticks(10));
+	console.log([visualizationData[0][0]["x"], visualizationData[0][1]["x"]]);
+	console.log("yScale: ", yScale);
+
+	chart.selectAll("text").data([visualizationData[0][0]["x"], visualizationData[0][visualizationData[0].length - 1]["x"]]).enter().append("text")
+	.attr("class", "xScaleLabel")
+	.attr("x", xScale)
+	.attr("y", outerHeight)
+	.attr("dx", "0.3em")
+	.attr("dy", -margin.bottom/visualizationData[0].length)
+	.attr("text-anchor", "end")
+	.text(String);
 
 	chart.selectAll("text").data(yScale.ticks(10)).enter().append("text")
 	.attr("class", "yScaleLabel")
@@ -117,17 +151,35 @@ function pageLoad() {
 	.attr("text-anchor", "end")
 	.text(String);
 
-	var layerGroups = chart.selectAll(".layer").data(visualizationData).enter()
+
+
+	var layerGroups = chart.selectAll(".layer").data(stackedData).enter()
 	.append("g")
 	.attr("class", "layer");
+
+	chart.append("g")
+	  .attr("class", "y axis")
+	  .call(yScale)
+	.append("text")
+	  .attr("transform", "rotate(-90)")
+	  .attr("y", 6)
+	  .attr("dy", "-55px")
+	  .attr("dx", "-150px")
+	  .style("text-anchor", "end")
+	  .text("Miles Run");
+
+	for (var i; i<=3; i++){
+		chart.selectAll(".layer").attr("class", "layer" + i);
+	}
 
 	var rects = layerGroups.selectAll("rect").data(function(d){ return d;}).enter().append("rect")
 	.attr("x", function(d, i) {return xScale(i);})
 	.attr("y", function(d) {return yScale(d.y0+d.y);})
 	.attr("width", xScale.rangeBand)
 	.attr("height", function(d){return yScale(d.y0) - yScale(d.y0 + d.y);})
-	.attr("class", "rect")
-	.style("fill", "#000000")
+	.attr("class", "rect");*/
+
+
 
 
 	// Backend Stuff

@@ -209,6 +209,8 @@ function pageLoad() {
 		} else {
 			console.log("No address given");
 		}
+
+		console.log("addpoint clicked");
 		
 		if (marker != null) {
 			for (var i = 0; i < Object.keys(markerDict).length; i++) {
@@ -374,6 +376,7 @@ function pageLoad() {
 
 	$("#pathCreator").on("click", function() {
 		// get rid of markers on map (replaced by )
+
 
 		var org = null;
 		var dest = null;
@@ -652,5 +655,5 @@ function pageLoad() {
 
 }
 
-//$(document).on("page:load", pageLoad);
+$(document).on("page:load", pageLoad);
 $(document).ready(pageLoad);
