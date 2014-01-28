@@ -141,6 +141,7 @@ if ($('#landingPage').length) {
 			container.animate({scrollTop: scrollTo.offset().top - 60}, 1500, "easeInOutQuint")
 		})
 	}
+	landingPageLoad()
 }
 
 $(document).ready(landingPageLoad);
