@@ -8,6 +8,7 @@ function pageLoad() {
 	$("#infoSection3").height(mainHeight);
 	$("#navigator").css("margin-top", (mainHeight/2) - $("#navigator").height()/2 + 60 - 20);
 	$("#infoSection1 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
+	$("#infoSection2 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
 
 	$(window).resize(function() {
 		var mainHeight = $(window).height() - 60;
@@ -17,6 +18,7 @@ function pageLoad() {
 		$("#infoSection3").height($(window).height() - 60);
 		$("#navigator").css("margin-top", (($(window).height() - 60)/2) - $("#navigator").height()/2 + 60 - 20);
 		$("#infoSection1 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
+		$("#infoSection2 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
 		if ( $(window).width() < 1440 ){
 			$('.jumbotron').css("min-height", '793px');
 		} else {
