@@ -465,7 +465,7 @@ function pageLoad1() {
 			});
 			console.log(startAddress, endAddress, wptAddresses);
 			var currentRoute = current.parent().parent();
-			currentRoute.children(".profConfirmOrDeny").html('<span id = "Croute-' + routeId + '" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span><span id = "Droute-' + routeId + '" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute" data-toggle="modal" data-target="#profDeleteConfirmModal"></span>');
+			currentRoute.children(".profConfirmOrDeny").html('<span id = "Croute-' + routeId + '" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span><span id = "Droute-' + routeId + '" style = "color: #e6463d; font-size: 20px; opacity: 0.5; margin-left: 3px; " class = "glyphicon glyphicon-remove profDeleteRoute" data-toggle="modal" data-target="#profDeleteConfirmModal"></span>');
 			currentRoute.remove();
 			$("#routesToRunContainer").append(currentRoute);
 
