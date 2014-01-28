@@ -32,6 +32,7 @@ function pageLoad1() {
 			$("#newGoalContainer").animate({"height": buttonHeight, "padding-bottom": "5px"}, 300);
 		});
 
+
 		var totalDistanceTraveled = 0;
 		$("#routesToRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
 			if ($(this).html() != "") {
@@ -59,6 +60,7 @@ function pageLoad1() {
 
 		// Route entry template
 
+
 		$(".profRouteEntry").on("click", function() {
 			if ( $(this).css("height") == "40px" ) {
 				$(this).css("height", "auto");
@@ -69,6 +71,7 @@ function pageLoad1() {
 
 
 		
+
 
 		$("#profPicCont").on("mouseenter", function() {
 			$("#profPicCover").css("opacity", 1);
@@ -87,6 +90,7 @@ function pageLoad1() {
 		$(".profDeleteRoute").on("mouseenter", function() {
 			$(this).css("opacity", 1);
 		});
+
 
 		$(".profDeleteRoute").on("mouseleave", function() {
 			$(this).css("opacity", 0.5);
@@ -352,3 +356,4 @@ function pageLoad1() {
 $(document).on("page:load", pageLoad1);
 $(document).ready(pageLoad1);
 	
+
