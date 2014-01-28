@@ -75,3 +75,18 @@ legend {
  	height: 0px; 
  	border-radius: 10px;
  }
+
+.chart rect{
+	fill: #3276b1;
+	stroke: white;
+}
+.chart text{
+	font: 20px Sanchez;
+}
+.chart line{
+	stroke: #ccc;
+}
+.chart .barLabel{
+	fill: white;
+}
+
