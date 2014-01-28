@@ -1,6 +1,4 @@
 RunThisTown::Application.routes.draw do
-
-
     devise_for :users
     resources :users do
         post :route_id, :on => :member
@@ -8,9 +6,12 @@ RunThisTown::Application.routes.draw do
 
     root :to => "landing#home"
     match '/homepage',          to: 'users#homepage',           via: 'get'
+    match '/user_search',       to: 'users#search',             via: 'get'
     match '/routeplanner',      to: 'route_planner#new',        via: 'get'
     match '/routeplanner_post', to: 'route_planner#create',     via: [:post]
     match '/destroy_route',     to: 'route_planner#destroy',    via: 'get'
+    match '/route_search',      to: 'route_planner#search',     via: 'get'
+
 
     get "friendships/new"
     get "friendships/create"

@@ -90,7 +90,15 @@ function pageLoad() {
 				lng = latLong.lng;
 				console.log("lat: " + lat);
 				console.log("lng: " + lng);
+
+				<% $url = RunThisTown::Application.routes.url_helpers %>
+
+				window.location.href = "<%= $url.route_search_path %>" + "/?latitude=" + lat + "&longitude=" + lng
 			});
+		} else {
+			search_input = $("#routeAndFriendFinder").val()
+
+			window.location.href = "<%= $url.user_search_path %>" + "/?search=" + search_input
 		}
 	});
 }
