@@ -11,6 +11,16 @@ function pageLoad() {
 
 	// Functional JavaScript
 
+
+	function parseDateShort(rubyDate) {
+		// 2014-01-28 08:25:48 UTC
+		var yearMonthDay = rubyDate.substring(0, 10);
+		var year = yearMonthDay.substring(0, 4);
+		var month = yearMonthDay.substring(5, 7);
+		var day = yearMonthDay.substring(8, 10);
+		return month + "/" + day + "/" + year;
+	}
+
 	$("#totalDistIcon").tooltip({"placement": "right"});
 	$("#totalCalIcon").tooltip({"placement": "right"});
 	$("#longestRunIcon").tooltip({"placement": "right"});
@@ -33,14 +43,15 @@ function pageLoad() {
 	visualizationData = [[]];
 	longestRun = 0;
 	$("#routesToRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
-		var date = $(this).parent().children($(".profRouteDateVal"));
+		var date = $(this).parent().parent().parent().children(".profWaypointsContainer").children(".profRouteDate").children(".profRouteDateVal").html();
+		var shortDate = parseDateShort(date);
 		if ($(this).html() != "") {
 			console.log($(this).html());
 			thisDistance = parseFloat($(this).html());
 			if (thisDistance > longestRun) {
 				longestRun = thisDistance;
 			}
-			visualizationData[0].push({"y": thisDistance, "x": "D"});
+			visualizationData[0].push({"y": thisDistance, "x": shortDate});
 		}
 		$("#longestRunStat").html(longestRun.toString() + " mi");
 	});
@@ -90,10 +101,10 @@ function pageLoad() {
 
 
 
-	/*var outerWidth = $("#routeVisualizationContainer").width();
+	var outerWidth = $("#routeVisualizationContainer").width();
 	var outerHeight = 500;
 	
-	var margin = {top: 20, right: 20, bottom: 80, left: 80};
+	var margin = {top: 40, right: 20, bottom: 80, left: 80};
 	
 	var chartWidth = outerWidth - margin.left - margin.right;
 	var chartHeight = outerHeight - margin.top - margin.bottom;
@@ -135,8 +146,8 @@ function pageLoad() {
 
 	chart.selectAll("text").data([visualizationData[0][0]["x"], visualizationData[0][visualizationData[0].length - 1]["x"]]).enter().append("text")
 	.attr("class", "xScaleLabel")
-	.attr("x", xScale)
-	.attr("y", outerHeight)
+	.attr("x", function(d, i){console.log("i: " + i); if (i == 0) {return 101; } else {return 675; }})
+	.attr("y", 460)
 	.attr("dx", "0.3em")
 	.attr("dy", -margin.bottom/visualizationData[0].length)
 	.attr("text-anchor", "end")
@@ -177,7 +188,7 @@ function pageLoad() {
 	.attr("y", function(d) {return yScale(d.y0+d.y);})
 	.attr("width", xScale.rangeBand)
 	.attr("height", function(d){return yScale(d.y0) - yScale(d.y0 + d.y);})
-	.attr("class", "rect");*/
+	.attr("class", "rect");
 
 
 
