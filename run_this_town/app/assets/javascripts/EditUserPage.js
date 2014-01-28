@@ -1,4 +1,4 @@
-function editUserPageLoad() {
+function pageLoad() {
     if ($("#currentPasswordEdit").val() == "") {
       document.getElementById("updateProfBtn").disabled = true;
     }
@@ -11,5 +11,5 @@ function editUserPageLoad() {
     });
 
   }
-
-  $(document).ready(editUserPageLoad);
+  $(document).on("page:load", pageLoad);
+  $(document).ready(pageLoad);
