@@ -132,7 +132,7 @@ function pageLoad1() {
 
 
 
-		if (visualizationData[0].length < 1) {
+		if (visualizationData[0].length >= 1) {
 			console.log("here: ", visualizationData);
 			var outerWidth = $("#routeVisualizationContainer").width();
 			var outerHeight = 500;
@@ -253,83 +253,66 @@ function pageLoad1() {
 						</div>'
 			)*/
 
-	/*	function successClick(current) {
-			var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
-			var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
-			var wptAddresses = [];
-			current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
-				wptAddresses.push(current.html());
-			});
-			console.log(startAddress, endAddress, wptAddresses);
-
-			
-	// 		var currentRoute = current.parent().parent();
-	// 		current.remove();
-	// 		currentRoute.children(".profConfirmOrDeny").children(".profDeleteRoute").attr("id", "profRemoveRoute");
-			
-	// 		currentRoute.remove();
-	// 		$("#routesRunContainer").append(currentRoute);
-
-	// 		$(".profRouteEntry").on("click", function() {
-	// 			if ( $(this).css("height") == "40px" ) {
-	// 				$(this).css("height", "auto");
-	// 			} else {
-	// 				$(this).css("height", "40px");
-	// 			}
-	// 		});
-
-	// 		$("#profRemoveRoute").on("click", function() {
-	// 			removeClick($(this));
-	// 		});
-
-	// 		// backend stuff goes here, use startAddress, endAddress, and wptAddresses //
-	// 	}*/
+	function successClick(current) {
+		var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
+		var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
+		var wptAddresses = [];
+		current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
+			wptAddresses.push(current.html());
+		});
+		console.log(startAddress, endAddress, wptAddresses);
 
 		
-	// 	/*function deleteClick(current) {
-	// 		var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
-	// 		var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
-	// 		var wptAddresses = [];
-	// 		current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
-	// 			wptAddresses.push($(this).html());
-	// 		});
-	// 		console.log(wptAddresses);
-	// 		var currentRoute = current.parent().parent();
+		var currentRoute = current.parent().parent();
+		current.remove();
+		currentRoute.children(".profConfirmOrDeny").children(".profDeleteRoute").attr("id", "profRemoveRoute");
+		
+		currentRoute.remove();
+		$("#routesRunContainer").append(currentRoute);
 
-	// 		currentRoute.remove();
+		$(".profRouteEntry").on("click", function() {
+			if ( $(this).css("height") == "40px" ) {
+				$(this).css("height", "auto");
+			} else {
+				$(this).css("height", "40px");
+			}
+		});
 
-	// 		$("#profDeleteRoute").on("click", function() {
-	// 			deleteClick($(this));
-	// 		}); */
+		$("#profRemoveRoute").on("click", function() {
+			removeClick($(this));
+		});
 
-	// 		/*$(".profRouteEntry").on("click", function(route) {
-	// 			if ( route.css("height") == "40px" ) {
-	// 				route.css("height", "auto");
-	// 			} else {
-	// 				route.css("height", "40px");
-	// 			}
-	// 		});*/
+		// backend stuff goes here, use startAddress, endAddress, and wptAddresses //
+	}	
 
-	// 		// backend stuff goes here, use startAddress, endAddress, and wptAddresses
-	// 		/*$.ajax({
-	// 			beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-	// 			url: '/homepage_post',
-	// 			type: 'POST',
-	// 			data: {
-	// 				"start": startAddress,
-	// 				"end": endAddress,
-	// 				"wptAddress": wptAddresses
-	// 			},
-	// 			dataType: "json",
-	// 			success: function(data, textStatus){
-	// 				console.log("deletion twerked")
-	// 			},
-	// 			error: function(){
-	// 				console.log("did not delete...");
-	// 			}
-	// 		}); 
+		
+	function deleteClick(current) {
+		var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
+		var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
+		var wptAddresses = [];
+		current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
+			wptAddresses.push($(this).html());
+		});
+		console.log(wptAddresses);
+		var currentRoute = current.parent().parent();
 
-	// 	} */
+		currentRoute.remove();
+
+		$("#profDeleteRoute").on("click", function() {
+			deleteClick($(this));
+		}); */
+
+		$(".profRouteEntry").on("click", function(route) {
+			if ( route.css("height") == "40px" ) {
+				route.css("height", "auto");
+			} else {
+				route.css("height", "40px");
+			}
+		});
+
+		// backend stuff goes here, use startAddress, endAddress, and wptAddresses
+
+	} 
 
 	// /*	function removeClick(current) {
 	// 		var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
