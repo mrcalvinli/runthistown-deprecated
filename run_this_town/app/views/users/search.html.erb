@@ -3,15 +3,34 @@
 		<div id = "userCol1" class = "col-xs-6" style = "height: 100%;">
 			<% index = 0 %>
 			<% while index < @user_ids.size do %>
-				<% p current_user.friends[$index] %>
-				<%= render 'partials/user_info', user: User.find(@user_ids[index]), friend_status: nil %>
+				<% p index %>
+				<% friend_id = @user_ids[index] %>
+				<% if current_user.id == friend_id %>
+					<% index += 2 %>
+					<% next %>
+				<% end %>
+				<% status = nil %>
+				<% if Friendship.exists?(user_id: current_user.id, friend_id: friend_id) %>
+					<% status = Friendship.find_by_user_id_and_friend_id(current_user.id, friend_id).state %>
+				<% end %>
+				<%= render 'partials/user_info', user: User.find(@user_ids[index]), friend_status: status %>
 				<% index += 2 %>
 			<% end %>
 		</div>
 		<div id = "userCol2" class = "col-xs-6" style = "height: 100%;">
 			<% index = 1 %>
 			<% while index < @user_ids.size do %>
-				<%= render 'partials/user_info', user: User.find(@user_ids[index]), friend_status: nil %>
+				<% p index %>
+				<% friend_id = @user_ids[index] %>
+				<% if current_user.id == friend_id %>
+					<% index += 2 %>
+					<% next %>
+				<% end %>
+				<% status = nil %>
+				<% if Friendship.exists?(user_id: current_user.id, friend_id: friend_id) %>
+					<% status = Friendship.find_by_user_id_and_friend_id(current_user.id, friend_id).state %>
+				<% end %>
+				<%= render 'partials/user_info', user: User.find(@user_ids[index]), friend_status: status %>
 				<% index += 2 %>
 			<% end %>
 		</div>

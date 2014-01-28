@@ -13,5 +13,9 @@
 		<%= button_to "Delete Friend", {controller: "friendships", action: "destroy", user_id: current_user.id, friend_id: user.id}, {type: "button", :id => "userDelFriendBtn", :class => "btn btn-warning", :style => "float: right; margin-top: 36px; margin-right: 10px;", :method => :post, :form => { style: "float: right" } } %>
 	<% elsif friend_status == nil %>
 		<%= button_to "Add Friend", {controller: "friendships", action: "create", user_id: current_user.id, friend_id: user.id}, {type: "button", :id => "userAddFriendBtn", :class => "btn btn-warning", :style => "float: right; margin-top: 36px; margin-right: 10px;", :method => :post, :form => { style: "float: right"} } %>
+	<% elsif friend_status == 'requested' %>
+		<button class = "btn btn-info" style = "float: right; margin-top: 36px; margin-right: 10px; cursor: default" disabled>Requested</button>
+	<% else %>
+		<%= link_to "Respond to Request", homepage_path, style: "float: right; margin-top: 42px; margin-right: 10px;" %>
 	<% end %>
 </div>
