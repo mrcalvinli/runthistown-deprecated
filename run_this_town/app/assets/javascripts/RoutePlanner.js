@@ -1,35 +1,36 @@
-function pageLoad() {
-	/**** Styling JavaScript ***/
-	$("#map").css("height", ($(window).height() - $(".navbar").height));
-	console.log("mapHeight: " + $("#map").height());
-	$("#locList").css("height", ($(window).height() - $(".navbar").height));
+if ($('#routePlanningPage').length) {
+	function routePlannerPageLoad() {
+		/**** Styling JavaScript ***/
+		$("#map").css("height", ($(window).height() - $(".navbar").height));
+		console.log("mapHeight: " + $("#map").height());
+		$("#locList").css("height", ($(window).height() - $(".navbar").height));
 
-	$("#map").height($(window).height() - $(".navbar").height);
-	$("#locList").height($(window).height() - $(".navbar").height);
+		$("#map").height($(window).height() - $(".navbar").height);
+		$("#locList").height($(window).height() - $(".navbar").height);
 
-	var map = null;
-	var rendererOptions = {map: map, draggable: true};
+		var map = null;
+		var rendererOptions = {map: map, draggable: true};
 
-	directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+		directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
 
-	function initialize() {
-		var mapOptions = {
-			center: new google.maps.LatLng(51.505, -0.09),
-			zoom: 15
-		};
-		map = new google.maps.Map(document.getElementById("map"), mapOptions);
-		if (navigator.geolocation) {
-		     navigator.geolocation.getCurrentPosition(function (position) {
-		         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-		         map.setCenter(initialLocation);
-		     });
-		 }
+		function initialize() {
+			var mapOptions = {
+				center: new google.maps.LatLng(51.505, -0.09),
+				zoom: 15
+			};
+			map = new google.maps.Map(document.getElementById("map"), mapOptions);
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function (position) {
+					initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+					map.setCenter(initialLocation);
+				});
+			}
 
-	}
+		}
 
 
-	function createUrlAddress(location) {
-		var address = location.toString();
+		function createUrlAddress(location) {
+			var address = location.toString();
 		// Address ex: 1600 Amphitheatre Parkway, Mountain View, CA
 		var addressArray = address.split(" ");
 		var urlAddress = "";
@@ -104,51 +105,51 @@ function pageLoad() {
 	});
 
 	google.maps.event.addListener(autocomplete, 'place_changed', function() {
-	    infowindow.close();
-	    if (marker != null) {
-	    	marker.setVisible(false);
-	    }
-	    marker = new google.maps.Marker({
+		infowindow.close();
+		if (marker != null) {
+			marker.setVisible(false);
+		}
+		marker = new google.maps.Marker({
 			map:map
 		});
-	    
-	    var place = autocomplete.getPlace();
-	    if (!place.geometry) {
-	      return;
-	    }
+
+		var place = autocomplete.getPlace();
+		if (!place.geometry) {
+			return;
+		}
 
 	    // If the place has a geometry, then present it on a map.
 	    if (place.geometry.viewport) {
-	      map.fitBounds(place.geometry.viewport);
+	    	map.fitBounds(place.geometry.viewport);
 	    } else {
-	      map.setCenter(place.geometry.location);
+	    	map.setCenter(place.geometry.location);
 	      map.setZoom(17);  // Why 17? Because it looks good.
-	    }
+	  }
 	    var pinColor = "e6463d";  // red
-		if (Object.keys(markerDict).length == 0) {
+	    if (Object.keys(markerDict).length == 0) {
 			pinColor = "2eba3e"; // green
 		}
-	    marker.setIcon(/** @type {google.maps.Icon} */({
-	      url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
-	      size: new google.maps.Size(21, 34),
-	      origin: new google.maps.Point(0, 0),
-	      anchor: new google.maps.Point(10, 34)
-	    }));
-	    marker.setPosition(place.geometry.location);
-	    marker.setVisible(true);
+		marker.setIcon(/** @type {google.maps.Icon} */({
+			url: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+			size: new google.maps.Size(21, 34),
+			origin: new google.maps.Point(0, 0),
+			anchor: new google.maps.Point(10, 34)
+		}));
+		marker.setPosition(place.geometry.location);
+		marker.setVisible(true);
 
-	    var address = '';
-	    if (place.address_components) {
-	      address = [
-	        (place.address_components[0] && place.address_components[0].short_name || ''),
-	        (place.address_components[1] && place.address_components[1].short_name || ''),
-	        (place.address_components[2] && place.address_components[2].short_name || '')
-	      ].join(' ');
-	    }
+		var address = '';
+		if (place.address_components) {
+			address = [
+			(place.address_components[0] && place.address_components[0].short_name || ''),
+			(place.address_components[1] && place.address_components[1].short_name || ''),
+			(place.address_components[2] && place.address_components[2].short_name || '')
+			].join(' ');
+		}
 
-	    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-	    infowindow.open(map, marker);
-  	});
+		infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+		infowindow.open(map, marker);
+	});
 
 	var existingMarker = null;
 	// Map click listener
@@ -181,9 +182,9 @@ function pageLoad() {
 			}
 
 			var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
-		        new google.maps.Size(21, 34),
-		        new google.maps.Point(0,0),
-		        new google.maps.Point(10, 34));
+				new google.maps.Size(21, 34),
+				new google.maps.Point(0,0),
+				new google.maps.Point(10, 34));
 
 			marker = new google.maps.Marker({
 				position: new google.maps.LatLng(lat, lng),
@@ -216,12 +217,12 @@ function pageLoad() {
 				// var pinColor = "5B84EF"; // blue marker;
 				var pinColor = "2eba3e"; // green marker;
 				var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
-			        new google.maps.Size(21, 34),
-			        new google.maps.Point(0,0),
-			        new google.maps.Point(10, 34));
-			    if (keysArray[i] != "A") {
-			    	markerDict[keysArray[i]].setIcon(pinImage);
-			    }
+					new google.maps.Size(21, 34),
+					new google.maps.Point(0,0),
+					new google.maps.Point(10, 34));
+				if (keysArray[i] != "A") {
+					markerDict[keysArray[i]].setIcon(pinImage);
+				}
 			}
 			
 			markerDict[letterArray[letterIndex]] = marker;
@@ -253,7 +254,7 @@ function pageLoad() {
 					}
 
 					var center = new google.maps.LatLng(lat, lng);
-				    map.panTo(center);
+					map.panTo(center);
 
 					pathArray.push([lat, lng]);
 					if (pathArray.length >= 2) {
@@ -314,11 +315,11 @@ function pageLoad() {
 
 							function myLoop () {           //  create a loop function
 							   setTimeout(function () {    //  call a 3s setTimeout when the loop is called
-							      	var currentLetter = letterArray[i];
-									$("#routeEntry-" + currentLetter).animate(
-										{"margin-top": parseInt($("#routeEntry-" + currentLetter).css("margin-top")) - 45},
-										300
-									);
+							   	var currentLetter = letterArray[i];
+							   	$("#routeEntry-" + currentLetter).animate(
+							   		{"margin-top": parseInt($("#routeEntry-" + currentLetter).css("margin-top")) - 45},
+							   		300
+							   		);
 
 									console.log(i);        //  your code here
 									i++;                     //  increment the counter
@@ -332,7 +333,7 @@ function pageLoad() {
 										}
 										letterIndex--;
 									}                     //  ..  setTimeout()
-							   }, 150)
+								}, 150)
 							}
 
 							myLoop();  
@@ -342,34 +343,34 @@ function pageLoad() {
 
 
 					});
-					
-					$("#routeEntry-" + letterArray[letterIndex] + " .routeInput").val(address.toString());
-					letterIndex++;
+
+	$("#routeEntry-" + letterArray[letterIndex] + " .routeInput").val(address.toString());
+	letterIndex++;
 
 					// Remember that when deleting an element, you should also change the id of all the elements in front of it
 				}
 				
 				
 			});		
-			marker = null;
-		} else {
-			alert("Invalid Point");
-			console.log("marker is null");
-		}
-	});
+	marker = null;
+} else {
+	alert("Invalid Point");
+	console.log("marker is null");
+}
+});
 
 	routeInfoArray = [];
 	distance = 0;
 	distanceString = "";
 
 	function computeTotalDistance(result) {
-	  var total = 0;
-	  var myroute = result.routes[0];
-	  for (var i = 0; i < myroute.legs.length; i++) {
-	    total += myroute.legs[i].distance.value;
-	  }
-	  distance = Math.round(total * 0.000621371 * 100) / 100;
-	  document.getElementById('routeLength').innerHTML = distance + ' mi';
+		var total = 0;
+		var myroute = result.routes[0];
+		for (var i = 0; i < myroute.legs.length; i++) {
+		//	total += myroute.legs[i].distance.value;
+		}
+		distance = Math.round(total * 0.000621371 * 100) / 100;
+		document.getElementById('routeLength').innerHTML = distance + ' mi';
 	}
 
 	$("#pathCreator").on("click", function() {
@@ -422,7 +423,7 @@ function pageLoad() {
 
 							for (var i = 0; i < Object.keys(markerDict).length; i++) {
 								var keysArray = Object.keys(markerDict);
-							    markerDict[keysArray[i]].setMap(null);
+								markerDict[keysArray[i]].setMap(null);
 							}
 
 							$(".entrySpan").each(function() {
@@ -498,41 +499,41 @@ function pageLoad() {
 									alert('failed to get directions');
 								}
 							});
-						}
-					} else if (customOrder == true) {
-						if (dest != null) {
+}
+} else if (customOrder == true) {
+	if (dest != null) {
 
-							for (var i = 0; i < Object.keys(markerDict).length; i++) {
-								var keysArray = Object.keys(markerDict);
-							    markerDict[keysArray[i]].setMap(null);
-							}
+		for (var i = 0; i < Object.keys(markerDict).length; i++) {
+			var keysArray = Object.keys(markerDict);
+			markerDict[keysArray[i]].setMap(null);
+		}
 
-							$(".entrySpan").each(function() {
-								$(this).html("");
-							});
+		$(".entrySpan").each(function() {
+			$(this).html("");
+		});
 
-							var request = {
-								origin: org,
-								destination: dest,
-								waypoints: wpts,
-								optimizeWaypoints: false,
-								travelMode: google.maps.DirectionsTravelMode.WALKING
-							};
-							directionsService = new google.maps.DirectionsService();
-							directionsService.route(request, function(response, status) {
-								if (status == google.maps.DirectionsStatus.OK) {
-									console.log("success");
-									directionsDisplay.setDirections(response);
+		var request = {
+			origin: org,
+			destination: dest,
+			waypoints: wpts,
+			optimizeWaypoints: false,
+			travelMode: google.maps.DirectionsTravelMode.WALKING
+		};
+		directionsService = new google.maps.DirectionsService();
+		directionsService.route(request, function(response, status) {
+			if (status == google.maps.DirectionsStatus.OK) {
+				console.log("success");
+				directionsDisplay.setDirections(response);
 
-									var legsArray = response["routes"][0]["legs"];
-									var distanceInMeters = 0;
-									for (var i in legsArray){
-										var legDistance = parseFloat(legsArray[i]["distance"]["value"]);
-										distanceInMeters += legDistance;
-									}
-									distance = Math.round(distanceInMeters * 0.000621371 * 100) / 100;
-									distanceString = distance.toString() + " mi";
-									$("#routeLength").html(distance.toString() + " mi");
+				var legsArray = response["routes"][0]["legs"];
+				var distanceInMeters = 0;
+				for (var i in legsArray){
+					var legDistance = parseFloat(legsArray[i]["distance"]["value"]);
+					distanceInMeters += legDistance;
+				}
+				distance = Math.round(distanceInMeters * 0.000621371 * 100) / 100;
+				distanceString = distance.toString() + " mi";
+				$("#routeLength").html(distance.toString() + " mi");
 
 									// create routeInfoArray
 									if (routeInfoArray.length == 0) {
@@ -552,13 +553,13 @@ function pageLoad() {
 									for (var i = 0; i < letterIndex; i++) {
 										$("#routeEntry-" + letterArray[i] + " .entrySpan").html(letterArray[i]);
 									}
-								document.getElementById("createRouteBtn").disabled = false;
-								$(".deleteRouteEntry").css("display", "none");
+									document.getElementById("createRouteBtn").disabled = false;
+									$(".deleteRouteEntry").css("display", "none");
 								} else {
 									alert('failed to get directions');
 								}
 							});
-						}
+}
 					}/* else if (autoOrder) {
 						if (isNaN(parseFloat($("#desiredLength").val()))) {
 							alert("Invalid desired distance");
@@ -575,9 +576,9 @@ function pageLoad() {
 						}
 					}*/
 				});
-			})(j);
-		});
-	});
+})(j);
+});
+});
 
 	$("#clearRoute").on("click", function() {
 		$("#routeList").html("");
@@ -648,9 +649,7 @@ function pageLoad() {
 	$("#clearRoute").tooltip({"placement": "top", "title": "Clears all entries in your current route"});
 	$("#pathCreator").tooltip({"placement": "left", "title": "Shows you what your route looks like"});
 	$("#createRouteBtn").tooltip({"placement": "left", "title": "Confirm that you want to submit this route to your profile"});
-
-
+}
 }
 
-//$(document).on("page:load", pageLoad);
-$(document).ready(pageLoad);
+$(document).ready(routePlannerPageLoad);

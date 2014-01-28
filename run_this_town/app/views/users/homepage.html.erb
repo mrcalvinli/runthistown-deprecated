@@ -1,21 +1,22 @@
 <!-- Help Modal -->
+<div id="profilePage">
 <div id = "profileContainer" class = "container">
 	<div class = "col-md-3 leftSection" >
 		<div style = "padding-top: 15px; padding-bottom: 15px; width: 100%; height: 100%">
 			<div id = "profPicCont" style = "position: relative; ">
 				<%= link_to edit_user_registration_path do %>
-					<div id = "profPicCover" style = "background-color: rgba(0, 0, 0, 0.5); position: absolute; width: 100%; height: 100%; opacity: 0; cursor:pointer; ">
-						<h3 style = "color: white; display: block; text-align: center; ">Change Picture</h3>
-					</div>
+				<div id = "profPicCover" style = "background-color: rgba(0, 0, 0, 0.5); position: absolute; width: 100%; height: 100%; opacity: 0; cursor:pointer; ">
+					<h3 style = "color: white; display: block; text-align: center; ">Change Picture</h3>
+				</div>
 				<% if current_user.avatar_file_name == nil %>
-					<%= image_tag "ProfPic.jpg", :style => "width: 100%"%>
+				<%= image_tag "ProfPic.jpg", :style => "width: 100%"%>
 				<% else %>
-					<%= image_tag current_user.avatar.url, :style => "width: 100%"%>
-   				<% end %>
-   			<% end %>
+				<%= image_tag current_user.avatar.url, :style => "width: 100%"%>
+				<% end %>
+				<% end %>
 			</div>
 			<legend style = "border-color: grey; "><h1 id = "name" style = "text-align: center; margin-bottom: 15px; font-family: Sanchez"><%= current_user.first_name + " " + current_user.last_name%></h1></legend>
-			
+
 			<!-- <div class = "stat">
 				<span id = "goalsPlus" class = "statVal glyphicon glyphicon-plus" style = "position: absolute"></span><h2 style = "font-family: Sanchez; margin-top: 0">Goals</h2>
 				<div id = "newGoalContainer" style = "border-bottom: 1px solid grey; padding: 5px; padding-bottom: 0; overflow:hidden; height: 0">
@@ -35,7 +36,7 @@
 			</div> -->
 
 			<%= link_to friendships_new_path do %>
-				<button class = "btn btn-primary btn-block" style = "margin-bottom: 30px; ">My Friends</button>
+			<button class = "btn btn-primary btn-block" style = "margin-bottom: 30px; ">My Friends</button>
 			<% end %>
 
 			<div class = "stat"><legend style = "border-bottom-color: grey; "><h2 style = "font-family: Sanchez; margin-top: 0; ">Stats</h2></legend></div>
@@ -50,16 +51,16 @@
 			
 
 			<% if current_user.pending_friends.size > 0 %>
-				<div class = "stat"><legend style = "border-bottom-color: grey"><h2 style = "margin-top: 0; ">Pending Friends</h2></legend></div>
-				<% for friend in current_user.pending_friends %>
-					<div id = "pendingFriendsContainer">
-						<div>
-							<%= friend.get_name %>
-							<%= link_to "(Ignore)", {controller: "friendships", action: "destroy", user_id: current_user.id, friend_id: friend.id}, {:method => :delete, style: 'float: right;'} %>
-							<%= link_to "(Accept)", {controller: "friendships", action: "update", user_id: current_user.id, friend_id: friend.id}, {:method => :delete, style: 'float: right;'} %>
-						</div>
-					</div>
-				<% end %>
+			<div class = "stat"><legend style = "border-bottom-color: grey"><h2 style = "margin-top: 0; ">Pending Friends</h2></legend></div>
+			<% for friend in current_user.pending_friends %>
+			<div id = "pendingFriendsContainer">
+				<div>
+					<%= friend.get_name %>
+					<%= link_to "(Ignore)", {controller: "friendships", action: "destroy", user_id: current_user.id, friend_id: friend.id}, {:method => :delete, style: 'float: right;'} %>
+					<%= link_to "(Accept)", {controller: "friendships", action: "update", user_id: current_user.id, friend_id: friend.id}, {:method => :delete, style: 'float: right;'} %>
+				</div>
+			</div>
+			<% end %>
 			<% end %>
 		</div>
 	</div>
@@ -72,23 +73,24 @@
 				<div id = "routesToRunContainer">
 					<button type="button" class="btn btn-success btn-lg btn-block" style = "font-size: 18pt; margin-bottom: 10px;"><%= link_to 'Create a new route', routeplanner_path, :style => "color: white; text-decoration: none;" %></button>
 					<% current_user.run_routes.each do |route| %>
-						<% if !route.has_ran %>
-							<% @run_route = route %>
-							<%= render 'run_routes/run_route', :object => @run_route %>
-						<% end %>
+					<% if !route.has_ran %>
+					<% @run_route = route %>
+					<%= render 'run_routes/run_route', :object => @run_route %>
+					<% end %>
 					<% end %>
 				</div>
 				<legend style = "border-color: grey; position: relative; "><h2 style = "text-align: center; font-family: Sanchez">Routes that I've run</h2><a id = "toggleRouteVisualization" style = "float: right; cursor: pointer; position: absolute; top: 5px; right: 5px; ">Visualize</a></legend>
 				<div id = "routeVisualizationContainer"></div>
 				<div id = "routesRunContainer">
 					<% current_user.run_routes.each do |route| %>
-						<% if route.has_ran %>
-							<% @run_route = route %>
-							<%= render 'run_routes/ran_route', :object => @run_route %>
-						<% end %>
+					<% if route.has_ran %>
+					<% @run_route = route %>
+					<%= render 'run_routes/ran_route', :object => @run_route %>
+					<% end %>
 					<% end %>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 </div>

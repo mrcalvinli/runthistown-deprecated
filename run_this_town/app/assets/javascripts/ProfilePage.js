@@ -1,4 +1,5 @@
-function pageLoad() {
+if ($('#profilePage').length) {
+	function profilePageLoad() {
 	// Backend Stuff
 	// $("#name").html("Myname Mcgee");
 
@@ -67,7 +68,7 @@ function pageLoad() {
 	}
 
 	//deleteRouteLink
-	$(".deleteRouteLink").append($('<span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>'))
+	$(".deleteRouteLink").append($('<span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>'));
 	
 	$(".profDeleteRoute").on("mouseenter", function() {
 		$(this).css("opacity", 1);
@@ -108,7 +109,7 @@ function pageLoad() {
 					</div>'
 		)*/
 
-/*	function successClick(current) {
+	function successClick(current) {
 		var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
 		var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
 		var wptAddresses = [];
@@ -137,7 +138,7 @@ function pageLoad() {
 		});
 
 		// backend stuff goes here, use startAddress, endAddress, and wptAddresses //
-	}*/
+	}
 
 	
 	/*function deleteClick(current) {
@@ -228,6 +229,6 @@ function pageLoad() {
 		removeClick($(this));
 	});*/
 }
+}
 
-$(document).on("page:load", pageLoad);
-$(document).ready(pageLoad);
+$(document).ready(profilePageLoad);
