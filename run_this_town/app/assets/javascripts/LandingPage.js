@@ -9,6 +9,10 @@ function pageLoad() {
 	$("#navigator").css("margin-top", (mainHeight/2) - $("#navigator").height()/2 + 60 - 20);
 	$("#infoSection1 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
 	$("#infoSection2 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
+	$(".landingSection3Icon").css("height", (mainHeight - 365)/3);
+	$("#landingSection3Icon2").css("font-size", (mainHeight - 365)/3);
+	$("#landingSection3Icon3").css("font-size", (mainHeight - 365)/3);
+
 
 	$(window).resize(function() {
 		var mainHeight = $(window).height() - 60;
