@@ -1,5 +1,5 @@
 if ($('#landingPage').length) {
-	function pageLoad() {
+	function landingPageLoad() {
 		// Styling javascript
 
 		var mainHeight = $(window).height() - 60;
@@ -122,4 +122,4 @@ if ($('#landingPage').length) {
 	}
 }
 
-$(document).ready(pageLoad);
+$(document).ready(landingPageLoad);
