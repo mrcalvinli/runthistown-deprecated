@@ -23,7 +23,13 @@
     <div style = "margin: 10px;"><%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation , :class => "userInput", :placeholder => "New Password" %></div>
 
-    <div style = "margin: 10px"><%= f.label :change_picture %>
+    <div style = "margin: 10px; input-group"><%= f.label :weight %>
+      <%= f.text_field :weight , :class => "userInput", :placeholder => "Weight" %>
+      <span class="input-group-addon">lbs</span>
+    </div>
+
+
+    <div style = "margin: 10px"><%= f.label :change_picture %> <i>(Max: 5 mb, must be .png or .jpg)</i>
     <%= f.file_field :avatar %></div>
 
     <div style = "margin: 10px;  margin-top: 30px; padding-top: 30px; border: 1px solid transparent; border-top-color: grey;"><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>

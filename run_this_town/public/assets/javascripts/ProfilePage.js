@@ -13,7 +13,6 @@ function pageLoad() {
 
 	$("#totalDistIcon").tooltip({"placement": "right"});
 	$("#totalCalIcon").tooltip({"placement": "right"});
-	$("#longestRunIcon").tooltip({"placement": "right"});
 
 	$("#goalsPlus").on("click", function() {
 		var buttonHeight = parseInt($("#newGoalBtn").css("height")) + parseInt($("#newGoalContainer").css("padding")) + parseInt($("#newGoalContainer").css("padding"));
@@ -31,18 +30,6 @@ function pageLoad() {
 		$("#totalDistanceStat").html(totalDistanceTraveled.toString() + " mi");
 	});
 
-	var longestRun = 0;
-	$("#routesToRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
-		if ($(this).html() != "") {
-			console.log($(this).html());
-			thisDistance = parseFloat($(this).html());
-			if (thisDistance > longestRun) {
-				longestRun = thisDistance;
-			}
-		}
-		$("#longestRunStat").html(longestRun.toString() + " mi");
-	});
-
 	// Route entry template
 
 	$(".profRouteEntry").on("click", function() {
@@ -52,8 +39,6 @@ function pageLoad() {
 			$(this).css("height", "40px");
 		}
 	});
-
-	
 
 	$("#profPicCont").on("mouseenter", function() {
 		$("#profPicCover").css("opacity", 1);
@@ -69,14 +54,6 @@ function pageLoad() {
 	//deleteRouteLink
 	$(".deleteRouteLink").append($('<span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>'))
 	
-	$(".profDeleteRoute").on("mouseenter", function() {
-		$(this).css("opacity", 1);
-	});
-
-	$(".profDeleteRoute").on("mouseleave", function() {
-		$(this).css("opacity", 0.5);
-	});
-
 
 	// Backend Stuff
 	// New Stat template

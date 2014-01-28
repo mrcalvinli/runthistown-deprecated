@@ -6,6 +6,7 @@
 	<div class = "profRunRouteInfo" style = "display: inline-block; width: 49%; ">
 		<p class = "profRouteName">Name: <span><%= @run_route.name %></span></p>
 		<p class = "profRouteDistance">Distance Traveled: <span class = "profRouteDistanceVal"><%= @run_route.distance %></span></p>
+		<p class = "profCaloriesBurned">Calories Burned: <span class = "profCaloriesBurnedVal"></span></p>
 		<p class = "profRouteStart">Start: <span><%= @run_route.locations[0].name %></span></p>
 		<p class = "profRouteEnd">End: <span><%= @run_route.locations[-1].name %></span></p>
 	</div>

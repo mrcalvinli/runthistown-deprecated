@@ -15,41 +15,52 @@
    			<% end %>
 			</div>
 			<legend style = "border-color: grey; "><h1 id = "name" style = "text-align: center; margin-bottom: 15px; font-family: Sanchez"><%= current_user.first_name + " " + current_user.last_name%></h1></legend>
-			<div class = "stat"><p id = "totalDistanceStat" class = "statVal">0 mi</p> <%= image_tag "RunningMan.png", :id => "totalDistIcon", :style  => "width: 16px", :title => "Total distance run" %></div>
-			<div class = "stat"><p class = "statVal">0 cal</p><span id = "totalCalIcon" class = "glyphicon glyphicon-fire" data-toggle = "tooltip" title = "Total Calories Burned"></span></div>
-			<div class = "statContainer">
-				<!-- <div class = "stat">
-					<span id = "goalsPlus" class = "statVal glyphicon glyphicon-plus" style = "position: absolute"></span><h2 style = "font-family: Sanchez; margin-top: 0">Goals</h2>
-					<div id = "newGoalContainer" style = "border-bottom: 1px solid grey; padding: 5px; padding-bottom: 0; overflow:hidden; height: 0">
-						<div id = "newGoalBtn" class="btn-group">
-						  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-						    Action <span class="caret"></span>
-						  </button>
-						  <ul class="dropdown-menu" role="menu">
-						    <li><a href="#">Action</a></li>
-						    <li><a href="#">Another action</a></li>
-						    <li><a href="#">Something else here</a></li>
-						    <li class="divider"></li>
-						    <li><a href="#">Separated link</a></li>
-						  </ul>
+			
+			<!-- <div class = "stat">
+				<span id = "goalsPlus" class = "statVal glyphicon glyphicon-plus" style = "position: absolute"></span><h2 style = "font-family: Sanchez; margin-top: 0">Goals</h2>
+				<div id = "newGoalContainer" style = "border-bottom: 1px solid grey; padding: 5px; padding-bottom: 0; overflow:hidden; height: 0">
+					<div id = "newGoalBtn" class="btn-group">
+					  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+					    Action <span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" role="menu">
+					    <li><a href="#">Action</a></li>
+					    <li><a href="#">Another action</a></li>
+					    <li><a href="#">Something else here</a></li>
+					    <li class="divider"></li>
+					    <li><a href="#">Separated link</a></li>
+					  </ul>
+					</div>
+				</div>
+			</div> -->
+
+			<%= link_to friendships_new_path do %>
+				<button class = "btn btn-primary btn-block" style = "margin-bottom: 30px; ">My Friends</button>
+			<% end %>
+
+			<div class = "stat"><legend style = "border-bottom-color: grey; "><h2 style = "font-family: Sanchez; margin-top: 0; ">Stats</h2></legend></div>
+			<div id = "statContainer">
+				<div class = "stat"><p id = "totalDistanceStat" class = "statVal">0 mi</p> <%= image_tag "RunningMan.png", :id => "totalDistIcon", :style  => "width: 16px", :title => "Total distance run" %></div>
+
+				<div class = "stat"><p id = "longestRunStat" class = "statVal">0 mi</p><span id = "longestRunIcon" class = "glyphicon glyphicon-road" data-toggle = "tooltip" title = "Longest Run"></span></div>
+
+				<div class = "stat"><p class = "statVal">0 cal</p><span id = "totalCalIcon" class = "glyphicon glyphicon-fire" data-toggle = "tooltip" title = "Total Calories Burned"></span></div>
+			</div>
+
+			
+
+			<% if current_user.pending_friends.size > 0 %>
+				<div class = "stat"><legend style = "border-bottom-color: grey"><h2 style = "margin-top: 0; ">Pending Friends</h2></legend></div>
+				<% for friend in current_user.pending_friends %>
+					<div id = "pendingFriendsContainer">
+						<div>
+							<%= friend.get_name %>
+							<%= link_to "(Ignore)", {controller: "friendships", action: "destroy", user_id: current_user.id, friend_id: friend.id}, {:method => :delete, style: 'float: right;'} %>
+							<%= link_to "(Accept)", {controller: "friendships", action: "update", user_id: current_user.id, friend_id: friend.id}, {:method => :delete, style: 'float: right;'} %>
 						</div>
 					</div>
-				</div> -->
-				<div class = "stat"><legend style = "border-bottom-color: grey; "><h2 style = "font-family: Sanchez; margin-top: 0; ">Stats</h2></legend></div>
-				<div id = "statContainer"></div>
-				<% if current_user.pending_friends.size > 0 %>
-					<div class = "stat"><legend style = "border-bottom-color: grey"><h2 style = "margin-top: 0; ">Pending Friends</h2></legend></div>
-					<% for friend in current_user.pending_friends %>
-						<div id = "pendingFriendsContainer">
-							<div>
-								<%= friend.get_name %>
-								<%= link_to "(Ignore)", {controller: "friendships", action: "destroy", user_id: current_user.id, friend_id: friend.id}, {:method => :delete, style: 'float: right;'} %>
-								<%= link_to "(Accept)", {controller: "friendships", action: "update", user_id: current_user.id, friend_id: friend.id}, {:method => :delete, style: 'float: right;'} %>
-							</div>
-						</div>
-					<% end %>
 				<% end %>
-			</div>
+			<% end %>
 		</div>
 	</div>
 
@@ -67,7 +78,8 @@
 						<% end %>
 					<% end %>
 				</div>
-				<legend style = "border-color: grey; "><h2 style = "text-align: center; font-family: Sanchez">Routes that I've run</h2></legend>
+				<legend style = "border-color: grey; position: relative; "><h2 style = "text-align: center; font-family: Sanchez">Routes that I've run</h2><a id = "toggleRouteVisualization" style = "float: right; cursor: pointer; position: absolute; top: 5px; right: 5px; ">Visualize</a></legend>
+				<div id = "routeVisualizationContainer"></div>
 				<div id = "routesRunContainer">
 					<% current_user.run_routes.each do |route| %>
 						<% if route.has_ran %>
