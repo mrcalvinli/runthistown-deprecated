@@ -16,10 +16,9 @@ function aRoutesPageLoad() {
 			},
 				100
 				);*/
-	}, 300
-	);	
+		}, 300);	
 	}
-});
+}
 
 $(document).on("page:load", aRoutesPageLoad);
 $(document).ready(aRoutesPageLoad);
