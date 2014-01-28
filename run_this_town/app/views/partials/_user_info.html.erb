@@ -6,7 +6,7 @@
 		<%= user.get_name %>
 	</span>
 	<% if friend_status == 'accepted' %>
-		<%= link_to "", {controller: "friendships", action: "destroy", user_id: current_user.id, friend_id: user.id}, {:method => :delete, :class => "userDelFriendLink"} %>
+		<%= button_to "Delete Friend", {controller: "friendships", action: "destroy", user_id: current_user.id, friend_id: user.id}, {type: "button", :id => "userDelFriendBtn", :class => "btn btn-warning", :style => "float: right; margin-top: 36px; margin-right: 10px;", :method => :delete} %>
 	<% elsif friend_status == nil %>
 		<%= link_to "", {controller: "friendships", action: "destroy", user_id: current_user.id, friend_id: user.id}, {:method => :delete, :class => "userAddFriendLink"} %>
 	<% end %>
