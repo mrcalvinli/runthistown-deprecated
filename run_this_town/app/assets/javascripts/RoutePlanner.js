@@ -652,5 +652,5 @@ function pageLoad() {
 
 }
 
-$(document).on("page:load", pageLoad);
+//$(document).on("page:load", pageLoad);
 $(document).ready(pageLoad);
