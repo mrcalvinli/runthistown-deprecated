@@ -11,7 +11,7 @@
 		<p class = "profRouteEnd">End: <span><%= @run_route.locations[-1].name %></span></p>
 	</div>
 	<div class = "profWaypointsContainer" style = "display: inline-block; width: 49%; height: 100%; position: absolute; top: 0; ">
-		<p style = "margin-top: 10px; text-align: center; " class = "profRouteDate">Date: <span><%= @run_route.created_at.to_s %></span></p>
+		<p style = "margin-top: 10px; text-align: center; " class = "profRouteDate">Date: <span class = "profRouteDateVal"><%= @run_route.created_at.to_s %></span></p>
 		
 		<div class = "wptsList">
 			<legend><h4 style = "text-align: center; font-family: Sanchez Regular">Waypoints Visited:</h4></legend>
