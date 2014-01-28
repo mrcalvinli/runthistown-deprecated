@@ -63,54 +63,88 @@ function pageLoad1() {
 		});
 
 
-		var totalDistanceTraveled = 0;
-		$("#routesRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
-			if ($(this).html() != "") {
-				totalDistanceTraveled += parseFloat($(this).html());
-			}			
-		});
-		totalDistanceTraveled = Math.round(totalDistanceTraveled * 100) / 100;
-		$("#totalDistanceStat").html(totalDistanceTraveled.toString() + " mi");
+		
 
 
 
-		visualizationData = [[]];
-		longestRun = 0;
-		$("#routesRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
-			var date = $(this).parent().parent().parent().children(".profWaypointsContainer").children(".profRouteDate").children(".profRouteDateVal").html();
-			var shortDate = parseDateShort(date);
-			if ($(this).html() != "") {
-				thisDistance = parseFloat($(this).html());
-				if (thisDistance > longestRun) {
-					longestRun = thisDistance;
+		
+
+		function createVisualizationData() {
+			visualizationData = [[]];
+			$("#routesRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
+				var date = $(this).parent().parent().parent().children(".profWaypointsContainer").children(".profRouteDate").children(".profRouteDateVal").html();
+				var shortDate = parseDateShort(date);
+				// $(this).parent().parent().parent().children(".profWaypointsContainer").children(".profRouteDate").children(".profRouteDateVal").html(shortDate);
+				if ($(this).html() != "") {
+					thisDistance = parseFloat($(this).html());
+					visualizationData[0].push({"y": thisDistance, "x": shortDate});
 				}
-				visualizationData[0].push({"y": thisDistance, "x": shortDate});
-			}
-			
-		});
-
-		var totalCalBurned = 0;
-		$("#routesRunContainer .profRouteEntry .profCaloriesBurnedVal").each(function(i) {
-			if ($(this).html() != "") {
-				console.log($(this).html());
-				totalCalBurned += parseInt($(this).html());
-			}			
-		});
-		$("#totalCalStat").html(totalCalBurned.toString() + " cal");
-
-		console.log("yis??");
-		console.log(visualizationData[0].length);
-		if (visualizationData[0].length < 2) {
-			console.log("yissss");
-			$("#toggleRouteVisualization").css("display", "none"); 
+				
+			});
+			return visualizationData;
 		}
-		longestRun = Math.round(longestRun * 100) / 100;
-		$("#longestRunStat").html(longestRun.toString() + " mi");
+
+		updateStats();
+		function updateStats() {
+			var totalDistanceTraveled = 0;
+			$("#routesRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
+				if ($(this).html() != "") {
+					totalDistanceTraveled += parseFloat($(this).html());
+				}			
+			});
+			totalDistanceTraveled = Math.round(totalDistanceTraveled * 100) / 100;
+			$("#totalDistanceStat").html(totalDistanceTraveled.toString() + " mi");
+
+			visualizationData = [[]];
+			longestRun = 0;
+			$("#routesRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
+				var date = $(this).parent().parent().parent().children(".profWaypointsContainer").children(".profRouteDate").children(".profRouteDateVal").html();
+				var shortDate = parseDateShort(date);
+				// $(this).parent().parent().parent().children(".profWaypointsContainer").children(".profRouteDate").children(".profRouteDateVal").html(shortDate);
+				if ($(this).html() != "") {
+					thisDistance = parseFloat($(this).html());
+					if (thisDistance > longestRun) {
+						longestRun = thisDistance;
+					}
+					visualizationData[0].push({"y": thisDistance, "x": shortDate});
+				}
+				
+			});
+			longestRun = Math.round(longestRun * 100) / 100;
+			$("#longestRunStat").html(longestRun.toString() + " mi");
+
+			var totalCalBurned = 0;
+			$("#routesRunContainer .profRouteEntry .profCaloriesBurnedVal").each(function(i) {
+				if ($(this).html() != "") {
+					console.log($(this).html());
+					totalCalBurned += parseInt($(this).html());
+				}			
+			});
+			$("#totalCalStat").html(totalCalBurned.toString() + " cal");
+
+			if (visualizationData[0].length < 2) {
+				console.log("invisible")
+				$("#toggleRouteVisualization").css("display", "none"); 
+				$("#routeVisualizationContainer").css("height", "0");
+			} else {
+				console.log("visible")
+				$("#toggleRouteVisualization").css("display", "block"); 
+
+			}
+		}
+
+		
+
+
+		
+
+		
 
 		// Route entry template
 
 
 		$(".profRouteEntry").on("click", function() {
+			console.log("clicked on route entry")
 			if ( $(this).css("height") == "40px" ) {
 				$(this).css("height", "auto");
 			} else {
@@ -158,97 +192,99 @@ function pageLoad1() {
 			}
 		});
 
+		createChart();
+		function createChart() {
+			visualizationData = createVisualizationData();
+			$("#routeVisualizationContainer").html("");
+			if (visualizationData[0].length >= 1) {
+				console.log("here: ", visualizationData);
+				var outerWidth = $("#routeVisualizationContainer").width();
+				var outerHeight = 500;
+				
+				var margin = {top: 40, right: 20, bottom: 80, left: 80};
+				
+				var chartWidth = outerWidth - margin.left - margin.right;
+				var chartHeight = outerHeight - margin.top - margin.bottom;
+				
+				var stack = d3.layout.stack();
+				//var stack = d3.layout.partition(); //left it as stack for simplicity
+				var stackedData = stack(visualizationData);
+				
+				var yStackMax = d3.max(stackedData, function(layer){return d3.max(layer, function(d){return d.y + d.y0;});});
+				
+				var yGroupMax = d3.max(stackedData, function(layer){return d3.max(layer, function(d){return d.y;});});
+				
+				var xScale = d3.scale.ordinal().domain(d3.range(visualizationData[0].length)).rangeBands([0, chartWidth]);
+				var yScale = d3.scale.linear().domain([0, yStackMax]).range([chartHeight, 0]);
+				
+				
+				var grouped = false;
+
+				var topIndex = 3;
 
 
-		if (visualizationData[0].length >= 1) {
-			console.log("here: ", visualizationData);
-			var outerWidth = $("#routeVisualizationContainer").width();
-			var outerHeight = 500;
-			
-			var margin = {top: 40, right: 20, bottom: 80, left: 80};
-			
-			var chartWidth = outerWidth - margin.left - margin.right;
-			var chartHeight = outerHeight - margin.top - margin.bottom;
-			
-			var stack = d3.layout.stack();
-			//var stack = d3.layout.partition(); //left it as stack for simplicity
-			var stackedData = stack(visualizationData);
-			
-			var yStackMax = d3.max(stackedData, function(layer){return d3.max(layer, function(d){return d.y + d.y0;});});
-			
-			var yGroupMax = d3.max(stackedData, function(layer){return d3.max(layer, function(d){return d.y;});});
-			
-			var xScale = d3.scale.ordinal().domain(d3.range(visualizationData[0].length)).rangeBands([0, chartWidth]);
-			var yScale = d3.scale.linear().domain([0, yStackMax]).range([chartHeight, 0]);
-			
-			
-			var grouped = false;
+				var chart = d3
+				.select("#routeVisualizationContainer") // equivalent to jQuery $("") selector
+				.append("svg") // Here we are appending divs to what we selected
+				.attr("class", "chart").attr("height", outerHeight).attr("width",outerWidth)
+				.append("g") // group element
+				.attr("transform", "translate(" + margin.left + "," + margin.top +")")
+				//.on("click", function(){ grouped ? shrinkWindow() : expandWindow();});
+				 // Same as jQuery
 
-			var topIndex = 3;
+				// adds lines
+				chart.selectAll("line").data(yScale.ticks(10)).enter().append("line")
+				.attr("x1", 0).attr("x2", chartWidth).attr("y1", yScale).attr("y2", yScale);
 
+				// adds labels to y axis
 
-			var chart = d3
-			.select("#routeVisualizationContainer") // equivalent to jQuery $("") selector
-			.append("svg") // Here we are appending divs to what we selected
-			.attr("class", "chart").attr("height", outerHeight).attr("width",outerWidth)
-			.append("g") // group element
-			.attr("transform", "translate(" + margin.left + "," + margin.top +")")
-			//.on("click", function(){ grouped ? shrinkWindow() : expandWindow();});
-			 // Same as jQuery
+				chart.selectAll("text").data([visualizationData[0][0]["x"], visualizationData[0][visualizationData[0].length - 1]["x"]]).enter().append("text")
+				.attr("class", "xScaleLabel")
+				.attr("x", function(d, i){console.log("i: " + i); if (i == 0) {return 101; } else {return 675; }})
+				.attr("y", 460)
+				.attr("dx", "0.3em")
+				.attr("dy", -margin.bottom/visualizationData[0].length)
+				.attr("text-anchor", "end")
+				.text(String);
 
-			// adds lines
-			chart.selectAll("line").data(yScale.ticks(10)).enter().append("line")
-			.attr("x1", 0).attr("x2", chartWidth).attr("y1", yScale).attr("y2", yScale);
-
-			// adds labels to y axis
-
-			chart.selectAll("text").data([visualizationData[0][0]["x"], visualizationData[0][visualizationData[0].length - 1]["x"]]).enter().append("text")
-			.attr("class", "xScaleLabel")
-			.attr("x", function(d, i){console.log("i: " + i); if (i == 0) {return 101; } else {return 675; }})
-			.attr("y", 460)
-			.attr("dx", "0.3em")
-			.attr("dy", -margin.bottom/visualizationData[0].length)
-			.attr("text-anchor", "end")
-			.text(String);
-
-			chart.selectAll("text").data(yScale.ticks(10)).enter().append("text")
-			.attr("class", "yScaleLabel")
-			.attr("x", 0)
-			.attr("y", yScale)
-			.attr("dx", -margin.left/8)
-			.attr("dy", "0.3em")
-			.attr("text-anchor", "end")
-			.text(String);
+				chart.selectAll("text").data(yScale.ticks(10)).enter().append("text")
+				.attr("class", "yScaleLabel")
+				.attr("x", 0)
+				.attr("y", yScale)
+				.attr("dx", -margin.left/8)
+				.attr("dy", "0.3em")
+				.attr("text-anchor", "end")
+				.text(String);
 
 
 
-			var layerGroups = chart.selectAll(".layer").data(stackedData).enter()
-			.append("g")
-			.attr("class", "layer");
+				var layerGroups = chart.selectAll(".layer").data(stackedData).enter()
+				.append("g")
+				.attr("class", "layer");
 
-			chart.append("g")
-			  .attr("class", "y axis")
-			  .call(yScale)
-			.append("text")
-			  .attr("transform", "rotate(-90)")
-			  .attr("y", 6)
-			  .attr("dy", "-55px")
-			  .attr("dx", "-150px")
-			  .style("text-anchor", "end")
-			  .text("Miles Run");
+				chart.append("g")
+				  .attr("class", "y axis")
+				  .call(yScale)
+				.append("text")
+				  .attr("transform", "rotate(-90)")
+				  .attr("y", 6)
+				  .attr("dy", "-55px")
+				  .attr("dx", "-150px")
+				  .style("text-anchor", "end")
+				  .text("Miles Run");
 
-			for (var i; i<=3; i++){
-				chart.selectAll(".layer").attr("class", "layer" + i);
+				for (var i; i<=3; i++){
+					chart.selectAll(".layer").attr("class", "layer" + i);
+				}
+
+				var rects = layerGroups.selectAll("rect").data(function(d){ return d;}).enter().append("rect")
+				.attr("x", function(d, i) {return xScale(i);})
+				.attr("y", function(d) {return yScale(d.y0+d.y);})
+				.attr("width", xScale.rangeBand)
+				.attr("height", function(d){return yScale(d.y0) - yScale(d.y0 + d.y);})
+				.attr("class", "rect");
 			}
-
-			var rects = layerGroups.selectAll("rect").data(function(d){ return d;}).enter().append("rect")
-			.attr("x", function(d, i) {return xScale(i);})
-			.attr("y", function(d) {return yScale(d.y0+d.y);})
-			.attr("width", xScale.rangeBand)
-			.attr("height", function(d){return yScale(d.y0) - yScale(d.y0 + d.y);})
-			.attr("class", "rect");
 		}
-
 
 
 		// Backend Stuff
@@ -301,7 +337,8 @@ function pageLoad1() {
 			$("#routesRunContainer").append(currentRoute);
 			currentRoute.children(".profConfirmOrDeny").children(".profDeleteRoute").attr("class", "glyphicon glyphicon-arrow-up profRemoveRoute").attr("id", "Rroute-" + routeId).attr("data-toggle", "").attr("data-target", "");
 
-			$(".profRouteEntry").on("click", function() {
+			$(currentRoute).on("click", function() {
+				console.log("clicked on route entry")
 				if ( $(this).css("height") == "40px" ) {
 					$(this).css("height", "auto");
 				} else {
@@ -311,6 +348,8 @@ function pageLoad1() {
 
 			$(".profRemoveRoute").on("click", function() {
 				removeClick($(this));
+				createChart();
+				updateStats();
 			});
 
 			$(".profConfirmRoute").on("mouseenter", function() {
@@ -368,7 +407,7 @@ function pageLoad1() {
 
 			currentRoute.remove();
 
-			$(".profRouteEntry").on("click", function(route) {
+			$(currentRoute).on("click", function(route) {
 				if ( route.css("height") == "40px" ) {
 					route.css("height", "auto");
 				} else {
@@ -430,7 +469,8 @@ function pageLoad1() {
 			currentRoute.remove();
 			$("#routesToRunContainer").append(currentRoute);
 
-			$(".profRouteEntry").on("click", function() {
+			$(currentRoute).on("click", function() {
+				console.log("clicked on route entry")
 				if ( $(this).css("height") == "40px" ) {
 					$(this).css("height", "auto");
 				} else {
@@ -440,6 +480,8 @@ function pageLoad1() {
 
 			$(".profConfirmRoute").on("click", function() {
 				successClick($(this));
+				createChart();
+				updateStats();
 			});
 
 			$(".profDeleteRoute").on("click", function() {
@@ -447,6 +489,8 @@ function pageLoad1() {
 		 		$("#profConfirmDeleteRoute").on("click", function() {
 			 		deleteClick(current);
 			 	});
+			 	createChart();
+			 	updateStats();
 		 	});
 
 			$(".profConfirmRoute").on("mouseenter", function() {
@@ -490,6 +534,8 @@ function pageLoad1() {
 		}
 	 	$(".profConfirmRoute").on("click", function() {
 	 		successClick($(this));
+	 		createChart();
+	 		updateStats();
 	 	});
 
 	 	$(".profDeleteRoute").on("click", function() {
@@ -497,12 +543,16 @@ function pageLoad1() {
 	 		$("#profConfirmDeleteRoute").on("click", function() {
 		 		deleteClick(current);
 		 	});
+		 	createChart();
+		 	updateStats();
 	 	});
 		 	
 
 
 	 	$(".profRemoveRoute").on("click", function() {
 	 		removeClick($(this));
+	 		createChart();
+	 		updateStats();
 	 	});
 	}
 }
