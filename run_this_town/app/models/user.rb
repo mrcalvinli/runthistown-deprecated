@@ -40,14 +40,18 @@ class User < ActiveRecord::Base
 			points = 0
 			for string in vals
 				if string.include? "@" and string.downcase == user.email.downcase
-					points += 1
+					points += 2
 				end
 
 				if string.downcase == user.first_name.downcase
+					points += 2
+				elsif user.first_name.downcase.include? string.downcase
 					points += 1
 				end
 
 				if string.downcase == user.last_name.downcase
+					points += 2
+				elsif user.last_name.downcase.include? string.downcase
 					points += 1
 				end
 			end

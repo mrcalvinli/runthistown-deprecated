@@ -1,6 +1,10 @@
 <div class = "userContainer">
 	<div class = "userImgContainer" style = "width: 100px; height: 100px; overflow: hidden; float: left;">
-		<%= image_tag "ProfPic.jpg", class: "img-thumbnail", style: "width: 100px;" %>
+		<% if user.avatar_file_name == nil %>
+			<%= image_tag "ProfPic.jpg", :style => "width: 100%"%>
+		<% else %>
+			<%= image_tag user.avatar.url, :style => "width: 100%; vertical-align: center;"%>
+   		<% end %>
 	</div>
 	<span style = "display: inline-block; margin-left: 20px; margin-top: 36px; font-size: 22px; " class = "userUsernameSpan">
 		<% if friend_status == 'accepted' %>

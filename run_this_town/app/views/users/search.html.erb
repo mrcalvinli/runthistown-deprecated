@@ -5,10 +5,6 @@
 			<% while index < @user_ids.size do %>
 				<% p index %>
 				<% friend_id = @user_ids[index] %>
-				<% if current_user.id == friend_id %>
-					<% index += 2 %>
-					<% next %>
-				<% end %>
 				<% status = nil %>
 				<% if Friendship.exists?(user_id: current_user.id, friend_id: friend_id) %>
 					<% status = Friendship.find_by_user_id_and_friend_id(current_user.id, friend_id).state %>
@@ -22,10 +18,6 @@
 			<% while index < @user_ids.size do %>
 				<% p index %>
 				<% friend_id = @user_ids[index] %>
-				<% if current_user.id == friend_id %>
-					<% index += 2 %>
-					<% next %>
-				<% end %>
 				<% status = nil %>
 				<% if Friendship.exists?(user_id: current_user.id, friend_id: friend_id) %>
 					<% status = Friendship.find_by_user_id_and_friend_id(current_user.id, friend_id).state %>
