@@ -18,7 +18,6 @@ function aRoutesPageLoad() {
 				);*/
 		}, 300);	
 		$(".profRouteEntry").on("click", function() {
-			console.log("clicked on route entry")
 			if ( $(this).css("height") == "40px" ) {
 				$(this).css("height", "auto");
 			} else {
@@ -27,7 +26,6 @@ function aRoutesPageLoad() {
 		});
 
 		if ($("#routeSearchContainer").children().length == 0) {
-			console.log("yes");
 			$("#routeSearchContainer").append($("<div style = 'z-index: -1; position: absolute; height: 100%; width: 100%; text-align: center; '><h2 style = 'margin-top: 30%; '>Could not find any routes</h2></div>"));
 		}
 	}

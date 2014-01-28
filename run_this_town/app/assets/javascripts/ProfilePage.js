@@ -116,18 +116,15 @@ function pageLoad1() {
 			var totalCalBurned = 0;
 			$("#routesRunContainer .profRouteEntry .profCaloriesBurnedVal").each(function(i) {
 				if ($(this).html() != "") {
-					console.log($(this).html());
 					totalCalBurned += parseInt($(this).html());
 				}			
 			});
 			$("#totalCalStat").html(totalCalBurned.toString() + " cal");
 
 			if (visualizationData[0].length < 2) {
-				console.log("invisible")
 				$("#toggleRouteVisualization").css("display", "none"); 
 				$("#routeVisualizationContainer").css("height", "0");
 			} else {
-				console.log("visible")
 				$("#toggleRouteVisualization").css("display", "block"); 
 
 			}
@@ -144,7 +141,6 @@ function pageLoad1() {
 
 
 		$(".profRouteEntry").on("click", function() {
-			console.log("clicked on route entry")
 			if ( $(this).css("height") == "40px" ) {
 				$(this).css("height", "auto");
 			} else {
@@ -197,7 +193,6 @@ function pageLoad1() {
 			visualizationData = createVisualizationData();
 			$("#routeVisualizationContainer").html("");
 			if (visualizationData[0].length >= 1) {
-				console.log("here: ", visualizationData);
 				var outerWidth = $("#routeVisualizationContainer").width();
 				var outerHeight = 500;
 				
@@ -240,7 +235,7 @@ function pageLoad1() {
 
 				chart.selectAll("text").data([visualizationData[0][0]["x"], visualizationData[0][visualizationData[0].length - 1]["x"]]).enter().append("text")
 				.attr("class", "xScaleLabel")
-				.attr("x", function(d, i){console.log("i: " + i); if (i == 0) {return 101; } else {return 675; }})
+				.attr("x", function(d, i){if (i == 0) {return 101; } else {return 675; }})
 				.attr("y", 460)
 				.attr("dx", "0.3em")
 				.attr("dy", -margin.bottom/visualizationData[0].length)
@@ -326,7 +321,6 @@ function pageLoad1() {
 			current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
 				wptAddresses.push(current.html());
 			});
-			console.log(startAddress, endAddress, wptAddresses);
 
 			
 			var currentRoute = current.parent().parent();
@@ -338,7 +332,6 @@ function pageLoad1() {
 			currentRoute.children(".profConfirmOrDeny").children(".profDeleteRoute").attr("class", "glyphicon glyphicon-arrow-up profRemoveRoute").attr("id", "Rroute-" + routeId).attr("data-toggle", "").attr("data-target", "");
 
 			$(currentRoute).on("click", function() {
-				console.log("clicked on route entry")
 				if ( $(this).css("height") == "40px" ) {
 					$(this).css("height", "auto");
 				} else {
@@ -402,7 +395,6 @@ function pageLoad1() {
 			current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
 				wptAddresses.push($(this).html());
 			});
-			console.log(wptAddresses);
 			var currentRoute = current.parent().parent();
 
 			currentRoute.remove();
@@ -463,14 +455,12 @@ function pageLoad1() {
 			current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
 				wptAddresses.push(current.html());
 			});
-			console.log(startAddress, endAddress, wptAddresses);
 			var currentRoute = current.parent().parent();
-			currentRoute.children(".profConfirmOrDeny").html('<span id = "Croute-' + routeId + '" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span><span id = "Droute-' + routeId + '" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute" data-toggle="modal" data-target="#profDeleteConfirmModal"></span>');
+			currentRoute.children(".profConfirmOrDeny").html('<span id = "Croute-' + routeId + '" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span><span id = "Droute-' + routeId + '" style = "color: #e6463d; font-size: 20px; opacity: 0.5; margin-left: 3px; " class = "glyphicon glyphicon-remove profDeleteRoute" data-toggle="modal" data-target="#profDeleteConfirmModal"></span>');
 			currentRoute.remove();
 			$("#routesToRunContainer").append(currentRoute);
 
 			$(currentRoute).on("click", function() {
-				console.log("clicked on route entry")
 				if ( $(this).css("height") == "40px" ) {
 					$(this).css("height", "auto");
 				} else {
