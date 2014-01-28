@@ -2,8 +2,6 @@ if ($('#landingPage').length) {
 	function landingPageLoad() {
 		// Styling javascript
 
-<<<<<<< HEAD
-=======
 	var mainHeight = $(window).height() - 60;
 	$(".jumbotron").css("height", mainHeight - 100);
 	$("#infoSection1").height(mainHeight);
@@ -18,7 +16,6 @@ if ($('#landingPage').length) {
 
 
 	$(window).resize(function() {
->>>>>>> e82c7a71fa65358e63ab214d4635887bf0b94047
 		var mainHeight = $(window).height() - 60;
 		$(".jumbotron").css("height", mainHeight - 100);
 		$("#infoSection1").height(mainHeight);
@@ -26,8 +23,6 @@ if ($('#landingPage').length) {
 		$("#infoSection3").height(mainHeight);
 		$("#navigator").css("margin-top", (mainHeight/2) - $("#navigator").height()/2 + 60 - 20);
 		$("#infoSection1 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
-<<<<<<< HEAD
-=======
 		$("#infoSection2 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
 		if ( $(window).width() < 1440 ){
 			$('.jumbotron').css("min-height", '793px');
@@ -35,7 +30,6 @@ if ($('#landingPage').length) {
 			$('.jumbotron').css('min-height', '500px');
 		}
 	});
->>>>>>> e82c7a71fa65358e63ab214d4635887bf0b94047
 
 		$(window).resize(function() {
 			var mainHeight = $(window).height() - 60;
