@@ -11,12 +11,12 @@ function friendListLoad() {
 				$("#userListContainer").animate({"height": containerHeight}, 1000, "easeOutBounce", function() {
 					$("#userListContainer").css("overflow", "auto");
 				});
-				/*setTimeout(function() {
+				setTimeout(function() {
 					var containerHeight = $(window).height() - 55
 					$("#userListContainer").animate({"height": containerHeight}, 800, "easeOutBounce");
 				},
 					100
-				);*/
+				);
 			}, 300
 		);
 		var col1html = $("#userCol1").val();
