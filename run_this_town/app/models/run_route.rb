@@ -25,7 +25,7 @@ class RunRoute < ActiveRecord::Base
 	#private, helper function
 	#Takes in lat and long, returns value of shortest distance from one of the waypoints
 	def shortest_distance_from(latitude, longitude)
-		min_dist = BigDecimal.new("10")
+		min_dist = BigDecimal.new("10.0")
 		input_lat = BigDecimal.new(latitude)
 		input_lng = BigDecimal.new(longitude)
 
@@ -97,7 +97,7 @@ class RunRoute < ActiveRecord::Base
 
 	def self.search_closest_routes(latitude, longitude)
 		#Heap to hold the most relevant routes
-		max_heap = (1..NUM_ROUTES).collect { LocNode.new(-1, BigDecimal("10")) }
+		max_heap = (1..NUM_ROUTES).collect { LocNode.new(-1, BigDecimal("0.70")) }
 
 		#Find 50 top best routes by updating max_heap
 		self.all.each do |route|
@@ -113,6 +113,7 @@ class RunRoute < ActiveRecord::Base
 
 		#Sort max_heap array
 		max_heap.sort_by! { |node| node.shortest_dist }
+		max_heap.select! { |node| node.id != -1 }
 		return max_heap.map { |node| node.id }
 	end
 end
