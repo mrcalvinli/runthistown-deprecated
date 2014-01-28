@@ -10,9 +10,10 @@ if ($('#landingPage').length) {
 	$("#navigator").css("margin-top", (mainHeight/2) - $("#navigator").height()/2 + 60 - 20);
 	$("#infoSection1 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
 	$("#infoSection2 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
-	$(".landingSection3Icon").css("height", (mainHeight - 365)/3);
-	$("#landingSection3Icon2").css("font-size", (mainHeight - 365)/3);
-	$("#landingSection3Icon3").css("font-size", (mainHeight - 365)/3);
+	$("#infoSection3 h2").css("font-size",  Math.ceil(mainHeight * $(window).width() / 40000));
+	$(".landingSection3Icon").css("height", (mainHeight - 440)/3);
+	$("#landingSection3Icon2").css("font-size", (mainHeight - 440)/3);
+	$("#landingSection3Icon3").css("font-size", (mainHeight - 440)/3);
 
 
 	$(window).resize(function() {
@@ -24,6 +25,10 @@ if ($('#landingPage').length) {
 		$("#navigator").css("margin-top", (mainHeight/2) - $("#navigator").height()/2 + 60 - 20);
 		$("#infoSection1 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
 		$("#infoSection2 p").css("font-size", Math.ceil(mainHeight * $(window).width() / 40000));
+		$("#infoSection3 h2").css("font-size",  Math.ceil(mainHeight * $(window).width() / 40000));
+		$(".landingSection3Icon").css("height", (mainHeight - 440)/3);
+		$("#landingSection3Icon2").css("font-size", (mainHeight - 440)/3);
+		$("#landingSection3Icon3").css("font-size", (mainHeight - 440)/3);
 		if ( $(window).width() < 1440 ){
 			$('.jumbotron').css("min-height", '793px');
 		} else {
