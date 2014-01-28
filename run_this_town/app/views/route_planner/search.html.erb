@@ -1,5 +1,5 @@
 <div class = "container" style = "height: 100%">
-	<div id = "routeListContainer" style = "margin-top: 70px; border-radius: 5px; width: 10px; height: 10px; background-color: rgba(66, 139, 202, 0.3); padding: 0; margin-left: auto; margin-right: auto; overflow: hidden;">
+	<div id = "routeSearchContainer" style = "margin-top: 70px; border-radius: 5px; width: 10px; height: 10px; background-color: rgba(66, 139, 202, 0.3); padding: 0; margin-left: auto; margin-right: auto; overflow: hidden;">
 		<% for route_id in @route_ids %>
 			<% route = RunRoute.find(route_id) %>
 			<% if route.user_id == current_user.id %>

@@ -64,9 +64,18 @@ legend {
 	height: calc(100% - 41px);
 	overflow: auto;
  }
- #profDeleteRoute:hover {
+ .profConfirmRoute:hover {
  	opacity: 1;
  };
+
+  .profDeleteRoute:hover {
+ 	opacity: 1;
+ };
+
+  .profRemoveRoute:hover {
+ 	opacity: 1;
+ };
+
  #profPicCont {
  	cursor: pointer;
  }

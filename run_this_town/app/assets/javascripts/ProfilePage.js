@@ -21,11 +21,28 @@ function pageLoad1() {
 		$(".deleteRouteLink").append($('<span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>'));
 		$(".removeRouteLink").append($('<span id = "profRemoveRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-arrow-up profRemoveRoute"></span>'));
 		
+		
+		$(".profConfirmRoute").on("mouseenter", function() {
+			$(this).css("opacity", 1);
+		});
+
+		$(".profConfirmRoute").on("mouseleave", function() {
+			$(this).css("opacity", 0.5);
+		});
+
 		$(".profDeleteRoute").on("mouseenter", function() {
 			$(this).css("opacity", 1);
 		});
 
 		$(".profDeleteRoute").on("mouseleave", function() {
+			$(this).css("opacity", 0.5);
+		});
+
+		$(".profRemoveRoute").on("mouseenter", function() {
+			$(this).css("opacity", 1);
+		});
+
+		$(".profRemoveRoute").on("mouseleave", function() {
 			$(this).css("opacity", 0.5);
 		});
 
@@ -295,6 +312,30 @@ function pageLoad1() {
 				removeClick($(this));
 			});
 
+			$(".profConfirmRoute").on("mouseenter", function() {
+				$(this).css("opacity", 1);
+			});
+
+			$(".profConfirmRoute").on("mouseleave", function() {
+				$(this).css("opacity", 0.5);
+			});
+
+			$(".profDeleteRoute").on("mouseenter", function() {
+				$(this).css("opacity", 1);
+			});
+
+			$(".profDeleteRoute").on("mouseleave", function() {
+				$(this).css("opacity", 0.5);
+			});
+
+			$(".profRemoveRoute").on("mouseenter", function() {
+				$(this).css("opacity", 1);
+			});
+
+			$(".profRemoveRoute").on("mouseleave", function() {
+				$(this).css("opacity", 0.5);
+			});
+
 			// backend stuff goes here, use startAddress, endAddress, and wptAddresses //
 			$.ajax({
 				beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
@@ -337,6 +378,30 @@ function pageLoad1() {
 					route.css("height", "40px");
 				}
 			});
+
+			$(".profConfirmRoute").on("mouseenter", function() {
+			$(this).css("opacity", 1);
+		});
+
+		$(".profConfirmRoute").on("mouseleave", function() {
+			$(this).css("opacity", 0.5);
+		});
+
+		$(".profDeleteRoute").on("mouseenter", function() {
+			$(this).css("opacity", 1);
+		});
+
+		$(".profDeleteRoute").on("mouseleave", function() {
+			$(this).css("opacity", 0.5);
+		});
+
+		$(".profRemoveRoute").on("mouseenter", function() {
+			$(this).css("opacity", 1);
+		});
+
+		$(".profRemoveRoute").on("mouseleave", function() {
+			$(this).css("opacity", 0.5);
+		});
 
 			// backend stuff goes here, use startAddress, endAddress, and wptAddresses
 			$.ajax({
@@ -383,6 +448,30 @@ function pageLoad1() {
 			$(".profDeleteRoute").on("click", function() {
 				deleteClick($(this));
 			});
+
+			$(".profConfirmRoute").on("mouseenter", function() {
+			$(this).css("opacity", 1);
+		});
+
+		$(".profConfirmRoute").on("mouseleave", function() {
+			$(this).css("opacity", 0.5);
+		});
+
+		$(".profDeleteRoute").on("mouseenter", function() {
+			$(this).css("opacity", 1);
+		});
+
+		$(".profDeleteRoute").on("mouseleave", function() {
+			$(this).css("opacity", 0.5);
+		});
+
+		$(".profRemoveRoute").on("mouseenter", function() {
+			$(this).css("opacity", 1);
+		});
+
+		$(".profRemoveRoute").on("mouseleave", function() {
+			$(this).css("opacity", 0.5);
+		});
 
 			// backend stuff goes here, use startAddress, endAddress, and wptAddresses
 			$.ajax({

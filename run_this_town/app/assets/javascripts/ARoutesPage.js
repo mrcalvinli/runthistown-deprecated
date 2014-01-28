@@ -1,14 +1,14 @@
 function aRoutesPageLoad() {
-	if (document.getElementById("routeListContainer") != null) {
+	if (document.getElementById("routeSearchContainer") != null) {
 		var containerHeight = $(window).height() - 80;
 		$(window).resize(function(){
-			$("#routeListContainer").height($(window).height() - 80)
+			$("#routeSearchContainer").height($(window).height() - 80)
 		});
 		setTimeout(function() {
-			$("#routeListContainer").animate({"width": "100%", "padding": "10px"}, 500, "easeOutExpo");
+			$("#routeSearchContainer").animate({"width": "100%", "padding": "10px"}, 500, "easeOutExpo");
 			
-			$("#routeListContainer").animate({"height": containerHeight}, 1000, "easeOutBounce", function() {
-				$("#routeListContainer").css("overflow", "auto");
+			$("#routeSearchContainer").animate({"height": containerHeight}, 1000, "easeOutBounce", function() {
+				$("#routeSearchContainer").css("overflow", "auto");
 			});
 			/*setTimeout(function() {
 				var containerHeight = $(window).height() - 55
