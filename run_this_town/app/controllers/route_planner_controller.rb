@@ -34,13 +34,21 @@ class RoutePlannerController < ApplicationController
 	def update
 		@route = RunRoute.find(params[:route_id])
 		@route.has_ran = params[:has_ran]
-		@route.save!
-		redirect_to homepage_path
+		respond_to do |format|
+			if @route.save!
+				format.json { render json: {success: true} }
+			else
+				format.json { render json: {success: false} }
+			end
+		end
+
 	end
 
 	def destroy
 		@route = RunRoute.find(params[:route_id])
 		@route.destroy
-		redirect_to homepage_path
+		respond_to do |format|
+			format.json { render json: {success: true} }
+		end
 	end
 end

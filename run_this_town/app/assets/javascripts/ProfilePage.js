@@ -254,6 +254,8 @@ function pageLoad1() {
 			)*/
 
 		function successClick(current) {
+			var routeId = parseInt(current.attr("id").split("-")[1])
+
 			var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
 			var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
 			var wptAddresses = [];
@@ -269,7 +271,7 @@ function pageLoad1() {
 			
 			currentRoute.remove();
 			$("#routesRunContainer").append(currentRoute);
-			currentRoute.children(".profConfirmOrDeny").children(".profDeleteRoute").attr("class", "glyphicon glyphicon-remove profRemoveRoute");
+			currentRoute.children(".profConfirmOrDeny").children(".profDeleteRoute").attr("class", "glyphicon glyphicon-arrow-up profRemoveRoute").attr("id", "Rroute-" + routeId);
 
 			$(".profRouteEntry").on("click", function() {
 				if ( $(this).css("height") == "40px" ) {
@@ -284,10 +286,25 @@ function pageLoad1() {
 			});
 
 			// backend stuff goes here, use startAddress, endAddress, and wptAddresses //
+			$.ajax({
+				beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+				url: '/update_route',
+				type: 'POST',
+				dataType: 'JSON',
+				data: {
+					route_id: routeId,
+					has_ran: true
+				},
+				success: function(data, textStatus) {
+					console.log("success has_ran!");
+				}
+			});
 		}	
 
 			
 		function deleteClick(current) {
+			var routeId = parseInt(current.attr("id").split("-")[1])
+
 			var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
 			var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
 			var wptAddresses = [];
@@ -312,10 +329,23 @@ function pageLoad1() {
 			});
 
 			// backend stuff goes here, use startAddress, endAddress, and wptAddresses
-
+			$.ajax({
+				beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+				url: '/destroy_route',
+				type: 'POST',
+				dataType: 'JSON',
+				data: {
+					route_id: routeId,
+				},
+				success: function(data, textStatus) {
+					console.log("success delete!");
+				}
+			});
 		} 
 
 		function removeClick(current) {
+			var routeId = parseInt(current.attr("id").split("-")[1])
+
 			var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
 			var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
 			var wptAddresses = [];
@@ -324,7 +354,7 @@ function pageLoad1() {
 			});
 			console.log(startAddress, endAddress, wptAddresses);
 			var currentRoute = current.parent().parent();
-			currentRoute.children(".profConfirmOrDeny").html('<span id = "profSuccessRoute" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span><span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>');
+			currentRoute.children(".profConfirmOrDeny").html('<span id = "Croute-' + routeId + '" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span><span id = "Droute-' + routeId + '" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>');
 			currentRoute.remove();
 			$("#routesToRunContainer").append(currentRoute);
 
@@ -345,6 +375,19 @@ function pageLoad1() {
 			});
 
 			// backend stuff goes here, use startAddress, endAddress, and wptAddresses
+			$.ajax({
+				beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+				url: '/update_route',
+				type: 'POST',
+				dataType: 'JSON',
+				data: {
+					route_id: routeId,
+					has_ran: false
+				},
+				success: function(data, textStatus) {
+					console.log("success has_not_ran!");
+				}
+			});
 		}
 	 	$(".profConfirmRoute").on("click", function() {
 	 		successClick($(this));

@@ -9,8 +9,8 @@ RunThisTown::Application.routes.draw do
     match '/user_search',       to: 'users#search',             via: 'get'
     match '/routeplanner',      to: 'route_planner#new',        via: 'get'
     match '/routeplanner_post', to: 'route_planner#create',     via: [:post]
-    match '/update_route',      to: 'route_planner#update',     via: 'get'
-    match '/destroy_route',     to: 'route_planner#destroy',    via: 'get'
+    match '/update_route',      to: 'route_planner#update',     via: [:post]
+    match '/destroy_route',     to: 'route_planner#destroy',    via: [:post]
     match '/route_search',      to: 'route_planner#search',     via: 'get'
 
 
