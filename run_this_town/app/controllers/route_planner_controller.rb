@@ -31,8 +31,14 @@ class RoutePlannerController < ApplicationController
 		@route_ids = RunRoute.search_closest_routes(params[:latitude], params[:longitude])
 	end
 
+	def update
+		@route = RunRoute.find(params[:route_id])
+		@route.has_ran = params[:has_ran]
+		@route.save!
+		redirect_to homepage_path
+	end
+
 	def destroy
-		puts "tighttight"
 		@route = RunRoute.find(params[:route_id])
 		@route.destroy
 		redirect_to homepage_path
