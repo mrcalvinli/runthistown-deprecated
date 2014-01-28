@@ -67,7 +67,7 @@ function pageLoad() {
 	}
 
 	//deleteRouteLink
-	$(".deleteRouteLink").append($('<span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>'))
+	$(".deleteRouteLink").append($('<span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>'));
 	
 	$("#profDeleteRoute").on("mouseenter", function() {
 		$(this).css("opacity", 1);
