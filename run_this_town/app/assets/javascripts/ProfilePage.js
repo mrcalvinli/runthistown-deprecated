@@ -40,8 +40,10 @@ function pageLoad1() {
 				totalDistanceTraveled += parseFloat($(this).html());
 			}
 			console.log(totalDistanceTraveled);
-			$("#totalDistanceStat").html(totalDistanceTraveled.toString() + " mi");
+			
 		});
+		totalDistanceTraveled = Math.round(totalDistanceTraveled * 100) / 100;
+		$("#totalDistanceStat").html(totalDistanceTraveled.toString() + " mi");
 		visualizationData = [[]];
 		longestRun = 0;
 		$("#routesToRunContainer .profRouteEntry .profRouteDistanceVal").each(function(i) {
@@ -55,8 +57,10 @@ function pageLoad1() {
 				}
 				visualizationData[0].push({"y": thisDistance, "x": shortDate});
 			}
-			$("#longestRunStat").html(longestRun.toString() + " mi");
+			
 		});
+		longestRun = Math.round(longestRun * 100) / 100;
+		$("#longestRunStat").html(longestRun.toString() + " mi");
 
 		// Route entry template
 
