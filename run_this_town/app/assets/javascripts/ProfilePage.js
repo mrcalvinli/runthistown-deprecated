@@ -1,4 +1,5 @@
-function profilePageLoad() {
+if ($('#profilePage').length) {
+	function profilePageLoad() {
 	// Backend Stuff
 	// $("#name").html("Myname Mcgee");
 
@@ -227,6 +228,7 @@ function profilePageLoad() {
 /*	$("#profRemoveRoute").on("click", function() {
 		removeClick($(this));
 	});*/
+}
 }
 
 $(document).ready(profilePageLoad);
