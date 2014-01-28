@@ -17,6 +17,14 @@ function aRoutesPageLoad() {
 				100
 				);*/
 		}, 300);	
+		$(".profRouteEntry").on("click", function() {
+			console.log("clicked on route entry")
+			if ( $(this).css("height") == "40px" ) {
+				$(this).css("height", "auto");
+			} else {
+				$(this).css("height", "40px");
+			}
+		});
 	}
 }
 
