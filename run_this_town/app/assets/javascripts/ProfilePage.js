@@ -12,40 +12,32 @@ function pageLoad1() {
 
 		// Functional JavaScript
 
-
-	//confirmRouteLink
-	$(".confirmRouteLink").append($('<span id = "profSuccessRoute" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span>'));
-	$(".deleteRouteLink").append($('<span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>'));
-	$(".removeRouteLink").append($('<span id = "profRemoveRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-arrow-up profRemoveRoute"></span>'));
-	
-	$(".profDeleteRoute").on("mouseenter", function() {
-		$(this).css("opacity", 1);
-	});
-
-	$(".profDeleteRoute").on("mouseleave", function() {
-		$(this).css("opacity", 0.5);
-	});
-
-	function parseDateShort(rubyDate) {
-		// 2014-01-28 08:25:48 UTC
-		var yearMonthDay = rubyDate.substring(0, 10);
-		var year = yearMonthDay.substring(0, 4);
-		var month = yearMonthDay.substring(5, 7);
-		var day = yearMonthDay.substring(8, 10);
-		return month + "/" + day + "/" + year;
-	}
-
-	$("#toggleRouteVisualization").on("click", function() {
-		var routeVisualizationContainer = $("#routeVisualizationContainer");
-		if (routeVisualizationContainer.height() == 0) {
-			routeVisualizationContainer.animate({"height": "500px"}, 500);
-		} else {
-			routeVisualizationContainer.animate({"height": "0px"}, 500);
-		}
-
 		$("#totalDistIcon").tooltip({"placement": "right"});
 		$("#totalCalIcon").tooltip({"placement": "right"});
 		$("#longestRunIcon").tooltip({"placement": "right"});
+
+		//confirmRouteLink
+		$(".confirmRouteLink").append($('<span id = "profSuccessRoute" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span>'));
+		$(".deleteRouteLink").append($('<span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>'));
+		$(".removeRouteLink").append($('<span id = "profRemoveRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-arrow-up profRemoveRoute"></span>'));
+		
+		$(".profDeleteRoute").on("mouseenter", function() {
+			$(this).css("opacity", 1);
+		});
+
+		$(".profDeleteRoute").on("mouseleave", function() {
+			$(this).css("opacity", 0.5);
+		});
+
+		function parseDateShort(rubyDate) {
+			// 2014-01-28 08:25:48 UTC
+			var yearMonthDay = rubyDate.substring(0, 10);
+			var year = yearMonthDay.substring(0, 4);
+			var month = yearMonthDay.substring(5, 7);
+			var day = yearMonthDay.substring(8, 10);
+			return month + "/" + day + "/" + year;
+		}
+
 
 		$("#goalsPlus").on("click", function() {
 			var buttonHeight = parseInt($("#newGoalBtn").css("height")) + parseInt($("#newGoalContainer").css("padding")) + parseInt($("#newGoalContainer").css("padding"));
@@ -80,6 +72,10 @@ function pageLoad1() {
 			}
 			
 		});
+		if (visualizationData == [[]]) {
+
+			$("#visualizationData").css("display", "none"); 
+		}
 		longestRun = Math.round(longestRun * 100) / 100;
 		$("#longestRunStat").html(longestRun.toString() + " mi");
 
@@ -105,12 +101,16 @@ function pageLoad1() {
 			$("#profPicCover").css("opacity", 0);
 		});
 
-		if ($("#routesRunContainer").html() == "") {
-			$("#routesRunContainer").append($("<div style = 'height: 100%; text-align: center; '>You have no routes yet.  Click the button above to get started!</div>"));
+		if ($("#routesRunContainer").val() == "") {
+			$("#routesRunContainer").append($("<div style = 'font-size: 14pt; height: 100%; text-align: center; '>You have not run a route yet.  Click the check mark on any routes above that you've completed</div>"));
+		}
+
+		if ($("#routesToRunContainer").val() == "") {
+			$("#routesToRunContainer").append($("<div style = 'font-size: 14pt; height: 100%; text-align: center; '>You have no pending routes.  Click the button above to create a new route!</div>"));
 		}
 
 		//deleteRouteLink
-		$(".deleteRouteLink").append($('<span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>'))
+		// $(".deleteRouteLink").append($('<span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>'))
 		
 		$(".profDeleteRoute").on("mouseenter", function() {
 			$(this).css("opacity", 1);
