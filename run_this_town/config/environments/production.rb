@@ -80,5 +80,5 @@ RunThisTown::Application.configure do
 
   #Required for DEVISE*****
   #Change when implementing
-  config.action_mailer.default_url_options = { :host => 'http://pure-anchorage-3360.herokuapp.com/' }
+  config.action_mailer.default_url_options = { :host => 'http://runthistown.herokuapp.com/' }
 end
