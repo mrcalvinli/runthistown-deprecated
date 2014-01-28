@@ -6,9 +6,12 @@ class FriendshipsController < ApplicationController
 		@user_id = params[:user_id]
 		@friend_id = params[:friend_id]
 
-		unless (@user_id == @friend_id || Friendship.exists?(user_id: @user_id, friend_id: @friend_id) || current_user.id.to_s != @user_id)
+		p current_user.id
+		p @user_id
+		unless (@user_id == @friend_id || Friendship.exists?(user_id: @user_id.to_i, friend_id: @friend_id.to_i) || current_user.id.to_s != @user_id)
 			Friendship.create(user_id: @user_id, friend_id: @friend_id, state: "requested")
 			Friendship.create(user_id: @friend_id, friend_id: @user_id, state: "pending")
+			puts "did this"
 		end
 
 		# TODO: Do error messages if friends don't get added
@@ -36,6 +39,6 @@ class FriendshipsController < ApplicationController
 			Friendship.find_by_user_id_and_friend_id(@friend_id, @user_id).destroy
 		end
 
-		redirect_to friendships_new_path
+		redirect_to homepage_path
 	end
 end

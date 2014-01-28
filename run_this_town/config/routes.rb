@@ -7,6 +7,7 @@ RunThisTown::Application.routes.draw do
     root :to => "landing#home"
     match '/homepage',          to: 'users#homepage',           via: 'get'
     match '/user_search',       to: 'users#search',             via: 'get'
+    match '/user_friend',       to: 'users#view_friend',         via: 'get'
     match '/routeplanner',      to: 'route_planner#new',        via: 'get'
     match '/routeplanner_post', to: 'route_planner#create',     via: [:post]
     match '/update_route',      to: 'route_planner#update',     via: [:post]
@@ -15,8 +16,9 @@ RunThisTown::Application.routes.draw do
 
 
     get "friendships/new"
-    get "friendships/create"
+    post "friendships/create"
     get "friendships/destroy"
+    post "friendships/destroy"
     get "friendships/update"
 
     # The priority is based upon order of creation: first created -> highest priority.
