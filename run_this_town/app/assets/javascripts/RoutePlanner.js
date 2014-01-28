@@ -1,5 +1,6 @@
 function pageLoad2() {
 	if (document.getElementById('map') != null) {
+		$("#navHelpItem").attr('style', "display: block ");
 		/**** Styling JavaScript ***/
 		$("#map").css("height", ($(window).height() - $(".navbar").height));
 		console.log("mapHeight: " + $("#map").height());

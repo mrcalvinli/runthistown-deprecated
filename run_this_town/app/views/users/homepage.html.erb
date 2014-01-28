@@ -65,6 +65,10 @@
 				<div class = "stat"><p id = "longestRunStat" class = "statVal">0 mi</p><span id = "longestRunIcon" class = "glyphicon glyphicon-road" data-toggle = "tooltip" title = "Longest Run"></span></div>
 
 				<div class = "stat"><p id = "totalCalStat" class = "statVal">0 cal</p><span id = "totalCalIcon" class = "glyphicon glyphicon-fire" data-toggle = "tooltip" title = "Total Calories Burned"></span></div>
+
+				<% if current_user.weight == nil %>
+					<p style = "text-align: center">(To show calories, enter your weight in Account Settings)</p>
+				<% end %>
 			</div>
 
 			
