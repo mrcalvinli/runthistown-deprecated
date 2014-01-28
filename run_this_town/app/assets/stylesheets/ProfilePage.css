@@ -70,3 +70,8 @@ legend {
  #profPicCont {
  	cursor: pointer;
  }
+ #routeVisualizationContainer {
+ 	background-color: rgba(0, 0, 0, 0.1);
+ 	height: 0px; 
+ 	border-radius: 10px;
+ }
