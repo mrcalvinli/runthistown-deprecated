@@ -78,6 +78,8 @@ function toolbarLoad() {
 	lat = 0;
 	lng = 0;
 	$("#navSearchBtn").on("click", function() {
+		<% url = RunThisTown::Application.routes.url_helpers %>
+
 		if (findRoutes) {
 			var location = $("#routeAndFriendFinder").val();
 			var urlAddress = createUrlAddress(location);
@@ -90,7 +92,12 @@ function toolbarLoad() {
 				lng = latLong.lng;
 				console.log("lat: " + lat);
 				console.log("lng: " + lng);
+
+				window.location.href = "<%= url.route_search_path %>" + "?latitude=" + lat + "&longitude=" + lng;
 			});
+		} else {
+			search = $('#routeAndFriendFinder').val()
+			window.location.href = "<%= url.user_search_path %>" + "?search=" + search
 		}
 	});
 }
