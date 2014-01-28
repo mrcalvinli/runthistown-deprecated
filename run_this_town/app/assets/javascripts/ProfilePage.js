@@ -253,109 +253,110 @@ function pageLoad1() {
 						</div>'
 			)*/
 
-	function successClick(current) {
-		var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
-		var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
-		var wptAddresses = [];
-		current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
-			wptAddresses.push(current.html());
-		});
-		console.log(startAddress, endAddress, wptAddresses);
+		function successClick(current) {
+			var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
+			var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
+			var wptAddresses = [];
+			current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
+				wptAddresses.push(current.html());
+			});
+			console.log(startAddress, endAddress, wptAddresses);
 
-		
-		var currentRoute = current.parent().parent();
-		current.remove();
-		currentRoute.children(".profConfirmOrDeny").children(".profDeleteRoute").attr("id", "profRemoveRoute");
-		
-		currentRoute.remove();
-		$("#routesRunContainer").append(currentRoute);
+			
+			var currentRoute = current.parent().parent();
+			current.remove();
+			
+			
+			currentRoute.remove();
+			$("#routesRunContainer").append(currentRoute);
+			currentRoute.children(".profConfirmOrDeny").children(".profDeleteRoute").attr("class", "glyphicon glyphicon-remove profRemoveRoute");
 
-		$(".profRouteEntry").on("click", function() {
-			if ( $(this).css("height") == "40px" ) {
-				$(this).css("height", "auto");
-			} else {
-				$(this).css("height", "40px");
-			}
-		});
+			$(".profRouteEntry").on("click", function() {
+				if ( $(this).css("height") == "40px" ) {
+					$(this).css("height", "auto");
+				} else {
+					$(this).css("height", "40px");
+				}
+			});
 
-		$("#profRemoveRoute").on("click", function() {
-			removeClick($(this));
-		});
+			$(".profRemoveRoute").on("click", function() {
+				removeClick($(this));
+			});
 
-		// backend stuff goes here, use startAddress, endAddress, and wptAddresses //
-	}	
+			// backend stuff goes here, use startAddress, endAddress, and wptAddresses //
+		}	
 
-		
-	function deleteClick(current) {
-		var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
-		var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
-		var wptAddresses = [];
-		current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
-			wptAddresses.push($(this).html());
-		});
-		console.log(wptAddresses);
-		var currentRoute = current.parent().parent();
+			
+		function deleteClick(current) {
+			var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
+			var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
+			var wptAddresses = [];
+			current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
+				wptAddresses.push($(this).html());
+			});
+			console.log(wptAddresses);
+			var currentRoute = current.parent().parent();
 
-		currentRoute.remove();
+			currentRoute.remove();
 
-		$("#profDeleteRoute").on("click", function() {
-			deleteClick($(this));
-		});
+			$(".profDeleteRoute").on("click", function() {
+				deleteClick($(this));
+			});
 
-		$(".profRouteEntry").on("click", function(route) {
-			if ( route.css("height") == "40px" ) {
-				route.css("height", "auto");
-			} else {
-				route.css("height", "40px");
-			}
-		});
+			$(".profRouteEntry").on("click", function(route) {
+				if ( route.css("height") == "40px" ) {
+					route.css("height", "auto");
+				} else {
+					route.css("height", "40px");
+				}
+			});
 
-		// backend stuff goes here, use startAddress, endAddress, and wptAddresses
+			// backend stuff goes here, use startAddress, endAddress, and wptAddresses
 
-	} 
+		} 
 
-	function removeClick(current) {
-		var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
-		var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
-		var wptAddresses = [];
-		current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
-			wptAddresses.push(current.html());
-		});
-		console.log(startAddress, endAddress, wptAddresses);
-		var currentRoute = current.parent().parent();
-		currentRoute.children(".profConfirmOrDeny").html('<span id = "profSuccessRoute" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span><span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>');
-		currentRoute.remove();
-		$("#routesToRunContainer").append(currentRoute);
+		function removeClick(current) {
+			var startAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteStart").children("span").html();
+			var endAddress = current.parent().parent().children(".profRunRouteInfo").children(".profRouteEnd").children("span").html();
+			var wptAddresses = [];
+			current.parent().parent().children(".profWaypointsContainer").children(".wptsList").children("ol").children("li").each(function() {
+				wptAddresses.push(current.html());
+			});
+			console.log(startAddress, endAddress, wptAddresses);
+			var currentRoute = current.parent().parent();
+			currentRoute.children(".profConfirmOrDeny").html('<span id = "profSuccessRoute" style = "color: #2eba3e; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-ok profConfirmRoute"></span><span id = "profDeleteRoute" style = "color: #e6463d; font-size: 20px; opacity: 0.5" class = "glyphicon glyphicon-remove profDeleteRoute"></span>');
+			currentRoute.remove();
+			$("#routesToRunContainer").append(currentRoute);
 
-		$(".profRouteEntry").on("click", function() {
-			if ( $(this).css("height") == "40px" ) {
-				$(this).css("height", "auto");
-			} else {
-				$(this).css("height", "40px");
-			}
-		});
+			$(".profRouteEntry").on("click", function() {
+				if ( $(this).css("height") == "40px" ) {
+					$(this).css("height", "auto");
+				} else {
+					$(this).css("height", "40px");
+				}
+			});
 
-		$("#profSuccessRoute").on("click", function() {
-			successClick($(this));
-		});
+			$(".profConfirmRoute").on("click", function() {
+				successClick($(this));
+			});
 
-		$("#profDeleteRoute").on("click", function() {
-			deleteClick($(this));
-		});
+			$(".profDeleteRoute").on("click", function() {
+				deleteClick($(this));
+			});
 
-		// backend stuff goes here, use startAddress, endAddress, and wptAddresses
-	}
-	// /*	$("#profSuccessRoute").on("click", function() {
-	// 		successClick($(this));
-	// 	});*/
+			// backend stuff goes here, use startAddress, endAddress, and wptAddresses
+		}
+	 	$(".profConfirmRoute").on("click", function() {
+	 		successClick($(this));
+	 	});
 
-	// 	/*$("#profDeleteRoute").on("click", function() {
-	// 		deleteClick($(this));
-	// 	});*/
+	 	$(".profDeleteRoute").on("click", function() {
+	 		deleteClick($(this));
+	 	});
 
-	// /*	$("#profRemoveRoute").on("click", function() {
-	// 		removeClick($(this));
-	// 	});*/
+	 	$(".profRemoveRoute").on("click", function() {
+	 		removeClick($(this));
+	 	});
 	}
 }
 
